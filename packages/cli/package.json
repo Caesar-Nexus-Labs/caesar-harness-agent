@@ -1,0 +1,41 @@
+{
+  "name": "@caesar/cli",
+  "version": "0.1.0",
+  "description": "caesar CLI — build, validate, and install CaesarAgent native outputs for supported AI coding tools.",
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "ai-agents",
+    "ai-agent-harness",
+    "coding-agents",
+    "claude-code-subagents",
+    "native-agent-outputs",
+    "agents-md",
+    "agent-transpiler",
+    "cli"
+  ],
+  "bin": {
+    "caesar": "./dist/index.js"
+  },
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@caesar/agents-core": "workspace:*",
+    "cac": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.21",
+    "tsup": "8.5.0",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}

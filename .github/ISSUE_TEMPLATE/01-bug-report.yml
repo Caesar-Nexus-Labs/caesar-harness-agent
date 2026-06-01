@@ -1,0 +1,73 @@
+name: Bug report
+description: Report a reproducible CaesarAgent bug.
+title: "bug: "
+labels:
+  - bug
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve CaesarAgent. Please include enough detail to reproduce the issue.
+  - type: input
+    id: version
+    attributes:
+      label: Package or CLI version
+      description: "Example: @caesar/cli 0.1.0 or commit SHA."
+      placeholder: "@caesar/cli 0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node.js version, and pnpm version.
+      placeholder: "Windows 11, Node 20.19.0, pnpm 10.33.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: target-tool
+    attributes:
+      label: Target tool
+      options:
+        - Claude Code
+        - OpenCode
+        - Kiro
+        - Codex
+        - Factory / Droid
+        - GitHub Copilot
+        - Gemini CLI
+        - OpenHands
+        - Kilo Code
+        - AGENTS.md fallback
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or workflow
+      description: What did you run?
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction details or logs
+      description: Include a minimal reproduction, relevant agent file, and error output if possible.
+      render: text
+    validations:
+      required: true

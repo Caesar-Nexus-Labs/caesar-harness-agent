@@ -1,0 +1,47 @@
+name: Feature request
+description: Suggest a focused improvement to CaesarAgent.
+title: "feat: "
+labels:
+  - enhancement
+  - needs-triage
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this solve for maintainers or users?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-behavior
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What workaround or simpler option exists today?
+    validations:
+      required: false
+  - type: dropdown
+    id: compatibility-impact
+    attributes:
+      label: Compatibility impact
+      options:
+        - No breaking change expected
+        - Changes generated output
+        - Changes canonical schema
+        - Changes CLI behavior
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: How should this be validated?
+      description: Tests, emitted files, docs, or manual smoke checks that should prove the change.
+    validations:
+      required: false

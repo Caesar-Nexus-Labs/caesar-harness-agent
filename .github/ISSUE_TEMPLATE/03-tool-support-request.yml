@@ -1,0 +1,58 @@
+name: Tool support request
+description: Request support for a new AI coding tool or output format.
+title: "tool-support: "
+labels:
+  - tool-support
+  - needs-triage
+body:
+  - type: input
+    id: tool-name
+    attributes:
+      label: Tool name
+      placeholder: "Example: Some Coding Agent CLI"
+    validations:
+      required: true
+  - type: input
+    id: official-docs
+    attributes:
+      label: Official docs link
+      description: Link to the tool's official agent, skill, rule, or configuration docs.
+      placeholder: "https://..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected-format
+    attributes:
+      label: Expected file format and path
+      description: Include filename, folder path, frontmatter/config format, and any examples from official docs.
+      placeholder: ".tool/agents/{slug}.md with YAML frontmatter"
+    validations:
+      required: true
+  - type: checkboxes
+    id: capabilities
+    attributes:
+      label: Harness capabilities
+      options:
+        - label: Isolated agent or subagent context
+        - label: Tool or permission allowlist
+        - label: Per-agent model selection
+        - label: Routing description or trigger fields
+        - label: Shared repository instruction fallback only
+  - type: dropdown
+    id: stability
+    attributes:
+      label: Tool stability
+      options:
+        - Stable public docs
+        - Beta / preview
+        - Reverse-engineered only
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this matters
+      description: Explain who needs this target and what workflow it unlocks.
+    validations:
+      required: true

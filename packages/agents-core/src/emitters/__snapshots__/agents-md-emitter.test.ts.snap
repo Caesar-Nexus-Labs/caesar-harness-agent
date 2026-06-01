@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`agentsMdEmitter — real cat-01 agents > emits a single AGENTS.md routing index (snapshot) 1`] = `
+"# Agent Routing Index
+
+> Fallback routing guide for tools without native subagents (Cursor, Windsurf, Cline, Antigravity, Amp, Kilo, OpenHands). OpenCode also reads this.
+
+## 01-core-development
+
+### api-designer
+Use when: A new or evolving API needs a contract before code; an existing API surface needs a consistency/versioning/security review; OpenAPI or JSON Schema must be authored or revised; or a team must choose REST vs JSON:API vs gRPC and standardize… Read-only: no. Tools: read, grep, glob, edit, write.
+Boundary: MUST NOT write production backend code, controllers, or business logic — that is backend-developer's responsibility.
+
+### backend-developer
+Use when: Trigger when the task is to IMPLEMENT server-side behavior against a known contract: build/modify REST handlers, services, persistence and migrations, authn/authz enforcement, idempotency, caching, rate limiting, structured… Read-only: no. Tools: read, grep, glob, edit, write, bash.
+Boundary: Design the public API contract, resource model, or versioning strategy from scratch — defer to api-designer.
+
+### frontend-developer
+Use when: A user-facing UI slice needs to be built or changed: new components, responsive layout, client-side/server-state wiring, styling against a design system, keyboard and screen-reader accessibility, or fixing slow/janky rendering and layout… Read-only: no. Tools: read, grep, glob, edit, write, bash.
+Boundary: Do not design or implement server APIs, database schemas, auth, or business logic → defer to backend-developer.
+
+### fullstack-developer
+Use when: Trigger when the work crosses the frontend↔backend seam in a single change: a feature implemented end-to-end (UI → server boundary → persistence), integrating the client with a new or modified server endpoint, establishing end-to-end type… Read-only: no. Tools: read, grep, glob, edit, write, bash.
+Boundary: Do deep frontend-only work — complex interaction/animation, accessibility audits, Core Web Vitals tuning — defer to frontend-developer (this agent builds the UI portion of a slice, not specialist FE…
+
+### graphql-architect
+Use when: Trigger when work centers on a GraphQL schema or graph: SDL/type modeling, nullability and interface/union decisions, Apollo Federation 2 (or Composite Schemas / GraphQL Fusion) subgraph design with @key/@requires/@provides,… Read-only: no. Tools: read, grep, glob, edit, write, bash.
+Boundary: Do not design REST/OpenAPI endpoint contracts, versioning, or HTTP semantics — defer to api-designer.
+
+### microservices-architect
+Use when: Trigger when the task is to SHAPE A DISTRIBUTED SYSTEM rather than build one service: decompose a domain into services, decide bounded contexts and data ownership, choose communication style per interaction, design saga/outbox and… Read-only: no. Tools: read, grep, glob, edit, write.
+Boundary: Implementing a single service's production code, handlers, or persistence — defer to backend-developer.
+
+### websocket-engineer
+Use when: Trigger when the work centers on a realtime/bidirectional transport: deciding SSE vs WebSocket vs WebTransport, implementing the RFC 6455 handshake (or RFC 8441 over HTTP/2), building connection state machines with heartbeat, reconnect… Read-only: no. Tools: read, grep, glob, edit, write, bash.
+Boundary: MUST NOT design REST/OpenAPI endpoint contracts, versioning, or HTTP resource semantics — defer to api-designer.
+
+## Platform Notes
+
+- Cursor: Custom Modes were removed in v2.1 — this index is always-on guidance; enable per-agent \`.cursor/rules/*.mdc\` (opt-in) for on-demand activation.
+- Windsurf: no native subagents — opt-in \`.windsurf/rules/*.md\` (trigger: model_decision, ≤12k chars/file) gives the closest on-demand behavior.
+- Cline: no native subagents — opt-in \`.clinerules/NN-*.md\` rules bank; this index is the default.
+- Antigravity: reads AGENTS.md (cross-tool) and GEMINI.md; no confirmed native subagent file (use \`--tool gemini\` for native \`.gemini/agents\` if running Gemini CLI).
+- Amp: reads AGENTS.md as first-class native config (cwd + parent dirs to $HOME + lazy subtree; fallback AGENT.md/CLAUDE.md). No per-subagent drop-in format; the only custom-agent path is an experimental, unstable TypeScript plugin (\`.amp/plugins/*.ts\` via \`experimental.createAgent\`) — deferred/opt-in.
+- Kilo: native \`.kilocodemodes\` (use \`--tool kilo\`); also auto-delegates via this AGENTS.md.
+- OpenHands: native \`.agents/skills/{slug}/SKILL.md\` (use \`--tool openhands\`); the SDK also reads AGENTS.md (always-on).
+- Roo: skipped (sunset 2026-05-15, repo archived).
+"
+`;

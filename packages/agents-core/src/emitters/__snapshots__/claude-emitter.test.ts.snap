@@ -1,0 +1,92 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`claudeEmitter > emits full-permission agent with write/bash tools + color (snapshot) 1`] = `
+"---
+name: feature-builder
+description: Implements features end-to-end across the codebase with full tooling.
+tools: Read, Grep, Glob, Edit, Write, Bash
+model: opus
+permissionMode: default
+color: green
+---
+
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only.
+"
+`;
+
+exports[`claudeEmitter > emits read-only agent (snapshot) 1`] = `
+"---
+name: doc-reader
+description: Reads and summarizes documentation without making changes.
+tools: Read, Grep, Glob
+model: inherit
+permissionMode: plan
+---
+
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only.
+"
+`;
+
+exports[`claudeEmitter > folds when_to_use + example triggers into description (snapshot) 1`] = `
+"---
+name: test-writer
+description: |-
+  Writes and maintains automated tests for new and changed code.
+
+  Use when: Invoke after a feature lands but before merge to lock behavior with tests. e.g. add tests for the /users endpoint; write a regression test for the null-pointer fix
+tools: Read, Grep, Glob, Edit, Write
+model: sonnet
+permissionMode: acceptEdits
+---
+
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only.
+"
+`;

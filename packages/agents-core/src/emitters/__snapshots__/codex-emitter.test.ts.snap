@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`codexEmitter > emits full-permission agent (snapshot) 1`] = `
+"name = "feature-builder"
+description = "Implements features end-to-end across the codebase with full tooling."
+developer_instructions = """
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only."""
+model = "gpt-5.5"
+sandbox_mode = "workspace-write"
+"
+`;
+
+exports[`codexEmitter > emits read-only agent (snapshot) 1`] = `
+"name = "doc-reader"
+description = "Reads and summarizes documentation without making changes."
+developer_instructions = """
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only."""
+sandbox_mode = "read-only"
+"
+`;
+
+exports[`codexEmitter > emits reasoning-effort agent (snapshot) 1`] = `
+"name = "api-designer"
+description = "API contract and specification design specialist for REST and GraphQL surfaces."
+developer_instructions = """
+## Role & Expertise
+You are an expert code reviewer.
+
+## When to Use
+After code is written or modified.
+
+## Workflow
+1. Read the diff. 2. Flag issues. 3. Report.
+
+## Checklist & Heuristics
+- Correctness before style.
+
+## Output Contract
+A prioritized list of findings.
+
+## Boundaries
+Never modify code; review only."""
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+"
+`;

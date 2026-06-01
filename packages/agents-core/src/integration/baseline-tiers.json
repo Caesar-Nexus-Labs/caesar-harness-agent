@@ -1,0 +1,672 @@
+{
+  "api-designer": {
+    "permission": "edit",
+    "model": "balanced",
+    "category": "01-core-development"
+  },
+  "backend-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "01-core-development"
+  },
+  "frontend-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "01-core-development"
+  },
+  "fullstack-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "01-core-development"
+  },
+  "graphql-architect": {
+    "permission": "full",
+    "model": "top",
+    "category": "01-core-development"
+  },
+  "microservices-architect": {
+    "permission": "edit",
+    "model": "top",
+    "category": "01-core-development"
+  },
+  "websocket-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "01-core-development"
+  },
+  "angular-architect": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "cpp-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "csharp-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "django-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "dotnet-core-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "elixir-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "expo-react-native-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "fastapi-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "flutter-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "golang-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "java-architect": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "javascript-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "kotlin-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "laravel-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "nextjs-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "node-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "php-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "powershell-7-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "python-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "rails-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "react-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "rust-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "spring-boot-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "sql-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "swift-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "symfony-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "typescript-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "vue-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "02-language-specialists"
+  },
+  "azure-infra-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "backstage-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "cloud-architect": {
+    "permission": "full",
+    "model": "top",
+    "category": "03-infrastructure"
+  },
+  "database-administrator": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "deployment-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "devops-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "docker-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "golden-path-designer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "idp-architect": {
+    "permission": "full",
+    "model": "top",
+    "category": "03-infrastructure"
+  },
+  "incident-responder": {
+    "permission": "full",
+    "model": "top",
+    "category": "03-infrastructure"
+  },
+  "kubernetes-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "network-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "platform-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "platform-product-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "security-engineer": {
+    "permission": "full",
+    "model": "top",
+    "category": "03-infrastructure"
+  },
+  "sre-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "terraform-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "terragrunt-expert": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "03-infrastructure"
+  },
+  "accessibility-tester": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "ad-security-reviewer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "architect-reviewer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "chaos-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "code-reviewer": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "compliance-auditor": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "debugger": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "error-detective": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "gdpr-ccpa-compliance": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "penetration-tester": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "performance-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "qa-expert": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "security-auditor": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "04-quality-security"
+  },
+  "test-automator": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "ui-ux-tester": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "04-quality-security"
+  },
+  "ai-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "ai-governance-auditor": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "05-data-ai"
+  },
+  "ai-observability-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "data-analyst": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "data-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "data-scientist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "database-optimizer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "eval-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "hallucination-investigator": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "05-data-ai"
+  },
+  "llm-architect": {
+    "permission": "full",
+    "model": "top",
+    "category": "05-data-ai"
+  },
+  "ml-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "mlops-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "model-risk-manager": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "05-data-ai"
+  },
+  "nlp-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "postgres-pro": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "prompt-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "prompt-regression-tester": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "reinforcement-learning-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "05-data-ai"
+  },
+  "responsible-ai-reviewer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "05-data-ai"
+  },
+  "build-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "cli-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "code-generator": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "dependency-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "documentation-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "dx-optimizer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "git-workflow-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "legacy-modernizer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "mcp-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "readme-generator": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "refactoring-specialist": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "tooling-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "06-developer-experience"
+  },
+  "api-documenter": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "blockchain-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "embedded-systems": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "fintech-engineer": {
+    "permission": "full",
+    "model": "top",
+    "category": "07-specialized-domains"
+  },
+  "game-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "hipaa-compliance": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "07-specialized-domains"
+  },
+  "iot-engineer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "mobile-app-developer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "payment-integration": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "quant-analyst": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "risk-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "07-specialized-domains"
+  },
+  "assumption-mapping": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "backlog-grooming": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "business-analyst": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "license-engineer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "08-business-product"
+  },
+  "product-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "project-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "scrum-master": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "technical-writer": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "08-business-product"
+  },
+  "agent-organizer": {
+    "permission": "full",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "codebase-orchestrator": {
+    "permission": "full",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "context-manager": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
+  },
+  "error-coordinator": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
+  },
+  "knowledge-synthesizer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "multi-agent-coordinator": {
+    "permission": "full",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "performance-monitor": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
+  },
+  "policy-guardrail-designer": {
+    "permission": "full",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "task-distributor": {
+    "permission": "full",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
+  },
+  "workflow-orchestrator": {
+    "permission": "full",
+    "model": "top",
+    "category": "09-meta-orchestration"
+  },
+  "data-researcher": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "10-research-analysis"
+  },
+  "first-principles-thinking": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "10-research-analysis"
+  },
+  "project-idea-validator": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "10-research-analysis"
+  },
+  "research-analyst": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "10-research-analysis"
+  },
+  "scientific-literature-researcher": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "10-research-analysis"
+  },
+  "search-specialist": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "10-research-analysis"
+  }
+}

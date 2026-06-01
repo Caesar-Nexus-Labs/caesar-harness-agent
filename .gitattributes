@@ -1,0 +1,11 @@
+# Normalize line endings to LF for deterministic emitter output across OSes.
+* text=auto eol=lf
+
+# Snapshots + emitted agent files must stay LF regardless of platform.
+*.snap text eol=lf
+*.md text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+
+# Lockfile
+pnpm-lock.yaml text eol=lf

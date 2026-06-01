@@ -1,0 +1,67 @@
+name: Release
+
+# Manual-only. Never triggers on push/PR. Publishing is gated behind the
+# "release" GitHub Environment, which should require a human approval before
+# the job's steps run (configure required reviewers in repo Settings →
+# Environments → release). No package is published without that approval.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Pack only — do NOT publish to npm (npm pack --dry-run)."
+        type: boolean
+        default: true
+
+jobs:
+  publish:
+    name: build · assemble · publish (@caesar)
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build (engine + CLI)
+        run: pnpm -r build
+
+      - name: Validate all agents (strict)
+        run: pnpm validate
+
+      - name: Assemble per-category packages
+        run: pnpm assemble
+
+      - name: Publish (dry run)
+        if: ${{ inputs.dry_run }}
+        run: |
+          npm pack --dry-run --workspace @caesar/agents-core --workspace @caesar/cli
+          for dir in packages/categories/caesar-*; do
+            (cd "$dir" && npm pack --dry-run)
+          done
+
+      - name: Publish to npm
+        if: ${{ !inputs.dry_run }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --workspace @caesar/agents-core --workspace @caesar/cli --access public --provenance
+          for dir in packages/categories/caesar-*; do
+            (cd "$dir" && npm publish --access public --provenance)
+          done
