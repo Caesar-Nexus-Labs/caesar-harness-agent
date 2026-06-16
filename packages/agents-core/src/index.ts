@@ -4,8 +4,14 @@
 export { agentsMdEmitter } from './emitters/agents-md-emitter.js';
 // Native emitters (claude, opencode, kiro, codex, factory, copilot).
 export { claudeEmitter } from './emitters/claude-emitter.js';
+// Multi-format plugin emitters (claude-plugin marketplace, roo YAML, cursor MDC).
+export {
+  claudePluginConfigEmitter,
+  claudePluginEmitter,
+} from './emitters/claude-plugin.js';
 export { codexEmitter } from './emitters/codex-emitter.js';
 export { copilotEmitter } from './emitters/copilot-emitter.js';
+export { cursorMdcEmitter } from './emitters/cursor-mdc.js';
 // Emitter contract + registry.
 export {
   type AggregateEmitter,
@@ -55,8 +61,10 @@ export {
 } from './emitters/opt-in-rules/windsurf-rule-emitter.js';
 export { registerExtendedNativeEmitters } from './emitters/register-extended-native-emitters.js';
 export { registerFallbackEmitters } from './emitters/register-fallback-emitters.js';
+export { registerMultiFormatEmitters } from './emitters/register-multi-format-emitters.js';
 export { registerNativeEmitters } from './emitters/register-native-emitters.js';
 export { registerPilotEmitters } from './emitters/register-pilot-emitters.js';
+export { rooYamlEmitter } from './emitters/roo-yaml.js';
 // Errors.
 export { AgentValidationError } from './errors.js';
 export {

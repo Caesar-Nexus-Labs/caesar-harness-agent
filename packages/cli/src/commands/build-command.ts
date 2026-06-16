@@ -6,6 +6,7 @@ import {
   parseAgentFile,
   registerExtendedNativeEmitters,
   registerFallbackEmitters,
+  registerMultiFormatEmitters,
   registerNativeEmitters,
   type ToolTarget,
   transpile,
@@ -58,6 +59,7 @@ export function runBuild(options: BuildOptions = {}): BuildResult {
   // openhands, kilo) + fallback aggregate. Order matters: split must see the aggregates.
   registerNativeEmitters();
   registerExtendedNativeEmitters();
+  registerMultiFormatEmitters();
   registerFallbackEmitters();
 
   const { native, fallback } = splitToolsByTier(tools);

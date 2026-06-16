@@ -1,7 +1,7 @@
 // Tool target registry — the set of emit destinations + their output metadata.
 // Single source of truth consumed by mapping tables, emitters, and write-outputs.
 
-/** All transpiler emit targets. `roo` is intentionally excluded (sunset 2026-05-15). */
+/** All transpiler emit targets. */
 export const TOOL_TARGETS = [
   'claude',
   'opencode',
@@ -12,6 +12,9 @@ export const TOOL_TARGETS = [
   'openhands',
   'gemini',
   'kilo',
+  'roo',
+  'cursor',
+  'claude-plugin',
   'agents-md',
 ] as const;
 
@@ -43,10 +46,14 @@ export const TOOL_TARGET_META: Record<ToolTarget, ToolTargetMeta> = {
   openhands: { tier: 'native', fileExtension: '.md', outputSubdir: '.agents/skills' },
   // Gemini CLI: per-agent flat file `{slug}.md` (copilot mold MINUS tools/model — inherit-only).
   gemini: { tier: 'native', fileExtension: '.md', outputSubdir: '.gemini/agents' },
-  // Kilo: first native-tier AGGREGATE target → one `.kilocodemodes` at repo root. Dispatch is by
-  // registry (hasAggregateEmitter), not tier; ext `.kilocodemodes` (not `.yaml`) so install's
-  // extension logic isn't lied to — aggregates bypass the extension filter anyway.
+  // Kilo: native-tier AGGREGATE target → one `.kilocodemodes` at repo root.
   kilo: { tier: 'native', fileExtension: '.kilocodemodes', outputSubdir: '' },
+  // Roo Code: AGGREGATE target → one `.roomodes` at repo root (YAML, same structure as kilo).
+  roo: { tier: 'native', fileExtension: '.roomodes', outputSubdir: '' },
+  // Cursor: per-agent `.cursor/rules/{slug}.mdc` (Agent-Requested MDC rule).
+  cursor: { tier: 'native', fileExtension: '.mdc', outputSubdir: '.cursor/rules' },
+  // Claude Plugin Marketplace: AGGREGATE → `.claude-plugin/marketplace.json` + `plugin.json`.
+  'claude-plugin': { tier: 'native', fileExtension: '.json', outputSubdir: '.claude-plugin' },
   'agents-md': { tier: 'fallback', fileExtension: '.md', outputSubdir: '' },
 };
 

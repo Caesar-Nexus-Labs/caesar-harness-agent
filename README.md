@@ -8,7 +8,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
 ![pnpm](https://img.shields.io/badge/pnpm-10.33.2-F69220?logo=pnpm&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-339933?logo=nodedotjs&logoColor=white)
-![Outputs](https://img.shields.io/badge/outputs-9_native_%2B_AGENTS.md-6B46C1)
+![Outputs](https://img.shields.io/badge/outputs-12_native_%2B_AGENTS.md-6B46C1)
 
 **Write expert coding subagents once. Emit native agent outputs everywhere.**
 
@@ -86,6 +86,9 @@ If you prefer not to use the CLI, you can install the npm package or clone the r
 | **Gemini CLI** | `gemini/.gemini/agents/*.md` | `.gemini/agents/` |
 | **OpenHands** | `openhands/.agents/skills/*` | `.agents/skills/` |
 | **Kilo Code** | `kilo/.kilocodemodes` | `.kilocodemodes` |
+| **Roo Code** | `roo/.roomodes` | `.roomodes` |
+| **Cursor** | `cursor/.cursor/rules/*.mdc` | `.cursor/rules/` |
+| **Claude Marketplace** | `claude-plugin/.claude-plugin/marketplace.json` | `.claude-plugin/` |
 | **Fallbacks** | `agents-md/AGENTS.md` | `AGENTS.md` |
 
 ## Interactive Auto-Detection
@@ -111,8 +114,10 @@ When you run `caesar add <source>` without specifying the `--tool` flag, the CLI
 | Gemini CLI | `.gemini/agents/*.md` | native, inherit-only emit |
 | OpenHands | `.agents/skills/*/SKILL.md` | native skill output |
 | Kilo Code | `.kilocodemodes` | native aggregate output |
+| Roo Code | `.roomodes` | native aggregate output |
+| Cursor | `.cursor/rules/*.mdc` | native per-agent MDC |
+| Claude Marketplace | `.claude-plugin/marketplace.json` | native aggregate output |
 | Cursor, Windsurf, Cline, Antigravity, Amp | shared `AGENTS.md` routing index | fallback |
-| Roo Code | not emitted | skipped |
 
 Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-support-matrix.md).
 
