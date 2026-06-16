@@ -31,3 +31,19 @@ export class BuildNotFoundError extends Error {
     this.hint = hint;
   }
 }
+
+export class PluginNotFoundError extends UsageError {
+  constructor(message: string) {
+    super(message);
+    this.name = 'PluginNotFoundError';
+  }
+}
+
+export class RegistryFetchError extends Error {
+  readonly exitCode = EXIT_VALIDATION;
+
+  constructor(message: string) {
+    super(message);
+    this.name = 'RegistryFetchError';
+  }
+}

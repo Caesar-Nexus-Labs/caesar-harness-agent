@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "license": "GPL-3.0-only",
-  "description": "CaesarAgent — author-once AI agent harness for expert coding agents and native cross-tool outputs.",
+  "description": "The definitive collection of harness subagents, specialized AI assistants designed for specific development tasks and native cross-platform coding agent outputs.",
   "packageManager": "pnpm@10.33.2",
   "engines": {
     "node": ">=20"
@@ -19,6 +19,7 @@
     "format": "biome format --write .",
     "validate": "node packages/cli/dist/index.js validate --strict",
     "assemble": "tsx scripts/assemble-category-packages.ts",
+    "assemble:check": "tsx scripts/check-assembled-packages.ts",
     "ci": "pnpm typecheck && pnpm build && pnpm test && pnpm validate && pnpm lint"
   },
   "devDependencies": {
@@ -28,11 +29,7 @@
     "tsup": "8.5.0",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
+    "vite": "^7.3.5",
     "vitest": "4.1.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
   }
 }

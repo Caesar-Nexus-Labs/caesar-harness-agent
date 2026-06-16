@@ -1,4 +1,4 @@
-# Code Standards — CaesarAgent
+# Code Standards — Caesar Harness Agent
 
 ## Language & module system
 

@@ -1,4 +1,4 @@
-# Codebase Summary — CaesarAgent
+# Codebase Summary — Caesar Harness Agent
 
 A pnpm-workspace TypeScript monorepo. Canonical agent sources live in `agents/`; the engine and CLI live in `packages/`; build output lands in `dist/` (gitignored).
 
@@ -49,10 +49,16 @@ Caesar-Agents/
 
 | File | Command |
 |---|---|
-| `commands/build-command.ts` | `caesar build` — discover → transpile → validate → write `dist/{tool}/` |
-| `commands/validate-command.ts` | `caesar validate [--strict]` — schema + body (+ output validators) |
-| `commands/install-command.ts` | `caesar install <category> --tool <t>` — copy artifacts into a project |
-| `reporting/cli-reporter.ts` | Human + `--json` output |
+| `packages/cli/src/commands/build-command.ts` | Discovers, transpiles, and writes native targets. |
+| `packages/cli/src/commands/validate-command.ts` | Validates canonical sources and optionally runs output validators. |
+| `packages/cli/src/commands/install-command.ts` | (Legacy) Copies built output from `dist/` into a user's project. |
+| `packages/cli/src/commands/add-command.ts` | (Harness) Installs plugins from npm/github/local into project or global dir. |
+| `packages/cli/src/commands/remove-command.ts` | (Harness) Uninstalls plugins using `caesar.lock`. |
+| `packages/cli/src/commands/list-command.ts` | (Harness) Lists installed plugins from `caesar.lock`. |
+| `packages/cli/src/plugin-source.ts` | Resolves npm, GitHub, and local plugin URLs to downloaded dirs. |
+| `packages/cli/src/caesar-lock.ts` | Manages the `caesar.lock` manifest of installed plugins. |
+| `packages/cli/src/resolve-global-path.ts` | Platform-specific logic for tool global agent directories. |
+| `packages/cli/src/index.ts` | CAC wiring, argument parsing, and command routing. |
 | `resolve-paths.ts` | Locate repo root / agents / dist |
 | `index.ts` | cac setup, command registration, exit-code mapping (0/1/2) |
 

@@ -46,7 +46,7 @@ export function resolvePaths(cwd: string, rootOverride?: string): ResolvedPaths 
   const root = rootOverride !== undefined ? resolve(rootOverride) : findRepoRoot(cwd);
   if (root === undefined || !existsSync(resolve(root, 'agents'))) {
     throw new Error(
-      'Could not locate an "agents/" directory. Run inside the CaesarAgent repo or pass --root <path>.',
+      'Could not locate an "agents/" directory. Run inside the Caesar Harness Agent repo or pass --root <path>.',
     );
   }
   return { root, agentsDir: resolve(root, 'agents') };

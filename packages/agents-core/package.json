@@ -1,7 +1,7 @@
 {
   "name": "@caesar/agents-core",
   "version": "0.1.0",
-  "description": "Canonical schema, transpiler engine, and native agent outputs for the CaesarAgent AI agent harness.",
+  "description": "Canonical schema, transpiler engine, and native agent outputs for Caesar-Harness-Agent.",
   "type": "module",
   "license": "GPL-3.0-only",
   "keywords": [
@@ -24,7 +24,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },

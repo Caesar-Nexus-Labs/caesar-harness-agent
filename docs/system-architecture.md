@@ -1,4 +1,4 @@
-# System Architecture — CaesarAgent
+# System Architecture — Caesar Harness Agent
 
 ## High-level flow
 
@@ -58,6 +58,27 @@ packages/
 **Mapping tables, not per-emitter logic.** `model-alias-map`, `permission-map`, `tools-map`, and `tool-targets` centralize field→tool translation so emitters stay thin and consistent. `tool-targets.ts` is the single registry of emit destinations + their output metadata (tier, extension, subdir).
 
 **Output validators close the loop.** Every emitted file is re-validated by its tool's `OutputValidator` before write — the transpiler never trusts an emitter blindly.
+
+## Plugin Harness (Agent Installation)
+
+Instead of manually copy-pasting agent files across projects, Caesar Harness Agent provides a plugin harness (`caesar add`, `caesar list`, `caesar remove`). This enables cross-platform AI agent plugins that can be installed directly from npm, GitHub, or local paths.
+
+```mermaid
+flowchart LR
+    A[Source: npm/github/local] --> B(caesar add)
+    B --> C[Resolve Tool Global/Project Dirs]
+    C --> D[Copy prebuilt artifacts]
+    D --> E[Update caesar.lock]
+```
+
+- **Scope Control**: Plugins can be installed per-project (`--cwd`) or globally (`--global`) for tools that support global agents (e.g. `~/.claude/agents`).
+- **Reproducibility**: The `caesar.lock` tracks the exact version, source, integrity hash, and installed paths, guaranteeing deterministic uninstalls and listing.
+- **Granular Targets**: The CLI routes each plugin's `dist/{tool}/...` artifacts into the active project's (or system's) correct subdirectory automatically.
+
+## Output Validation
+Transpiled output does not bypass quality gates. The `native-output-validators.ts` module runs the generated string against schema validations or content assertions for the target tool.
+
+If an emitter produces invalid Markdown for Claude Code (e.g., missing YAML), the build fails.
 
 **CLI is a thin orchestrator.** `caesar` parses args (cac), calls `agents-core` (`discoverAgents`, `transpile`, validators, `writeOutputs`), and reports. No transpile logic lives in the CLI. Exit codes: `0` ok, `1` validation fail, `2` usage error.
 

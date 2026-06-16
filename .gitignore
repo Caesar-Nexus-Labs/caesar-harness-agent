@@ -35,7 +35,7 @@ yarn-error.log*
 # package manager
 package-lock.json
 yarn.lock
-# pnpm-lock.yaml tracked for reproducible CI (CaesarAgent monorepo)
+# pnpm-lock.yaml tracked for reproducible CI (Caesar Harness Agent monorepo)
 
 # semantic-release
 .nyc_output
@@ -101,9 +101,33 @@ external/
 # Git worktrees (local development only)
 worktrees/
 
-# === Management kit artifacts (NOT part of CaesarAgent product) ===
-# This workspace is driven by the ClaudeKit management kit. The product
+# === Management kit artifacts (NOT part of Caesar Harness Agent product) ===
+# This workspace is driven by the management kit. The product
 # (agents/, transpiler/, dist/) is greenfield and tracked; the kit is not.
 /.opencode/
 /release-manifest.json
 /.repomixignore
+/.agent/
+/.agents/
+/.amp/
+/.cline/
+/.clinerules/
+/.codex/
+/.cursor/
+/.factory/
+/.gemini/
+/.goose/
+.goosehints
+/.kilocode/
+.kilocodemodes
+/.kiro/
+/.openhands/
+/.roo/
+.roomodes
+/.windsurf/
+AGENT.md
+GEMINI.md
+.github/agents/
+.github/copilot-instructions.md
+.github/instructions/
+.github/skills/

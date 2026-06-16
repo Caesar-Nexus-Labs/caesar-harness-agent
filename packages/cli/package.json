@@ -1,7 +1,7 @@
 {
   "name": "@caesar/cli",
   "version": "0.1.0",
-  "description": "caesar CLI — build, validate, and install CaesarAgent native outputs for supported AI coding tools.",
+  "description": "caesar CLI — build, validate, and install native outputs for Caesar-Harness-Agent.",
   "type": "module",
   "license": "GPL-3.0-only",
   "keywords": [
@@ -17,7 +17,9 @@
   "bin": {
     "caesar": "./dist/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +32,8 @@
   },
   "dependencies": {
     "@caesar/agents-core": "workspace:*",
-    "cac": "7.0.0"
+    "cac": "7.0.0",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@types/node": "20.19.21",

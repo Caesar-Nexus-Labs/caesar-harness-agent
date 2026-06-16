@@ -1,4 +1,4 @@
-# Project Roadmap — CaesarAgent
+# Project Roadmap — Caesar Harness Agent
 
 ## Status: v1 complete (2026-05-30)
 
@@ -24,6 +24,7 @@ All 134 agents re-authored from the ~90-line "dead zone" to a **150–220 line e
 | 09 | Scale remaining 9 categories (134 agents total) | ✅ done |
 | 10 | Packaging + docs + CI | ✅ done |
 | 11 | Extended native emitters (gemini, openhands, kilo) — registry-based tier split | ✅ done |
+| 12 | Agent Plugin Harness (`add`, `list`, `remove`, `caesar.lock`, global scope) | ✅ done |
 
 ## Agent inventory
 

@@ -1,4 +1,4 @@
-# Tech Stack — CaesarAgent Dev-Subagents Suite
+# Tech Stack — Caesar Harness Agent Dev-Subagents Suite
 
 **Status:** locked (bootstrap 2026-05-30) · **Type:** greenfield, isolated from management kit (`.claude/`, `.opencode/`).
 
@@ -28,7 +28,7 @@
 
 ```
 @caesar/agents-core        # canonical schema, transpiler engine, emitters
-@caesar/cli                # `caesar` CLI: build, install, validate
+@caesar/cli                # `caesar` CLI: build, validate, add, remove, list
 @caesar/core-dev           # category plugin: 01-core-development agents (built artifacts)
 @caesar/lang               # 02-language-specialists
 @caesar/infra              # 03-infrastructure-devops
@@ -37,7 +37,7 @@
 
 - Monorepo manager: **pnpm workspaces** (or npm workspaces — decide in plan).
 - Each category = installable package; users install only what they need.
-- CLI: `caesar install <category> --tool <claude|opencode|kiro|...>` copies built `dist/{tool}/` into user project.
+- CLI: `caesar add <source>` installs plugins directly into the user project or globally (`--global`). Legacy `install` command copies built artifacts.
 - Mirrors existing `.opencode` precedent (`@claudekit/opencode-plugins`).
 
 ---

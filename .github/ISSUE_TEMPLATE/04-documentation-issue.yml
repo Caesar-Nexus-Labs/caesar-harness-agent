@@ -1,5 +1,5 @@
 name: Documentation issue
-description: Report unclear, stale, or missing CaesarAgent documentation.
+description: Report unclear, stale, or missing Caesar Harness Agent documentation.
 title: "docs: "
 labels:
   - documentation

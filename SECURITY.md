@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the current `main` branch and the latest published CaesarAgent packages. If versioned releases are added later, this policy should be updated with supported release lines.
+Security fixes target the current `main` branch and the latest published Caesar Harness Agent packages. If versioned releases are added later, this policy should be updated with supported release lines.
 
 ## Reporting a vulnerability
 

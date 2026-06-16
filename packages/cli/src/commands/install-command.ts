@@ -1,9 +1,7 @@
-import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import {
   discoverAgents,
-  getToolTargetMeta,
-  hasAggregateEmitter,
   isToolTarget,
   registerExtendedNativeEmitters,
   registerFallbackEmitters,
@@ -14,6 +12,7 @@ import { categoryMatches } from '../agent-selection.js';
 import { BuildNotFoundError, UsageError } from '../cli-errors.js';
 import type { InstallResult } from '../command-results.js';
 import { isWithin, resolveOutRoot, resolvePaths } from '../resolve-paths.js';
+import { includeFile, listFilesRecursive } from '../shared/file-copy-utils.js';
 
 // install: copy built <out>/{tool}/ artifacts for a category into --dest (default CWD).
 // Native per-agent files are filtered to the category's slugs; aggregate indexes (agents-md,
@@ -30,16 +29,6 @@ export interface InstallOptions {
   force?: boolean;
   root?: string;
   cwd?: string;
-}
-
-/** List every file under `dir` (recursive), returning paths relative to `dir`. */
-function listFilesRecursive(dir: string): string[] {
-  const out: string[] = [];
-  for (const entry of readdirSync(dir, { recursive: true }) as string[]) {
-    const abs = join(dir, entry);
-    if (statSync(abs).isFile()) out.push(entry);
-  }
-  return out;
 }
 
 export function runInstall(options: InstallOptions = {}): InstallResult {
@@ -106,26 +95,4 @@ function categorySlugs(root: string, category: string): Set<string> {
     throw new UsageError(`No agents found for category "${category}".`);
   }
   return new Set(matched.map((d) => d.slug));
-}
-
-/**
- * Decide whether a built file (path relative to the tool dir) belongs to the install set.
- * - aggregate targets (agents-md, kilo): single all-agents index → always included (no split).
- * - folder-nested per-agent (openhands `{slug}/SKILL.md`): slug is the PARENT dir segment.
- * - flat per-agent (claude/gemini/copilot/…): slug = basename minus the tool extension.
- */
-function includeFile(tool: ToolTarget, relativePath: string, slugs: Set<string>): boolean {
-  // Aggregate indexes are copied whole (copy regardless of slug).
-  if (hasAggregateEmitter(tool)) return true;
-
-  const segs = relativePath.split(/[\\/]/);
-  const base = segs.at(-1) ?? relativePath;
-
-  // Folder-per-agent (openhands): `.agents/skills/{slug}/SKILL.md` → slug is the parent dir.
-  if (base === 'SKILL.md') return slugs.has(segs.at(-2) ?? '');
-
-  // Flat per-agent: slug = basename minus the tool extension (handles copilot `.agent.md`).
-  const ext = getToolTargetMeta(tool).fileExtension;
-  if (!base.endsWith(ext)) return false;
-  return slugs.has(base.slice(0, base.length - ext.length));
 }
