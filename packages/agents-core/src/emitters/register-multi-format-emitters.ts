@@ -1,6 +1,6 @@
-import { registerAggregateEmitter, registerEmitter } from './emitter-interface.js';
 import { claudePluginConfigEmitter, claudePluginEmitter } from './claude-plugin.js';
 import { cursorMdcEmitter } from './cursor-mdc.js';
+import { registerAggregateEmitter, registerEmitter } from './emitter-interface.js';
 import { rooYamlEmitter } from './roo-yaml.js';
 
 // Wires the multi-format plugin targets into the registries:

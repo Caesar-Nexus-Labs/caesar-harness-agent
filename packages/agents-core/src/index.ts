@@ -2,17 +2,16 @@
 
 // Aggregate fallback emitter (agents-md routing index).
 export { agentsMdEmitter } from './emitters/agents-md-emitter.js';
-// Multi-format plugin emitters (claude-plugin marketplace, roo YAML, cursor MDC).
-export {
-  claudePluginEmitter,
-  claudePluginConfigEmitter,
-} from './emitters/claude-plugin.js';
-export { cursorMdcEmitter } from './emitters/cursor-mdc.js';
-export { rooYamlEmitter } from './emitters/roo-yaml.js';
 // Native emitters (claude, opencode, kiro, codex, factory, copilot).
 export { claudeEmitter } from './emitters/claude-emitter.js';
+// Multi-format plugin emitters (claude-plugin marketplace, roo YAML, cursor MDC).
+export {
+  claudePluginConfigEmitter,
+  claudePluginEmitter,
+} from './emitters/claude-plugin.js';
 export { codexEmitter } from './emitters/codex-emitter.js';
 export { copilotEmitter } from './emitters/copilot-emitter.js';
+export { cursorMdcEmitter } from './emitters/cursor-mdc.js';
 // Emitter contract + registry.
 export {
   type AggregateEmitter,
@@ -65,6 +64,7 @@ export { registerFallbackEmitters } from './emitters/register-fallback-emitters.
 export { registerMultiFormatEmitters } from './emitters/register-multi-format-emitters.js';
 export { registerNativeEmitters } from './emitters/register-native-emitters.js';
 export { registerPilotEmitters } from './emitters/register-pilot-emitters.js';
+export { rooYamlEmitter } from './emitters/roo-yaml.js';
 // Errors.
 export { AgentValidationError } from './errors.js';
 export {

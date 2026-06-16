@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { claudePluginEmitter, claudePluginConfigEmitter } from './claude-plugin.js';
+import { claudePluginConfigEmitter, claudePluginEmitter } from './claude-plugin.js';
 import type { EmitContext } from './emitter-interface.js';
 import { buildAgent, fullPermissionAgent, readOnlyAgent } from './pilot-emitter-test-fixtures.js';
 

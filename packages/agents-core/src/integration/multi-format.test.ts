@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { claudePluginEmitter } from '../emitters/claude-plugin.js';
 import { cursorMdcEmitter } from '../emitters/cursor-mdc.js';
-import { rooYamlEmitter } from '../emitters/roo-yaml.js';
 import type { EmitContext } from '../emitters/emitter-interface.js';
+import { rooYamlEmitter } from '../emitters/roo-yaml.js';
 import type { CanonicalAgent } from '../loader/agent-file-loader.js';
 
 // E2E tests for multi-format emitter outputs.
@@ -20,25 +20,27 @@ function makeAgent(overrides: {
   permission?: 'read-only' | 'edit' | 'full';
   body?: string;
 }): CanonicalAgent {
-  const body = overrides.body ?? [
-    '## Role & Expertise',
-    'An expert agent.',
-    '',
-    '## When to Use',
-    'When needed.',
-    '',
-    '## Workflow',
-    '1. Do the work.',
-    '',
-    '## Checklist & Heuristics',
-    '- Quality first.',
-    '',
-    '## Output Contract',
-    'A report.',
-    '',
-    '## Boundaries',
-    'Scope limited.',
-  ].join('\n');
+  const body =
+    overrides.body ??
+    [
+      '## Role & Expertise',
+      'An expert agent.',
+      '',
+      '## When to Use',
+      'When needed.',
+      '',
+      '## Workflow',
+      '1. Do the work.',
+      '',
+      '## Checklist & Heuristics',
+      '- Quality first.',
+      '',
+      '## Output Contract',
+      'A report.',
+      '',
+      '## Boundaries',
+      'Scope limited.',
+    ].join('\n');
 
   return {
     frontmatter: {
@@ -60,9 +62,20 @@ function makeAgent(overrides: {
 
 describe('Multi-Format E2E: claudePluginEmitter (marketplace.json)', () => {
   const agents = [
-    makeAgent({ name: 'code-reviewer', description: 'Reviews code for quality and security issues.' }),
-    makeAgent({ name: 'test-writer', description: 'Writes automated tests for code coverage.', permission: 'edit' }),
-    makeAgent({ name: 'security-auditor', description: 'Audits system for security vulnerabilities.', category: '04-quality-security' }),
+    makeAgent({
+      name: 'code-reviewer',
+      description: 'Reviews code for quality and security issues.',
+    }),
+    makeAgent({
+      name: 'test-writer',
+      description: 'Writes automated tests for code coverage.',
+      permission: 'edit',
+    }),
+    makeAgent({
+      name: 'security-auditor',
+      description: 'Audits system for security vulnerabilities.',
+      category: '04-quality-security',
+    }),
   ];
 
   it('produces parseable JSON for all agents', () => {
@@ -163,7 +176,10 @@ describe('Multi-Format E2E: rooYamlEmitter (.roomodes)', () => {
   it('.roomodes output has no stray frontmatter --- delimiters at top level', () => {
     const agents = [
       makeAgent({ name: 'agent-a', description: 'First agent for testing delimiter safety.' }),
-      makeAgent({ name: 'agent-b', description: 'Second agent for testing YAML output cleanliness.' }),
+      makeAgent({
+        name: 'agent-b',
+        description: 'Second agent for testing YAML output cleanliness.',
+      }),
     ];
     const file = rooYamlEmitter(agents, ctx);
     // The output is raw YAML — no --- frontmatter delimiters at top level

@@ -98,7 +98,8 @@ async function searchAgents(
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
 
   const scored = index.map((agent) => {
-    const haystack = `${agent.id} ${agent.name} ${agent.description} ${agent.category}`.toLowerCase();
+    const haystack =
+      `${agent.id} ${agent.name} ${agent.description} ${agent.category}`.toLowerCase();
     const matchCount = terms.filter((term) => haystack.includes(term)).length;
     return { agent, matchCount };
   });
@@ -167,11 +168,7 @@ interface JsonRpcResponse {
   error?: { code: number; message: string; data?: unknown };
 }
 
-function makeError(
-  id: string | number | null,
-  code: number,
-  message: string,
-): JsonRpcResponse {
+function makeError(id: string | number | null, code: number, message: string): JsonRpcResponse {
   return { jsonrpc: '2.0', id, error: { code, message } };
 }
 

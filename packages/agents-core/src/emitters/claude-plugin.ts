@@ -80,7 +80,8 @@ export const claudePluginEmitter: AggregateEmitter = (
   const manifest: MarketplaceManifest = {
     schemaVersion: '1.0',
     name: 'Caesar Harness Agent',
-    description: 'The definitive collection of harness subagents for specialized development tasks.',
+    description:
+      'The definitive collection of harness subagents for specialized development tasks.',
     agents: marketplaceAgents,
   };
 

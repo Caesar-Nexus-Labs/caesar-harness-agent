@@ -11,10 +11,7 @@ const AgentIdSchema = z
   .string()
   .min(1, 'agent_id must be non-empty')
   .max(100, 'agent_id too long')
-  .regex(
-    /^[a-z][a-z0-9-]*$/,
-    'agent_id must be lowercase kebab-case — no path separators allowed',
-  );
+  .regex(/^[a-z][a-z0-9-]*$/, 'agent_id must be lowercase kebab-case — no path separators allowed');
 
 // ─── Path traversal rejection tests ───────────────────────────────────────────
 

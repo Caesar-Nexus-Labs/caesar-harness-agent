@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { cursorMdcEmitter } from './cursor-mdc.js';
 import type { EmitContext } from './emitter-interface.js';
 import { buildAgent, fullPermissionAgent, readOnlyAgent } from './pilot-emitter-test-fixtures.js';
-import { cursorMdcEmitter } from './cursor-mdc.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };
 
