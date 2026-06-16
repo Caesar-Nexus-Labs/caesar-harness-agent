@@ -2,7 +2,7 @@
 
 ## Our pledge
 
-We pledge to make participation in CaesarAgent welcoming, respectful, and productive for everyone.
+We pledge to make participation in Caesar Harness Agent welcoming, respectful, and productive for everyone.
 
 ## Expected behavior
 

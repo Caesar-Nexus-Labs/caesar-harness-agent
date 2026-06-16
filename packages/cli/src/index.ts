@@ -2,10 +2,21 @@ import { pathToFileURL } from 'node:url';
 import { CAESAR_AGENTS_CORE_VERSION } from '@caesar/agents-core';
 import { cac } from 'cac';
 import { BuildNotFoundError, EXIT_OK, EXIT_USAGE, EXIT_VALIDATION } from './cli-errors.js';
+import { runAdd } from './commands/add-command.js';
 import { runBuild } from './commands/build-command.js';
 import { runInstall } from './commands/install-command.js';
+import { runList } from './commands/list-command.js';
+import { runRemove } from './commands/remove-command.js';
 import { runValidate } from './commands/validate-command.js';
-import { formatBuild, formatInstall, formatValidate, toJson } from './reporting/cli-reporter.js';
+import {
+  formatAdd,
+  formatBuild,
+  formatInstall,
+  formatList,
+  formatRemove,
+  formatValidate,
+  toJson,
+} from './reporting/cli-reporter.js';
 
 // CLI entry: cac arg parsing + command registration + exit-code mapping. Contains NO transpile
 // logic — each action calls a run* command function (which delegates to agents-core) and the
@@ -78,6 +89,58 @@ export function buildCli() {
         root: options.root,
       });
       emit(options.json ? toJson(result) : formatInstall(result));
+      process.exitCode = EXIT_OK;
+    });
+
+  cli
+    .command('add <source>', 'Install agent plugin(s) from npm, GitHub, or local path')
+    .option('--tool <tool>', 'Target tool (repeatable); default = all')
+    .option('--category <cat>', 'Category filter NN | NN-name | name (repeatable)')
+    .option('--global, -g', 'Install to user global agent dirs')
+    .option('--force', 'Overwrite existing files')
+    .option('--dry-run', 'Show what would be installed without writing')
+    .option('--json', 'Emit the raw result as JSON')
+    .action(async (source: string, options) => {
+      const result = await runAdd({
+        source: String(source),
+        tool: toArray(options.tool),
+        category: toArray(options.category),
+        global: options.g || options.global,
+        force: options.force === true,
+        dryRun: options.dryRun === true,
+      });
+      emit(options.json ? toJson(result) : formatAdd(result));
+      process.exitCode = EXIT_OK;
+    });
+
+  cli
+    .command('remove <name>', 'Remove an installed agent plugin')
+    .option('--global, -g', 'Operate on global scope')
+    .option('--force', 'Skip error if plugin not found')
+    .option('--dry-run', 'Show what would be removed')
+    .option('--json', 'Emit the raw result as JSON')
+    .action((name: string, options) => {
+      const result = runRemove({
+        name: String(name),
+        global: options.g || options.global,
+        force: options.force === true,
+        dryRun: options.dryRun === true,
+      });
+      emit(options.json ? toJson(result) : formatRemove(result));
+      process.exitCode = EXIT_OK;
+    });
+
+  cli
+    .command('list', 'List installed agent plugins')
+    .option('--global, -g', 'Show global scope only')
+    .option('--all', 'Show both project and global scopes')
+    .option('--json', 'Emit result as JSON')
+    .action((options) => {
+      const result = runList({
+        global: options.g || options.global,
+        all: options.all,
+      });
+      emit(options.json ? toJson(result) : formatList(result));
       process.exitCode = EXIT_OK;
     });
 

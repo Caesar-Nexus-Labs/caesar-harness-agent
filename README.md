@@ -1,8 +1,8 @@
 <div align="center">
 
-# CaesarAgent
+# Caesar Harness Agent
 
-### Author-once AI agent harness for cross-platform AI coding agents
+### The definitive collection of harness subagents, specialized AI assistants designed for specific development tasks and native cross-platform coding agent outputs
 
 ![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
@@ -10,36 +10,93 @@
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-339933?logo=nodedotjs&logoColor=white)
 ![Outputs](https://img.shields.io/badge/outputs-9_native_%2B_AGENTS.md-6B46C1)
 
-**Write Claude Code subagents once. Emit native agent outputs everywhere.**
+**Write expert coding subagents once. Emit native agent outputs everywhere.**
 
-CaesarAgent is an AI agent harness for Claude Code subagents, AGENTS.md-compatible tools, and native agent outputs across the modern AI coding stack.
+Caesar-Harness-Agent serves as the definitive collection of harness subagents, specialized AI assistants designed for specific development tasks and native cross-platform coding agent outputs.
 
 </div>
 
-## Why CaesarAgent
+## Why Caesar Harness Agent
 
 Every AI coding tool invented its own agent file format. Maintaining the same backend reviewer, Rust expert, or security auditor prompt across multiple tools by hand creates drift and stale behavior.
 
-CaesarAgent keeps one canonical Markdown + YAML definition per expert agent, then transpiles it into each tool's native format with schema validation on every build. One source of truth. No per-tool copy-paste. No prompt drift.
+Caesar Harness Agent keeps one canonical Markdown + YAML definition per expert agent, then transpiles it into each tool's native format with schema validation on every build. One source of truth. No per-tool copy-paste. No prompt drift.
 
-## Quickstart
+## Installation Methods
 
+### Method 1: Automatic via Caesar CLI (Recommended)
+Add agent plugins directly using `npx @caesar/cli`:
 ```bash
-pnpm install
-pnpm build
-pnpm validate
+# Add to current project (all supported tools)
+npx @caesar/cli add @caesar/lang
+
+# Add for specific tools only
+npx @caesar/cli add @caesar/data-ai --tool claude --tool opencode
+
+# Add globally (for tools that support global agent directories)
+npx @caesar/cli add @caesar/core-dev --global
 ```
 
-After building the CLI, call the built entrypoint and install one category into a target project:
-
+Manage your installed plugins:
 ```bash
-node packages/cli/dist/index.js build
-node packages/cli/dist/index.js install 05-data-ai --tool claude --dest <target-project>     # → .claude/agents/*.md
-node packages/cli/dist/index.js install 03-infrastructure --tool codex --dest <target-project>
-node packages/cli/dist/index.js validate --strict
+npx @caesar/cli list
+npx @caesar/cli list --global
+npx @caesar/cli remove @caesar/lang
 ```
 
-Replace `<target-project>` with the project directory that should receive the generated agent files. Category accepts `NN`, `NN-name`, or `name` (for example: `05`, `05-data-ai`, `data-ai`).
+Plugins support local paths, npm packages, and GitHub repositories:
+```bash
+npx @caesar/cli add github:user/custom-agents
+```
+
+### Method 2: Project devDependency & Version Pinning
+Manage plugin versions within your project's package lifecycle:
+1. Install the category plugin:
+   ```bash
+   pnpm add -D @caesar/lang
+   # or npm install --save-dev @caesar/lang
+   ```
+2. Run the local CLI to link artifacts:
+   ```bash
+   npx caesar add @caesar/lang
+   ```
+
+### Method 3: Automated via postinstall Hook
+To ensure all developers and CI pipelines have the correct agent configs synced:
+Add this to your project's `package.json`:
+```json
+{
+  "scripts": {
+    "postinstall": "caesar add @caesar/lang"
+  }
+}
+```
+
+### Method 4: Manual Copy-Paste (Direct Folder Mapping)
+If you prefer not to use the CLI, you can install the npm package or clone the repository, then copy files manually:
+
+| Tool | Source Path (in `@caesar/{category}/dist/`) | Target Path (Project Root) |
+| :--- | :--- | :--- |
+| **Claude Code** | `claude/.claude/agents/*.md` | `.claude/agents/` |
+| **OpenCode** | `opencode/.opencode/agents/*.md` | `.opencode/agents/` |
+| **Kiro** | `kiro/.kiro/agents/*.json` | `.kiro/agents/` |
+| **Codex** | `codex/.codex/agents/*.toml` | `.codex/agents/` |
+| **Factory / Droid** | `factory/.factory/droids/*.md` | `.factory/droids/` |
+| **GitHub Copilot** | `copilot/.github/agents/*.agent.md` | `.github/agents/` |
+| **Gemini CLI** | `gemini/.gemini/agents/*.md` | `.gemini/agents/` |
+| **OpenHands** | `openhands/.agents/skills/*` | `.agents/skills/` |
+| **Kilo Code** | `kilo/.kilocodemodes` | `.kilocodemodes` |
+| **Fallbacks** | `agents-md/AGENTS.md` | `AGENTS.md` |
+
+## Interactive Auto-Detection
+
+When you run `caesar add <source>` without specifying the `--tool` flag, the CLI automatically detects which AI coding tools are configured on your machine.
+- **Interactive Terminal (TTY)**: The CLI will scan your workspace and global directories, and ask you:
+  ```text
+  Detected active tools: claude, opencode. Install for these? (Y/n): 
+  ```
+  If you accept, it installs only for those tools. If you decline, it will let you enter a custom comma-separated list of tools.
+- **Non-Interactive (CI/CD / Postinstall)**: The CLI will automatically detect active tools and install only for them. If no active tools are found, it acts as a **safe no-op** to prevent writing unwanted folders and polluting your workspace.
 
 ## Native agent outputs
 
@@ -59,9 +116,53 @@ Replace `<target-project>` with the project directory that should receive the ge
 
 Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-support-matrix.md).
 
+## Target Tools Configuration & Usage
+
+Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool:
+
+### 1. Claude Code
+- **Path**: Local `.claude/agents/` or Global `~/.claude/agents/`
+- **Usage**: Run `claude`. Inside the Claude interactive terminal, type `/` to see the autocomplete list of agents, or type `/<agent-slug>` (e.g. `/typescript-pro`) to activate a specific agent.
+
+### 2. OpenCode
+- **Path**: Local `.opencode/agents/` or Global `~/.opencode/agents/`
+- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` and choose the subagent from the session setup menu.
+
+### 3. Kiro
+- **Path**: Local `.kiro/agents/` or Global `~/.kiro/agents/`
+- **Usage**: Kiro parses these JSON agent manifests. Run Kiro and target the agent mode by specifying the agent name or using the UI mode selector.
+
+### 4. Codex
+- **Path**: Local `.codex/agents/` or Global `~/.codex/agents/`
+- **Usage**: Codex loads TOML developer instructions. Run Codex and specify the developer agent mode.
+
+### 5. Factory / Droid
+- **Path**: Local `.factory/droids/` or Global `~/.factory/droids/`
+- **Usage**: Droids are selected in the Factory build execution interface to automate specific development loops.
+
+### 6. GitHub Copilot / VS Code
+- **Path**: Local `.github/agents/`
+- **Usage**: Copilot in VS Code reads these YAML definitions. In the Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route your conversation and context to the specialized agent.
+
+### 7. Gemini CLI
+- **Path**: Local `.gemini/agents/` or Global `~/.gemini/agents/`
+- **Usage**: Custom agents inherit the active Gemini session config. Run `gemini` and load the agent mode.
+
+### 8. OpenHands
+- **Path**: Local `.agents/skills/` (folder-per-skill format)
+- **Usage**: OpenHands automatically injects these folders as workspace skills. Run OpenHands; agents will invoke these skills programmatically when appropriate.
+
+### 9. Kilo Code
+- **Path**: Local `.kilocodemodes` (single YAML file)
+- **Usage**: Kilo reads this file to configure its custom modes. The modes list will be displayed in the Kilo UI dropdown.
+
+### 10. Fallbacks (Cursor, Windsurf, Cline, Antigravity, Amp)
+- **Path**: Local `AGENTS.md`
+- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. The instructions guide the fallback tools on role discovery and system boundaries.
+
 ## Expert coding agents and prompt library
 
-CaesarAgent currently ships **134 expert coding agents** across 10 categories.
+Caesar-Harness-Agent currently ships **134 expert coding agents** across 10 categories.
 
 | # | Category | Count | Examples |
 |---|---|---:|---|
@@ -103,7 +204,7 @@ Architecture detail: [`docs/system-architecture.md`](docs/system-architecture.md
 
 ## AGENTS.md fallback
 
-For tools that read repository-level instructions instead of tool-native agent files, CaesarAgent emits a shared `AGENTS.md` routing index. That fallback keeps role discovery consistent, but native targets remain the preferred path when a tool supports isolated agents, permissions, or model routing.
+For tools that read repository-level instructions instead of tool-native agent files, Caesar Harness Agent emits a shared `AGENTS.md` routing index. That fallback keeps role discovery consistent, but native targets remain the preferred path when a tool supports isolated agents, permissions, or model routing.
 
 ## Contributing a new agent
 
@@ -127,23 +228,23 @@ pnpm lint
 
 ## FAQ
 
-### What are Claude Code subagents?
+### What are expert coding subagents?
 
-They are specialized agent definitions that Claude Code can route to for focused work such as code review, infrastructure, data engineering, or security analysis.
+They are specialized agent definitions that tools can route to for focused work such as code review, infrastructure, data engineering, or security analysis.
 
-### Can Claude Code agents work in OpenCode or Codex?
+### Can these agents work natively in OpenCode or Codex?
 
-Not directly as the same file. CaesarAgent solves that by compiling one canonical source into native OpenCode, Codex, and other target formats.
+Not directly as the same file. Caesar Harness Agent solves that by compiling one canonical source into native OpenCode, Codex, and other target formats.
 
 ### What is AGENTS.md used for?
 
 `AGENTS.md` is the shared repository instruction index for compatible tools and fallback routing. It is useful for consistency, but it does not replace native tool support where native agents are available.
 
-### How does CaesarAgent prevent prompt drift?
+### How does Caesar Harness Agent prevent prompt drift?
 
 The canonical agent is the only source that maintainers edit. Generated outputs are rebuilt and validated instead of hand-maintained per tool.
 
-### Is CaesarAgent a prompt marketplace?
+### Is Caesar Harness Agent a prompt marketplace?
 
 No. It is a harness, transpiler, and curated software-engineering agent library for maintainers who want repeatable multi-tool outputs.
 

@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve CaesarAgent. This repository is an author-once AI agent harness for expert coding agents and native outputs across supported AI coding tools.
+Thanks for helping improve Caesar Harness Agent. Caesar-Harness-Agent serves as the definitive collection of harness subagents, specialized AI assistants designed for specific development tasks and native cross-platform coding agent outputs.
 
 ## Setup
 
@@ -38,7 +38,7 @@ Every agent change follows the six gates documented in `docs/g1-research-playboo
 
 ## Public-surface hygiene
 
-Public files must describe CaesarAgent as original work. Do not include names of external prompt suites, study repositories, benchmark collections, or internal planning sources. Tool names are allowed when they are supported output targets.
+Public files must describe Caesar Harness Agent as original work. Do not include names of external prompt suites, study repositories, benchmark collections, or internal planning sources. Tool names are allowed when they are supported output targets.
 
 ## Pull request checklist
 

@@ -1,4 +1,4 @@
-# Project Overview (PDR) — CaesarAgent Dev-Subagents Suite
+# Project Overview (PDR) — Caesar Harness Agent Dev-Subagents Suite
 
 **Status:** v1 implemented (2026-05-30) · **Type:** greenfield TypeScript monorepo
 
@@ -15,7 +15,7 @@ Author each expert subagent **once** in a canonical Markdown + YAML format, then
 **In scope:**
 - 134 domain-expert dev subagents across 10 categories (core dev, languages, infra, quality/security, data/AI, DX, specialized domains, business/product, meta-orchestration, research).
 - Canonical schema (zod) + transpiler + 9 native emitters (claude, opencode, kiro, codex, factory, copilot, gemini, openhands, kilo) + 1 aggregate fallback (`AGENTS.md`) + opt-in rule emitters (cursor, windsurf, cline).
-- `caesar` CLI: `build`, `validate`, `install`.
+- `caesar` CLI: `build`, `validate`, plugin harness (`add`, `list`, `remove`), and legacy `install`.
 - Per-category npm packages of prebuilt artifacts; two functional packages (`@caesar/agents-core`, `@caesar/cli`).
 - A 6-gate per-agent quality pipeline with a measurable G4 rubric.
 

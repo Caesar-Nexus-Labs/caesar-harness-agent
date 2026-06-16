@@ -62,3 +62,36 @@ export interface InstallResult {
   skipped: string[];
   force: boolean;
 }
+
+export interface AddResult {
+  source: string;
+  name: string;
+  version: string;
+  scope: 'project' | 'global';
+  dryRun: boolean;
+  installedTools: ToolTarget[];
+  copiedPaths: string[];
+  skippedPaths: string[];
+  lockUpdated: boolean;
+}
+
+export interface RemoveResult {
+  name: string;
+  scope: 'project' | 'global';
+  dryRun: boolean;
+  removedPaths: string[];
+  skippedPaths: string[];
+}
+
+export interface ListResult {
+  entries: Array<{
+    name: string;
+    version: string;
+    source: 'npm' | 'github' | 'local';
+    scope: 'project' | 'global';
+    installedTools: ToolTarget[];
+    installedAt: string;
+  }>;
+  projectLockPath?: string;
+  globalLockPath?: string;
+}

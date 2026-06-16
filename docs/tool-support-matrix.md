@@ -1,6 +1,6 @@
 # Tool Support Matrix
 
-CaesarAgent transpiles each canonical agent to the native subagent format of the tools below. **Native** tools get a first-class per-agent file; **fallback** tools are covered by a single shared `AGENTS.md` routing index (plus optional opt-in rule files where per-agent activation matters).
+Caesar Harness Agent transpiles each canonical agent to the native subagent format of the tools below. **Native** tools get a first-class per-agent file; **fallback** tools are covered by a single shared `AGENTS.md` routing index (plus optional opt-in rule files where per-agent activation matters).
 
 _Verified 2026-06-01 against current tool documentation, local emitters, and output validators._
 
@@ -22,7 +22,7 @@ _Verified 2026-06-01 against current tool documentation, local emitters, and out
 
 A single aggregated `dist/agents-md/AGENTS.md` routing index covers every tool below. It groups agents by category with a one-line "when to use" + permission/tool summary per agent, and a Platform Notes section documenting each tool's limits.
 
-| Tool | How it consumes CaesarAgent | Opt-in per-agent rule file |
+| Tool | How it consumes Caesar Harness Agent | Opt-in per-agent rule file |
 |---|---|---|
 | **Cursor** | reads `AGENTS.md` (Custom Modes removed in v2.1 — index is always-on guidance) | `.cursor/rules/{slug}.mdc` (`alwaysApply: false`, description, globs) |
 | **Windsurf** | reads `AGENTS.md` | `.windsurf/rules/{slug}.md` (`trigger: model_decision`; ≤12k chars/file, enforced) |

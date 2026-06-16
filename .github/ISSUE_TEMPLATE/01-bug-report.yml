@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible CaesarAgent bug.
+description: Report a reproducible Caesar Harness Agent bug.
 title: "bug: "
 labels:
   - bug
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve CaesarAgent. Please include enough detail to reproduce the issue.
+        Thanks for helping improve Caesar Harness Agent. Please include enough detail to reproduce the issue.
   - type: input
     id: version
     attributes:

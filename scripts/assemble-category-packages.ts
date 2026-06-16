@@ -14,9 +14,7 @@ import {
   cpSync,
   existsSync,
   mkdirSync,
-  readdirSync,
   rmSync,
-  statSync,
   writeFileSync,
 } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -31,6 +29,7 @@ import {
   TOOL_TARGETS,
   type ToolTarget,
 } from '@caesar/agents-core';
+import { includeFile, listFilesRecursive } from '../packages/cli/src/shared/file-copy-utils.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..');
@@ -67,28 +66,7 @@ function humanTitle(category: string): string {
     .join(' ');
 }
 
-/** List files under `dir` recursively, returning paths relative to `dir`. */
-function listFilesRecursive(dir: string): string[] {
-  if (!existsSync(dir)) return [];
-  const out: string[] = [];
-  for (const entry of readdirSync(dir, { recursive: true }) as string[]) {
-    const abs = join(dir, entry);
-    if (statSync(abs).isFile()) out.push(entry);
-  }
-  return out;
-}
 
-/** True when a native per-agent built file (relative to its tool dir) belongs to one of `slugs`. */
-function fileBelongsToCategory(tool: ToolTarget, relativePath: string, slugs: Set<string>): boolean {
-  const segs = relativePath.split(/[\\/]/);
-  const base = segs.at(-1) ?? relativePath;
-  // Folder-per-agent (openhands): `.agents/skills/{slug}/SKILL.md` → slug is the parent dir.
-  if (base === 'SKILL.md') return slugs.has(segs.at(-2) ?? '');
-  // Flat per-agent: slug = basename minus the tool extension (handles copilot `.agent.md`).
-  const ext = getToolTargetMeta(tool).fileExtension;
-  if (!base.endsWith(ext)) return false;
-  return slugs.has(base.slice(0, base.length - ext.length));
-}
 
 interface CategoryPackage {
   category: string;
@@ -142,7 +120,7 @@ function assemble(): CategoryPackage[] {
     for (const tool of nativeTargets) {
       const toolDir = resolve(DIST_ROOT, tool);
       for (const rel of listFilesRecursive(toolDir)) {
-        if (!fileBelongsToCategory(tool, rel, slugs)) continue;
+        if (!includeFile(tool, rel, slugs)) continue;
         const src = join(toolDir, rel);
         const dest = join(pkgDist, tool, rel);
         mkdirSync(dirname(dest), { recursive: true });
@@ -173,7 +151,7 @@ function assemble(): CategoryPackage[] {
 
     writeFileSync(
       resolve(pkgDir, 'package.json'),
-      `${JSON.stringify(buildPackageJson(pkgSlug, category), null, 2)}\n`,
+      `${JSON.stringify(buildPackageJson(pkgSlug, category, [...slugs]), null, 2)}\n`,
       'utf8',
     );
     writeFileSync(resolve(pkgDir, 'README.md'), buildReadme(category, pkgSlug, [...slugs]), 'utf8');
@@ -184,11 +162,11 @@ function assemble(): CategoryPackage[] {
   return results;
 }
 
-function buildPackageJson(pkgSlug: string, category: string): Record<string, unknown> {
+function buildPackageJson(pkgSlug: string, category: string, agentSlugs: string[]): Record<string, unknown> {
   return {
     name: `@caesar/${pkgSlug}`,
     version: VERSION,
-    description: `CaesarAgent ${humanTitle(category)} expert coding agents — prebuilt native outputs for supported AI coding tools.`,
+    description: `Caesar Harness Agent ${humanTitle(category)} harness subagents — specialized AI assistants designed for specific development tasks and native cross-platform coding agent outputs.`,
     license: 'GPL-3.0-only',
     keywords: [
       'ai-agents',
@@ -198,6 +176,14 @@ function buildPackageJson(pkgSlug: string, category: string): Record<string, unk
       'native-agent-outputs',
       'agent-prompt-library',
     ],
+    caesar: {
+      type: 'agent-plugin',
+      schemaVersion: 1,
+      categories: [category],
+      agentCount: agentSlugs.length,
+      agentSlugs,
+      supportedTools: TOOL_TARGETS,
+    },
     files: ['dist', 'README.md'],
     publishConfig: { access: 'public' },
   };
@@ -208,7 +194,7 @@ function buildReadme(category: string, pkgSlug: string, agentSlugs: string[]): s
   const lines = [
     `# @caesar/${pkgSlug}`,
     '',
-    `Prebuilt **${title}** expert coding agents from the CaesarAgent suite, transpiled into native outputs for supported AI coding tools.`,
+    `Prebuilt **${title}** expert coding agents from the Caesar Harness Agent suite, transpiled into native outputs for supported AI coding tools.`,
     '',
     `## Agents (${agentSlugs.length})`,
     '',
@@ -216,10 +202,20 @@ function buildReadme(category: string, pkgSlug: string, agentSlugs: string[]): s
     '',
     '## Install',
     '',
-    'Copy the prebuilt files for your tool into your project using the `caesar` CLI:',
-    '',
+    'Add to your project (all supported tools):',
     '```bash',
-    `caesar install ${category} --tool claude`,
+    `npx @caesar/cli add @caesar/${pkgSlug} --tool all`,
+    '```',
+    '',
+    'Or install for a specific tool:',
+    '```bash',
+    `npx @caesar/cli add @caesar/${pkgSlug} --tool claude`,
+    `npx @caesar/cli add @caesar/${pkgSlug} --tool opencode`,
+    '```',
+    '',
+    'Global install:',
+    '```bash',
+    `npx @caesar/cli add @caesar/${pkgSlug} --tool claude --global`,
     '```',
     '',
     'Supported tools: `claude`, `opencode`, `kiro`, `codex`, `factory`, `copilot`, `gemini`, `openhands`, `kilo` (native), plus a shared `AGENTS.md` routing index for fallback tools (Cursor, Windsurf, Cline, Antigravity, Amp).',
@@ -227,6 +223,8 @@ function buildReadme(category: string, pkgSlug: string, agentSlugs: string[]): s
     '## Layout',
     '',
     'Built artifacts live under `dist/{tool}/` mirroring each tool’s native agent path (e.g. `dist/claude/.claude/agents/*.md`).',
+    '',
+    'You can view installed plugins using `caesar list` or `caesar list --global`.',
     '',
     '> Generated from canonical sources — do not edit these files directly.',
     '',
