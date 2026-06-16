@@ -4,6 +4,7 @@ import type {
   InstallResult,
   RemoveResult,
   ValidateResult,
+  AliasResult,
 } from '../command-results.js';
 
 // Rendering layer: turns command result objects into strings. Human summaries by default;
@@ -164,3 +165,15 @@ export function formatList(result: ListResult): string {
 
   return lines.join('\n');
 }
+
+export function formatAlias(result: AliasResult): string {
+  const lines: string[] = [];
+  lines.push(result.message);
+  if (result.dryRun) {
+    lines.push('--- GENERATED WRAPPERS ---');
+    lines.push(result.content);
+    lines.push('--------------------------');
+  }
+  return lines.join('\n');
+}
+

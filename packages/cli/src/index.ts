@@ -8,6 +8,7 @@ import { runInstall } from './commands/install-command.js';
 import { runList } from './commands/list-command.js';
 import { runRemove } from './commands/remove-command.js';
 import { runValidate } from './commands/validate-command.js';
+import { runAlias } from './commands/alias-command.js';
 import {
   formatAdd,
   formatBuild,
@@ -15,6 +16,7 @@ import {
   formatList,
   formatRemove,
   formatValidate,
+  formatAlias,
   toJson,
 } from './reporting/cli-reporter.js';
 
@@ -143,6 +145,21 @@ export function buildCli() {
       emit(options.json ? toJson(result) : formatList(result));
       process.exitCode = EXIT_OK;
     });
+
+  cli
+    .command('alias', 'Generate shell wrapper scripts to intercept native agent command management')
+    .option('--setup <shell>', 'Target shell to auto-configure (bash, zsh, powershell)')
+    .option('--dry-run', 'Generate and print wrappers without writing profile')
+    .option('--json', 'Emit result as JSON')
+    .action((options) => {
+      const result = runAlias({
+        setup: options.setup,
+        dryRun: options.dryRun === true,
+      });
+      emit(options.json ? toJson(result) : formatAlias(result));
+      process.exitCode = EXIT_OK;
+    });
+
 
   cli.help();
   cli.version(CAESAR_AGENTS_CORE_VERSION);

@@ -95,3 +95,13 @@ export interface ListResult {
   projectLockPath?: string;
   globalLockPath?: string;
 }
+
+export interface AliasResult {
+  shell: string;
+  profilePath: string;
+  updated: boolean;
+  dryRun: boolean;
+  content: string;
+  message: string;
+}
+
