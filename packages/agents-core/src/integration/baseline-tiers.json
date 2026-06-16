@@ -668,5 +668,10 @@
     "permission": "read-only",
     "model": "balanced",
     "category": "10-research-analysis"
+  },
+  "caesar-coordinator": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
   }
 }
