@@ -32,26 +32,30 @@ packages/
 │       ├── schema/         enums.ts · canonical-agent-schema.ts · body-section-validator.ts
 │       ├── loader/         agent-file-loader.ts · agent-discovery.ts
 │       ├── mapping/        model-alias-map · permission-map · tools-map · tool-targets
-│       ├── emitters/       claude · opencode · kiro · codex · factory · copilot · gemini · openhands · kilo
+│       ├── emitters/       claude · opencode · kiro · codex · factory · copilot · gemini · openhands · cursor
+│       │   ├── claude-plugin.ts            (Claude Marketplace aggregate)
+│       │   ├── roo-yaml.ts                 (Roo Code YAML aggregate)
 │       │   ├── agents-md-emitter.ts        (aggregate fallback index)
 │       │   ├── kilo-emitter.ts             (aggregate native — .kilocodemodes)
 │       │   ├── opt-in-rules/               cursor · windsurf · cline (off by default)
-│       │   └── register-{pilot,native,extended-native,fallback}-emitters.ts
+│       │   └── register-{pilot,native,extended-native,fallback,multi-format}-emitters.ts
 │       ├── validation/     one *-output-validator.ts per tool + registry
 │       ├── smoke/          markdown + structured smoke-test harnesses
 │       ├── transpile.ts · write-outputs.ts · errors.ts · index.ts
 │       └── integration/    authored-agents-transpile.test.ts  (G5+G6 gate)
 └── cli/                # the `caesar` CLI (thin layer over agents-core)
-    └── src/  index.ts · commands/{build,validate,install} · reporting · resolve-paths
+    └── src/  index.ts · commands/{build,validate,install} · reporting · resolve-paths · mcp/summon-server.ts
 ```
 
 ## Key design decisions
 
 **Pure functions, separate sink.** Emitters are pure `(CanonicalAgent, ctx) → EmittedFile`. The filesystem sink (`writeOutputs`) is isolated so transpile/emit are testable without touching disk. `writeOutputs` resolves every target under `<distRoot>/<tool>/` and rejects any `..` traversal or absolute path before writing (fail-fast, no partial writes).
 
-**Two emitter kinds.** Per-agent emitters (one file per agent) and **aggregate** emitters (the full agent set → one file). The registry supports both via `registerEmitter` / `registerAggregateEmitter`. There are **9 native + 1 fallback** emitters: 8 per-agent native (claude, opencode, kiro, codex, factory, copilot, gemini, openhands) plus **Kilo** — the first native-tier *aggregate* target (`.kilocodemodes`, one file with a `customModes:` array carrying real `groups` permission). The `agents-md` aggregate remains the universal fallback index.
+**Two emitter kinds.** Per-agent emitters (one file per agent) and **aggregate** emitters (the full agent set → one file). The registry supports both via `registerEmitter` / `registerAggregateEmitter`. There are **12 native + 1 fallback** emitters: 9 per-agent native (claude, opencode, kiro, codex, factory, copilot, gemini, openhands, cursor) plus **kilo, roo, and claude-plugin** — native-tier *aggregate* targets (`.kilocodemodes`, `.roomodes`, `marketplace.json` / `plugin.json` aggregates). The `agents-md` aggregate remains the universal fallback index.
 
-**Dispatch by registry, not tool name.** The CLI tier-split (`splitToolsByTier`) routes a tool to the aggregate path iff `hasAggregateEmitter(tool)` is true (agents-md, kilo) — not a hard-coded `=== 'agents-md'` check. This requires emitters to be registered *before* the split, so `build`/`validate`/`install` call `registerNativeEmitters` + `registerExtendedNativeEmitters` + `registerFallbackEmitters` up front. Install copies aggregate indexes whole and derives per-agent slugs from the folder segment for folder-nested outputs (openhands `{slug}/SKILL.md`).
+**MCP Dynamic Summoning.** A Meta-Orchestrator (`caesar-coordinator`) is shipped to query an MCP stdio server (`summon-server.ts`). This allows clients to dynamically search and load the full instruction set of any of the 135 agents on-demand instead of loading them all into context, saving token space and avoiding LLM confusion.
+
+**Dispatch by registry, not tool name.** The CLI tier-split (`splitToolsByTier`) routes a tool to the aggregate path iff `hasAggregateEmitter(tool)` is true (agents-md, kilo, roo, claude-plugin) — not a hard-coded `=== 'agents-md'` check. This requires emitters to be registered *before* the split, so `build`/`validate`/`install` call `registerNativeEmitters` + `registerExtendedNativeEmitters` + `registerMultiFormatEmitters` + `registerFallbackEmitters` up front. Install copies aggregate indexes whole and derives per-agent slugs from the folder segment for folder-nested outputs (openhands `{slug}/SKILL.md`).
 
 **Single source of truth = zod.** `CanonicalAgentFrontmatterSchema` drives both the inferred TypeScript type and runtime validation. A `superRefine` enforces the security invariant: `permission: read-only` agents cannot declare `edit`/`write`/`bash` tools.
 
