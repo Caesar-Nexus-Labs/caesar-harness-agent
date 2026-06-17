@@ -104,4 +104,3 @@ export interface AliasResult {
   content: string;
   message: string;
 }
-

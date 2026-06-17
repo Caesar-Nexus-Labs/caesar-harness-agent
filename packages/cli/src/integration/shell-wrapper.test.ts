@@ -1,13 +1,13 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { execSync } from 'node:child_process';
-import { writeFileSync, readFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { generateBashZshWrapper } from '../templates/wrapper-templates.js';
 
 describe('Unix Shell Integration Wrapper Integration', () => {
   const testDir = join(tmpdir(), `caesar-integration-test-${Date.now()}`);
-  
+
   beforeEach(() => {
     mkdirSync(testDir, { recursive: true });
   });
@@ -40,7 +40,9 @@ describe('Unix Shell Integration Wrapper Integration', () => {
     // 2. Write mock 'opencode' command in our testDir that echoes arguments to a log
     const opencodeLog = join(testDir, 'opencode.log');
     const mockOpencode = join(testDir, 'opencode');
-    writeFileSync(mockOpencode, `#!/bin/sh\necho "OPENCODE:$@" >> "${opencodeLog}"\n`, { mode: 0o755 });
+    writeFileSync(mockOpencode, `#!/bin/sh\necho "OPENCODE:$@" >> "${opencodeLog}"\n`, {
+      mode: 0o755,
+    });
 
     // 3. Generate wrapper and write execution script
     const wrapper = generateBashZshWrapper('opencode');
@@ -58,7 +60,9 @@ opencode dev --port 3000
     writeFileSync(runnerScript, scriptBody, { mode: 0o755 });
 
     // 4. Run the runnerScript via bash
-    execSync(`bash "${runnerScript}"`, { env: { ...process.env, PATH: `${testDir}:${process.env.PATH}` } });
+    execSync(`bash "${runnerScript}"`, {
+      env: { ...process.env, PATH: `${testDir}:${process.env.PATH}` },
+    });
 
     // 5. Assert the outcomes
     expect(existsSync(caesarLog)).toBe(true);
