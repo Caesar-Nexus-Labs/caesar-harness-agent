@@ -123,7 +123,7 @@ Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-suppo
 
 ## Target Tools Configuration & Usage
 
-Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool:
+Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool. For a native-like installation flow (e.g. running `claude plugin install`), you can configure CLI wrappers by following the [Native-Like CLI Commands Guide](docs/native-like-cli-integration.md).
 
 ### 1. Claude Code
 - **Path**: Local `.claude/agents/` or Global `~/.claude/agents/`
@@ -131,7 +131,7 @@ Once the agents are copied or installed into their respective target paths, here
 
 ### 2. OpenCode
 - **Path**: Local `.opencode/agents/` or Global `~/.opencode/agents/`
-- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` and choose the subagent from the session setup menu.
+- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` and choose the subagent from the session setup menu or invoke them via standard chat.
 
 ### 3. Kiro
 - **Path**: Local `.kiro/agents/` or Global `~/.kiro/agents/`
@@ -139,7 +139,7 @@ Once the agents are copied or installed into their respective target paths, here
 
 ### 4. Codex
 - **Path**: Local `.codex/agents/` or Global `~/.codex/agents/`
-- **Usage**: Codex loads TOML developer instructions. Run Codex and specify the developer agent mode.
+- **Usage**: Codex loads TOML developer instructions. Run Codex and specify the developer agent mode via config or CLI arguments.
 
 ### 5. Factory / Droid
 - **Path**: Local `.factory/droids/` or Global `~/.factory/droids/`
@@ -149,9 +149,9 @@ Once the agents are copied or installed into their respective target paths, here
 - **Path**: Local `.github/agents/`
 - **Usage**: Copilot in VS Code reads these YAML definitions. In the Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route your conversation and context to the specialized agent.
 
-### 7. Gemini CLI
+### 7. Gemini CLI & Antigravity (Agy)
 - **Path**: Local `.gemini/agents/` or Global `~/.gemini/agents/`
-- **Usage**: Custom agents inherit the active Gemini session config. Run `gemini` and load the agent mode.
+- **Usage**: Antigravity is built on top of the Gemini CLI substrate and natively parses files in `.gemini/agents/`. Run `gemini` or `antigravity` and target the mode using the mode picker or session arguments.
 
 ### 8. OpenHands
 - **Path**: Local `.agents/skills/` (folder-per-skill format)
@@ -161,9 +161,22 @@ Once the agents are copied or installed into their respective target paths, here
 - **Path**: Local `.kilocodemodes` (single YAML file)
 - **Usage**: Kilo reads this file to configure its custom modes. The modes list will be displayed in the Kilo UI dropdown.
 
-### 10. Fallbacks (Cursor, Windsurf, Cline, Antigravity, Amp)
+### 10. Roo Code
+- **Path**: Local `.roomodes` (single YAML file)
+- **Usage**: Roo Code reads this file to configure its custom modes. You can select the custom mode from the mode dropdown in the sidebar.
+
+### 11. Cursor (Native MDC Rules)
+- **Path**: Local `.cursor/rules/`
+- **Usage**: Cursor loads per-agent `.mdc` files. The rules are applied automatically based on the glob patterns defined in the MDC frontmatter, or you can mention them in chat using `@rule-name`.
+
+### 12. Claude Plugin Marketplace
+- **Path**: Local `.claude-plugin/`
+- **Usage**: Configures the local registry for custom plugin distributions. Run your local marketplace server to serve these to Claude.
+
+### 13. Fallbacks (Windsurf, Cline, Amp)
 - **Path**: Local `AGENTS.md`
-- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. The instructions guide the fallback tools on role discovery and system boundaries.
+- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. The instructions guide the fallback tools on role discovery and system boundaries. Cline also checks `.clinerules/` for custom instruction files.
+
 
 ## Expert coding agents and prompt library
 

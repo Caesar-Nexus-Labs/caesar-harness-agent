@@ -1,5 +1,6 @@
 import type {
   AddResult,
+  AliasResult,
   BuildResult,
   InstallResult,
   RemoveResult,
@@ -162,5 +163,16 @@ export function formatList(result: ListResult): string {
     `└${'─'.repeat(21)}┴${'─'.repeat(10)}┴${'─'.repeat(9)}┴${'─'.repeat(30)}┴${'─'.repeat(12)}┘`,
   );
 
+  return lines.join('\n');
+}
+
+export function formatAlias(result: AliasResult): string {
+  const lines: string[] = [];
+  lines.push(result.message);
+  if (result.dryRun) {
+    lines.push('--- GENERATED WRAPPERS ---');
+    lines.push(result.content);
+    lines.push('--------------------------');
+  }
   return lines.join('\n');
 }

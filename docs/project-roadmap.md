@@ -2,11 +2,11 @@
 
 ## Status: v1 complete (2026-05-30)
 
-134 agents across 10 categories, authored once and transpiling to 9 native targets plus shared `AGENTS.md`. `caesar validate --strict` green; full suite builds to 1074 files.
+135 agents across 10 categories, authored once and transpiling to 12 native targets plus shared `AGENTS.md`. `caesar validate --strict` green; full suite builds to 1215 files.
 
 ### Depth upgrade (2026-05-30, post-v1)
 
-All 134 agents re-authored from the ~90-line "dead zone" to a **150–220 line expert band** (median 91 → 161; min 150, max 199, all in-band), filling the added lines with high-signal artifacts — decision tables, code/command snippets, numeric thresholds, behavioral traits, explicit cross-agent boundaries — not prose. Evidence: a blind, position-swapped, length-controlled measurement scored the re-authored prompts 25/25 vs the ~90-line baseline AND 25/25 vs a same-length filler control (depth, not length). Body soft-cap at 300 lines (non-fatal warn). A manifest-driven `agent-depth-budget.test.ts` enforces band + artifact-presence + permission/model-tier diff (no read-only auditor gained mutating tools). Spec captured in `g1-research-playbook.md` §2a/§4.
+All 135 agents re-authored from the ~90-line "dead zone" to a **150–220 line expert band** (median 91 → 161; min 150, max 199, all in-band), filling the added lines with high-signal artifacts — decision tables, code/command snippets, numeric thresholds, behavioral traits, explicit cross-agent boundaries — not prose. Evidence: a blind, position-swapped, length-controlled measurement scored the re-authored prompts 25/25 vs the ~90-line baseline AND 25/25 vs a same-length filler control (depth, not length). Body soft-cap at 300 lines (non-fatal warn). A manifest-driven `agent-depth-budget.test.ts` enforces band + artifact-presence + permission/model-tier diff (no read-only auditor gained mutating tools). Spec captured in `g1-research-playbook.md` §2a/§4.
 
 
 ## Phases
@@ -25,6 +25,7 @@ All 134 agents re-authored from the ~90-line "dead zone" to a **150–220 line e
 | 10 | Packaging + docs + CI | ✅ done |
 | 11 | Extended native emitters (gemini, openhands, kilo) — registry-based tier split | ✅ done |
 | 12 | Agent Plugin Harness (`add`, `list`, `remove`, `caesar.lock`, global scope) | ✅ done |
+| 13 | Multi-format plugin emitters (roo, cursor, claude-plugin) + MCP Summon server | ✅ done |
 
 ## Agent inventory
 
@@ -38,9 +39,9 @@ All 134 agents re-authored from the ~90-line "dead zone" to a **150–220 line e
 | 06 developer-experience | 12 |
 | 07 specialized-domains | 11 |
 | 08 business-product | 8 |
-| 09 meta-orchestration | 10 |
+| 09 meta-orchestration | 11 |
 | 10 research-analysis | 6 |
-| **Total** | **134** |
+| **Total** | **135** |
 
 Applied during scale-out: **dedupe** (12 marketing-flavored agents not authored — owned by the separate marketing kit) and **fold-in** (Codex AI-governance/LLMOps roles → cat-05; internal-developer-platform roles → cat-03). No net-new categories.
 
