@@ -1,10 +1,10 @@
 import type {
   AddResult,
+  AliasResult,
   BuildResult,
   InstallResult,
   RemoveResult,
   ValidateResult,
-  AliasResult,
 } from '../command-results.js';
 
 // Rendering layer: turns command result objects into strings. Human summaries by default;
@@ -176,4 +176,3 @@ export function formatAlias(result: AliasResult): string {
   }
   return lines.join('\n');
 }
-

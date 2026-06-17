@@ -3,20 +3,20 @@ import { CAESAR_AGENTS_CORE_VERSION } from '@caesar/agents-core';
 import { cac } from 'cac';
 import { BuildNotFoundError, EXIT_OK, EXIT_USAGE, EXIT_VALIDATION } from './cli-errors.js';
 import { runAdd } from './commands/add-command.js';
+import { runAlias } from './commands/alias-command.js';
 import { runBuild } from './commands/build-command.js';
 import { runInstall } from './commands/install-command.js';
 import { runList } from './commands/list-command.js';
 import { runRemove } from './commands/remove-command.js';
 import { runValidate } from './commands/validate-command.js';
-import { runAlias } from './commands/alias-command.js';
 import {
   formatAdd,
+  formatAlias,
   formatBuild,
   formatInstall,
   formatList,
   formatRemove,
   formatValidate,
-  formatAlias,
   toJson,
 } from './reporting/cli-reporter.js';
 
@@ -159,7 +159,6 @@ export function buildCli() {
       emit(options.json ? toJson(result) : formatAlias(result));
       process.exitCode = EXIT_OK;
     });
-
 
   cli.help();
   cli.version(CAESAR_AGENTS_CORE_VERSION);
