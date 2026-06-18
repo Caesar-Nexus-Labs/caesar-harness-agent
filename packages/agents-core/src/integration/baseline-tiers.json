@@ -594,6 +594,11 @@
     "model": "top",
     "category": "09-meta-orchestration"
   },
+  "caesar-coordinator": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "09-meta-orchestration"
+  },
   "codebase-orchestrator": {
     "permission": "full",
     "model": "top",
@@ -669,9 +674,84 @@
     "model": "balanced",
     "category": "10-research-analysis"
   },
-  "caesar-coordinator": {
+  "ad-copy-creator": {
     "permission": "read-only",
     "model": "balanced",
-    "category": "09-meta-orchestration"
+    "category": "11-marketing"
+  },
+  "campaign-architect": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "cold-outreach-writer": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "community-responder": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "conversion-copywriter": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "cro-data-analyst": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "11-marketing"
+  },
+  "email-sequence-builder": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "market-positioning-strategist": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "paid-media-planner": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "pr-outreach-planner": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "seo-content-strategist": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "seo-longform-writer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "11-marketing"
+  },
+  "social-media-planner": {
+    "permission": "read-only",
+    "model": "fast",
+    "category": "11-marketing"
+  },
+  "social-post-writer": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
+  },
+  "technical-b2b-writer": {
+    "permission": "read-only",
+    "model": "top",
+    "category": "11-marketing"
+  },
+  "visual-prompt-engineer": {
+    "permission": "read-only",
+    "model": "balanced",
+    "category": "11-marketing"
   }
 }
