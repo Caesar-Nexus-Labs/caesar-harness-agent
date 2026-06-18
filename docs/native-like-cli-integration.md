@@ -1,46 +1,46 @@
 # Native-Like CLI Commands & Shell Integration
 
-Bản hướng dẫn này giải thích cách thiết lập các trình bao bọc (shell wrappers) giúp bạn sử dụng cú pháp cài đặt plugin nguyên bản của các công cụ đích (như `claude`, `opencode`) trực tiếp từ dòng lệnh.
+This guide explains how to set up shell wrappers that allow you to use the target tools' native plugin/agent installation syntax (such as `claude`, `opencode`) directly from your terminal.
 
-## 1. Cơ chế hoạt động (How It Works)
+## 1. How It Works
 
-Khi bạn gõ lệnh cài đặt plugin của bên thứ ba, trình bao bọc shell sẽ chặn lệnh và chuyển tiếp tương đương sang lệnh `caesar add`:
+When you type a third-party plugin/agent command, the shell wrapper intercepts the execution and forwards the equivalent command to `caesar add` or `caesar remove`:
 
-* `claude plugin marketplace add <src>` $\rightarrow$ `caesar add <src> --tool claude`
-* `claude plugin install <src>` $\rightarrow$ `caesar add <src> --tool claude`
-* `opencode subagent add <src>` $\rightarrow$ `caesar add <src> --tool opencode`
-* `opencode subagent remove <name>` $\rightarrow$ `caesar remove <name>`
-* `kiro agent install <src>` $\rightarrow$ `caesar add <src> --tool kiro`
-* `copilot agent add <src>` $\rightarrow$ `caesar add <src> --tool copilot`
-* `factory agent add <src>` $\rightarrow$ `caesar add <src> --tool factory`
-* `openhands agent install <src>` $\rightarrow$ `caesar add <src> --tool openhands`
+* `claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool claude`
+* `claude plugin install <plugin-name>` → `caesar add <plugin-name> --tool claude`
+* `opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool opencode`
+* `opencode subagent remove <subagent-name>` → `caesar remove <subagent-name>`
+* `kiro agent install Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool kiro`
+* `copilot agent add Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool copilot`
+* `factory agent add Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool factory`
+* `openhands agent install Caesar-Nexus-Labs/caesar-harness-agent` → `caesar add Caesar-Nexus-Labs/caesar-harness-agent --tool openhands`
 
-Các lệnh không liên quan đến cài đặt plugin (ví dụ: `claude dev`, `opencode start`) sẽ được chuyển tiếp trực tiếp sang công cụ gốc với hiệu năng không thay đổi (latency < 10ms) và không có nguy cơ lặp vô hạn (recursion).
+Commands unrelated to plugin or subagent management (e.g., `claude dev`, `opencode start`) are forwarded directly to the original tool with zero overhead (latency < 10ms) and no risk of infinite recursion.
 
 ---
 
-## 2. Thiết lập tự động (Automatic Setup)
+## 2. Automatic Setup
 
-Để tự động phát hiện shell hiện tại và ghi cấu hình vào profile của bạn:
+To automatically detect your current active shell and write the wrapper configuration to your profile:
 
 ```bash
 caesar alias
 ```
 
-Hoặc chỉ định rõ shell mong muốn:
+Or specify the desired shell explicitly:
 
 ```bash
-# Cấu hình Bash (~/.bashrc)
+# Configure Bash (~/.bashrc)
 caesar alias --setup bash
 
-# Cấu hình Zsh (~/.zshrc)
+# Configure Zsh (~/.zshrc)
 caesar alias --setup zsh
 
-# Cấu hình PowerShell ($PROFILE)
+# Configure PowerShell ($PROFILE)
 caesar alias --setup powershell
 ```
 
-Nếu bạn muốn xem trước nội dung script mà không ghi đè lên file:
+If you want to preview the script contents without writing them to a file:
 
 ```bash
 caesar alias --dry-run
@@ -48,13 +48,13 @@ caesar alias --dry-run
 
 ---
 
-## 3. Cấu hình thủ công (Manual Setup)
+## 3. Manual Setup
 
-Nếu bạn không muốn CLI chỉnh sửa profile của mình, hãy sao chép các khối mã tương ứng dưới đây vào file cấu hình của bạn:
+If you prefer not to have the CLI modify your shell profile, copy the corresponding code blocks below into your configuration file:
 
-### A. Đối với Unix (Bash / Zsh)
+### A. For Unix (Bash / Zsh)
 
-Thêm đoạn mã này vào cuối file `~/.bashrc` hoặc `~/.zshrc`:
+Add this code block to the end of your `~/.bashrc` or `~/.zshrc` file:
 
 ```bash
 # <<< CAESAR NATIVE-LIKE WRAPPER START >>>
@@ -80,9 +80,9 @@ opencode() {
 # <<< CAESAR NATIVE-LIKE WRAPPER END >>>
 ```
 
-### B. Đối với Windows (PowerShell)
+### B. For Windows (PowerShell)
 
-Thêm đoạn mã này vào file profile PowerShell của bạn (đường dẫn hiển thị khi chạy lệnh `$PROFILE` trong PowerShell):
+Add this code block to your PowerShell profile file (the path shown when running the `$PROFILE` command in PowerShell):
 
 ```powershell
 # <<< CAESAR NATIVE-LIKE WRAPPER START >>>
@@ -95,6 +95,21 @@ function claude {
         $realBin = (Get-Command claude -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1).Path
         if (-not $realBin) {
             Write-Error "The underlying command 'claude' was not found in PATH."
+            return
+        }
+        & $realBin @args
+    }
+}
+
+function opencode {
+    if ($args[0] -eq "subagent" -and $args[1] -eq "add" -and $args[2]) {
+        caesar add $args[2] --tool opencode
+    } elseif ($args[0] -eq "subagent" -and $args[1] -eq "remove" -and $args[2]) {
+        caesar remove $args[2]
+    } else {
+        $realBin = (Get-Command opencode -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1).Path
+        if (-not $realBin) {
+            Write-Error "The underlying command 'opencode' was not found in PATH."
             return
         }
         & $realBin @args
