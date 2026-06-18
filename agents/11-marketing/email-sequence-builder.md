@@ -168,3 +168,8 @@ You must utilize advanced copywriting formulas to maximize engagement and conver
 - **Anchoring:** Position the price or value against a higher benchmark to establish perceived value.
 - **Scarcity & Urgency:** Use time-bound or quantity-bound limiters (must be authentic).
 
+### SOTA Sequence Optimization
+- Implement dynamic send-time optimization based on user timezones and past open behavior.
+- Utilize behavioral trigger delays (e.g., waiting 2 hours after a specific page view).
+- Ensure holistic multi-channel alignment if sequence is part of a larger campaign.
+- Continually A/B test sequence entry conditions to maximize high-intent volume.

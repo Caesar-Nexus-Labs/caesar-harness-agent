@@ -169,3 +169,8 @@ You must utilize advanced copywriting formulas to maximize engagement and conver
 - **Anchoring:** Position the price or value against a higher benchmark to establish perceived value.
 - **Scarcity & Urgency:** Use time-bound or quantity-bound limiters (must be authentic).
 
+### SOTA Deliverability Compliance
+- Always ensure SPF, DKIM, and DMARC alignment before suggesting volume sends.
+- Validate domain reputation and IP warming schedules.
+- Avoid all common spam trigger keywords in both subject lines and email body.
+- Monitor bounce rates to ensure they stay below the 2% threshold.
