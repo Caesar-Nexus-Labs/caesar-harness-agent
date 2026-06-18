@@ -123,39 +123,53 @@ Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-suppo
 
 ## Target Tools Configuration & Usage
 
-Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool. For a native-like installation flow (e.g. running `claude plugin install`), you can configure CLI wrappers by following the [Native-Like CLI Commands Guide](docs/native-like-cli-integration.md).
+Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool. For a native-like installation flow, configure CLI shell wrappers by running `caesar alias` (see the [Native-Like CLI Commands Guide](docs/native-like-cli-integration.md)).
 
 ### 1. Claude Code
 - **Path**: Local `.claude/agents/` or Global `~/.claude/agents/`
-- **Usage**: Run `claude`. Inside the Claude interactive terminal, type `/` to see the autocomplete list of agents, or type `/<agent-slug>` (e.g. `/typescript-pro`) to activate a specific agent.
+- **Native-Like Installation**:
+  - Add registry: `claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent`
+  - Install agent: `claude plugin install <plugin-name>`
+- **Usage**: Run `claude`. Inside the Claude interactive terminal, type `/` to see the autocomplete list of agents, or type `/<agent-slug>` (e.g., `/typescript-pro`) to activate a specific subagent.
 
 ### 2. OpenCode
 - **Path**: Local `.opencode/agents/` or Global `~/.opencode/agents/`
-- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` and choose the subagent from the session setup menu or invoke them via standard chat.
+- **Native-Like Installation**:
+  - Add source: `opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent`
+  - Remove subagent: `opencode subagent remove <subagent-name>`
+- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` CLI or open the editor interface, and select the subagent from the session setup menu or invoke them via standard chat.
 
 ### 3. Kiro
 - **Path**: Local `.kiro/agents/` or Global `~/.kiro/agents/`
-- **Usage**: Kiro parses these JSON agent manifests. Run Kiro and target the agent mode by specifying the agent name or using the UI mode selector.
+- **Native-Like Installation**:
+  - Install source/agent: `kiro agent install Caesar-Nexus-Labs/caesar-harness-agent`
+- **Usage**: Kiro parses these JSON agent manifests. Run `kiro` CLI or use the Kiro IDE/UI mode selector, and specify the agent by name.
 
 ### 4. Codex
 - **Path**: Local `.codex/agents/` or Global `~/.codex/agents/`
-- **Usage**: Codex loads TOML developer instructions. Run Codex and specify the developer agent mode via config or CLI arguments.
+- **Usage**: Codex loads TOML developer instructions. Run `codex` CLI or launch the Codex web IDE; it automatically scans `.codex/agents/` to make the custom agent modes available.
 
 ### 5. Factory / Droid
 - **Path**: Local `.factory/droids/` or Global `~/.factory/droids/`
-- **Usage**: Droids are selected in the Factory build execution interface to automate specific development loops.
+- **Native-Like Installation**:
+  - Add source/agent: `factory agent add Caesar-Nexus-Labs/caesar-harness-agent`
+- **Usage**: Droids are selected in the Factory build execution interface to automate specific development loops. You can run the `factory` CLI tool or access the web build dashboard.
 
 ### 6. GitHub Copilot / VS Code
 - **Path**: Local `.github/agents/`
+- **Native-Like Installation**:
+  - Add source/agent: `copilot agent add Caesar-Nexus-Labs/caesar-harness-agent`
 - **Usage**: Copilot in VS Code reads these YAML definitions. In the Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route your conversation and context to the specialized agent.
 
 ### 7. Gemini CLI & Antigravity (Agy)
 - **Path**: Local `.gemini/agents/` or Global `~/.gemini/agents/`
-- **Usage**: Antigravity is built on top of the Gemini CLI substrate and natively parses files in `.gemini/agents/`. Run `gemini` or `antigravity` and target the mode using the mode picker or session arguments.
+- **Usage**: Antigravity is built on top of the Gemini CLI substrate and natively parses files in `.gemini/agents/`. Run the `gemini` or `antigravity` CLI tool and target the mode using the mode picker or session arguments. The IDE extensions (such as Gemini Code Assist) also read from the workspace environment dynamically.
 
 ### 8. OpenHands
 - **Path**: Local `.agents/skills/` (folder-per-skill format)
-- **Usage**: OpenHands automatically injects these folders as workspace skills. Run OpenHands; agents will invoke these skills programmatically when appropriate.
+- **Native-Like Installation**:
+  - Install source/agent: `openhands agent install Caesar-Nexus-Labs/caesar-harness-agent`
+- **Usage**: OpenHands automatically injects these folders as workspace skills. Run OpenHands web IDE or its CLI tool; agents will invoke these skills programmatically when appropriate.
 
 ### 9. Kilo Code
 - **Path**: Local `.kilocodemodes` (single YAML file)
@@ -163,11 +177,11 @@ Once the agents are copied or installed into their respective target paths, here
 
 ### 10. Roo Code
 - **Path**: Local `.roomodes` (single YAML file)
-- **Usage**: Roo Code reads this file to configure its custom modes. You can select the custom mode from the mode dropdown in the sidebar.
+- **Usage**: Roo Code reads this file to configure its custom modes. You can select the custom mode from the mode dropdown in the sidebar in VS Code.
 
 ### 11. Cursor (Native MDC Rules)
 - **Path**: Local `.cursor/rules/`
-- **Usage**: Cursor loads per-agent `.mdc` files. The rules are applied automatically based on the glob patterns defined in the MDC frontmatter, or you can mention them in chat using `@rule-name`.
+- **Usage**: Cursor loads per-agent `.mdc` files. The rules are applied automatically based on the glob patterns defined in the MDC frontmatter, or you can mention them in chat using `@rule-name`. Open the workspace using the `cursor .` CLI command or the editor UI.
 
 ### 12. Claude Plugin Marketplace
 - **Path**: Local `.claude-plugin/`
@@ -175,7 +189,7 @@ Once the agents are copied or installed into their respective target paths, here
 
 ### 13. Fallbacks (Windsurf, Cline, Amp)
 - **Path**: Local `AGENTS.md`
-- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. The instructions guide the fallback tools on role discovery and system boundaries. Cline also checks `.clinerules/` for custom instruction files.
+- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. Open the workspace using the `windsurf .` CLI command or the IDE interface. The instructions guide the fallback tools on role discovery and system boundaries. Cline also checks `.clinerules/` for custom instruction files.
 
 
 ## Expert coding agents and prompt library

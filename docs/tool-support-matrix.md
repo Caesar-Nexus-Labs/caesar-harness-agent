@@ -4,7 +4,7 @@ Caesar Harness Agent transpiles each canonical agent to the native subagent form
 
 _Verified 2026-06-01 against current tool documentation, local emitters, and output validators._
 
-## Native targets (9)
+## Native targets (10)
 
 | Tool | Output path | Format notes | Emitter |
 |---|---|---|---|
@@ -17,6 +17,7 @@ _Verified 2026-06-01 against current tool documentation, local emitters, and out
 | **Gemini CLI** | `.gemini/agents/{slug}.md` | YAML: name, description, `kind: local`. **Inherit-only** — no tools/model emitted (inherits the Gemini session surface; dodges unverified tool-ids). | `gemini` |
 | **OpenHands** | `.agents/skills/{slug}/SKILL.md` | YAML: name, description. Folder-per-skill; **no triggers** (agent-invoked); model/permission/tools inherit. | `openhands` |
 | **Kilo Code** | `.kilocodemodes` (one file) | YAML `customModes:` array. **Aggregate** target: slug, name, roleDefinition, groups (real permission), whenToUse/description/customInstructions. **No per-agent model** (legacy format → inherits). | `kilo` |
+| **Roo Code** | `.roomodes` (one file) | YAML `customModes:` array (same structure as kilo). **Aggregate** target: slug, name, roleDefinition, groups (real permission), whenToUse/description/customInstructions. (Roo Code repository was archived 2026-05-15, but native output is still emitted for backward compatibility). | `roo` |
 
 ## Fallback targets (shared `AGENTS.md`)
 
@@ -35,9 +36,7 @@ A single aggregated `dist/agents-md/AGENTS.md` routing index covers every tool b
 
 ## Not emitted
 
-| Tool | Reason |
-|---|---|
-| **Roo Code** | `.roomodes` sunset 2026-05-15 (repo archived). Not emitted. |
+None. All target formats are fully supported and emitted.
 
 ## Field mapping summary
 
