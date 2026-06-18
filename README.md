@@ -194,7 +194,7 @@ Once the agents are copied or installed into their respective target paths, here
 
 ## Expert coding agents and prompt library
 
-Caesar-Harness-Agent currently ships **134 expert coding agents** across 10 categories.
+Caesar-Harness-Agent currently ships **151 expert coding agents** across 11 categories.
 
 | # | Category | Count | Examples |
 |---|---|---:|---|
@@ -206,8 +206,9 @@ Caesar-Harness-Agent currently ships **134 expert coding agents** across 10 cate
 | 06 | developer-experience | 12 | refactoring-specialist, mcp-developer, build-engineer |
 | 07 | specialized-domains | 11 | blockchain-developer, fintech-engineer, embedded-systems |
 | 08 | business-product | 8 | product-manager, business-analyst, technical-writer |
-| 09 | meta-orchestration | 10 | multi-agent-coordinator, context-manager, policy-guardrail-designer |
+| 09 | meta-orchestration | 11 | multi-agent-coordinator, context-manager, policy-guardrail-designer |
 | 10 | research-analysis | 6 | research-analyst, search-specialist, first-principles-thinking |
+| 11 | marketing | 16 | ad-copy-creator, campaign-architect, seo-content-strategist, social-media-planner |
 
 Each category can ship as its own npm package of prebuilt artifacts (`@caesar/lang`, `@caesar/infra`, and others) so projects install only the roles they need.
 

@@ -167,6 +167,23 @@ const UPGRADED: ReadonlySet<string> = new Set<string>([
   'symfony-specialist',
   'typescript-pro',
   'vue-expert',
+  // Marketing
+  'ad-copy-creator',
+  'campaign-architect',
+  'cold-outreach-writer',
+  'community-responder',
+  'conversion-copywriter',
+  'cro-data-analyst',
+  'email-sequence-builder',
+  'market-positioning-strategist',
+  'paid-media-planner',
+  'pr-outreach-planner',
+  'seo-content-strategist',
+  'seo-longform-writer',
+  'social-media-planner',
+  'social-post-writer',
+  'technical-b2b-writer',
+  'visual-prompt-engineer',
 ]);
 
 // Agents intentionally kept lean (below band) with justification. Permanent exemption.
@@ -200,8 +217,8 @@ const agents = discoverAgents(repoRoot).map((d) => parseAgentFile(d.path));
 const baselineTiers = baseline();
 
 describe('agent depth budget (Phase B/C ratchet)', () => {
-  it('discovers all 135 agents', () => {
-    expect(agents.length).toBe(135);
+  it('discovers all 151 agents', () => {
+    expect(agents.length).toBe(151);
   });
 
   for (const agent of agents) {

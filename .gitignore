@@ -131,3 +131,8 @@ GEMINI.md
 .github/copilot-instructions.md
 .github/instructions/
 .github/skills/
+
+# Local-only agent safety rules
+CLAUDE.md
+AGENTS.md
+docs/

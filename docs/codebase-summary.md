@@ -6,19 +6,20 @@ A pnpm-workspace TypeScript monorepo. Canonical agent sources live in `agents/`;
 
 ```
 Caesar-Agents/
-├── agents/                       # CANONICAL SOURCE — 135 agents, author-once MD+YAML
+├── agents/                       # CANONICAL SOURCE — 151 agents, author-once MD+YAML
 │   ├── _template/                # canonical-agent-template.md (start here for new agents)
 │   ├── 01-core-development/      (7)    02-language-specialists/ (28)
 │   ├── 03-infrastructure/ (18)   04-quality-security/ (15)
 │   ├── 05-data-ai/ (19)          06-developer-experience/ (12)
 │   ├── 07-specialized-domains/ (11)  08-business-product/ (8)
-│   └── 09-meta-orchestration/ (11)   10-research-analysis/ (6)
+│   ├── 09-meta-orchestration/ (11)   10-research-analysis/ (6)
+│   └── 11-marketing/ (16)        # [UPGRADED] 150-220 depth band, 0 padding, concrete artifacts, banned words list
 ├── packages/
 │   ├── agents-core/              # @caesar/agents-core — engine
 │   ├── cli/                      # @caesar/cli — `caesar` CLI
 │   └── categories/               # GENERATED @caesar/{category} packages (gitignored)
 ├── scripts/assemble-category-packages.ts   # dist/ → category packages
-├── docs/                         # this documentation set
+├── docs/                         # this documentation set (local-only, gitignored)
 ├── dist/                         # build output (gitignored)
 └── .github/workflows/            # ci.yml · release.yml
 ```
@@ -67,8 +68,16 @@ Caesar-Agents/
 
 ## Tests
 
-795 tests across 30 files (vitest). Unit tests per emitter/validator/mapping + snapshot tests for emitter output + the integration gate that transpiles + smoke-tests all 135 agents to every target.
+795 tests across 30 files (vitest). Unit tests per emitter/validator/mapping + snapshot tests for emitter output + the integration gate that transpiles + smoke-tests all 151 agents to every target.
 
 ## Conventions
 
 See [`code-standards.md`](code-standards.md). In short: pure TypeScript (ESM/NodeNext, strict), files < 200 lines, kebab-case filenames, Biome for lint/format, zod as the single source of truth.
+
+## Git Safety Rules
+
+To maintain a clean public surface and prevent internal management kit tooling from leaking into the product repository, strict Git ignore rules are enforced:
+- **Local-only agent safety rules:** Files like `CLAUDE.md`, `AGENT.md`, `AGENTS.md`, and the `docs/` directory are gitignored.
+- **Management kit artifacts:** All hidden tooling directories (e.g., `.claude/`, `.opencode/`, `.cline/`) and configurations are gitignored.
+
+This ensures that only canonical source files (`agents/`, `packages/`, `scripts/`) are tracked, published, and shipped.

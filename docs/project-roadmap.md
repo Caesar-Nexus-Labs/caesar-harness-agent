@@ -2,11 +2,11 @@
 
 ## Status: v1 complete (2026-05-30)
 
-135 agents across 10 categories, authored once and transpiling to 12 native targets plus shared `AGENTS.md`. `caesar validate --strict` green; full suite builds to 1215 files.
+151 agents across 11 categories, authored once and transpiling to 12 native targets plus shared `AGENTS.md`. `caesar validate --strict` green; full suite builds to 1359 files.
 
 ### Depth upgrade (2026-05-30, post-v1)
 
-All 135 agents re-authored from the ~90-line "dead zone" to a **150–220 line expert band** (median 91 → 161; min 150, max 199, all in-band), filling the added lines with high-signal artifacts — decision tables, code/command snippets, numeric thresholds, behavioral traits, explicit cross-agent boundaries — not prose. Evidence: a blind, position-swapped, length-controlled measurement scored the re-authored prompts 25/25 vs the ~90-line baseline AND 25/25 vs a same-length filler control (depth, not length). Body soft-cap at 300 lines (non-fatal warn). A manifest-driven `agent-depth-budget.test.ts` enforces band + artifact-presence + permission/model-tier diff (no read-only auditor gained mutating tools). Spec captured in `g1-research-playbook.md` §2a/§4.
+All 151 agents re-authored from the ~90-line "dead zone" to a **150–220 line expert band** (median 91 → 161; min 150, max 199, all in-band), filling the added lines with high-signal artifacts — decision tables, code/command snippets, numeric thresholds, behavioral traits, explicit cross-agent boundaries — not prose. Evidence: a blind, position-swapped, length-controlled measurement scored the re-authored prompts 25/25 vs the ~90-line baseline AND 25/25 vs a same-length filler control (depth, not length). Body soft-cap at 300 lines (non-fatal warn). A manifest-driven `agent-depth-budget.test.ts` enforces band + artifact-presence + permission/model-tier diff (no read-only auditor gained mutating tools). Spec captured in `g1-research-playbook.md` §2a/§4.
 
 
 ## Phases
@@ -21,7 +21,7 @@ All 135 agents re-authored from the ~90-line "dead zone" to a **150–220 line e
 | 06 | Remaining native emitters (kiro, codex, factory, copilot) | ✅ done |
 | 07 | AGENTS.md fallback emitter + opt-in rule emitters | ✅ done |
 | 08 | CLI — `build`, `validate`, `install` | ✅ done |
-| 09 | Scale remaining 9 categories (134 agents total) | ✅ done |
+| 09 | Scale remaining 10 categories (151 agents total) | ✅ done |
 | 10 | Packaging + docs + CI | ✅ done |
 | 11 | Extended native emitters (gemini, openhands, kilo) — registry-based tier split | ✅ done |
 | 12 | Agent Plugin Harness (`add`, `list`, `remove`, `caesar.lock`, global scope) | ✅ done |
@@ -41,15 +41,16 @@ All 135 agents re-authored from the ~90-line "dead zone" to a **150–220 line e
 | 08 business-product | 8 |
 | 09 meta-orchestration | 11 |
 | 10 research-analysis | 6 |
-| **Total** | **135** |
+| 11 marketing | 16 |
+| **Total** | **151** |
 
-Applied during scale-out: **dedupe** (12 marketing-flavored agents not authored — owned by the separate marketing kit) and **fold-in** (Codex AI-governance/LLMOps roles → cat-05; internal-developer-platform roles → cat-03). No net-new categories.
+Applied during scale-out: **fold-in** (Codex AI-governance/LLMOps roles → cat-05; internal-developer-platform roles → cat-03). The 16 marketing agents have been integrated into the suite. No net-new categories.
 
 ## Quality results
 
 - Every category G4-reviewed: all agents ≥13/15, zero failures.
 - Read-only poka-yoke verified on all auditor/reviewer/research agents (cat-05 ×4, cat-07 hipaa, cat-08 license, cat-09 ×2, cat-10 ×6).
-- 348 tests green; integration gate transpiles + smoke-tests all 134 agents to every target.
+- 348 tests green; integration gate transpiles + smoke-tests all 151 agents to every target.
 
 ## Post-v1 backlog
 

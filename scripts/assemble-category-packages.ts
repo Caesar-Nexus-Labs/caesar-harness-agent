@@ -52,6 +52,7 @@ const CATEGORY_PACKAGE_SLUG: Record<string, string> = {
   '08-business-product': 'product',
   '09-meta-orchestration': 'orchestration',
   '10-research-analysis': 'research',
+  '11-marketing': 'marketing',
 };
 
 function packageSlug(category: string): string {

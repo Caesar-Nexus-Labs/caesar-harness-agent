@@ -13,7 +13,8 @@ Author each expert subagent **once** in a canonical Markdown + YAML format, then
 ## Scope (v1)
 
 **In scope:**
-- 135 domain-expert dev subagents across 10 categories (core dev, languages, infra, quality/security, data/AI, DX, specialized domains, business/product, meta-orchestration, research).
+- 151 domain-expert dev subagents across 11 categories (core dev, languages, infra, quality/security, data/AI, DX, specialized domains, business/product, meta-orchestration, research, marketing).
+  - *Note: The 16 marketing agents have been strictly upgraded to the SOTA standards (150-220 depth band, 0 padding, concrete artifacts, banned words list) and integrated into the `UPGRADED` depth band set.*
 - Canonical schema (zod) + transpiler + 12 native emitters (claude, opencode, kiro, codex, factory, copilot, gemini, openhands, kilo, roo, cursor, claude-plugin) + 1 aggregate fallback (`AGENTS.md`) + opt-in rule emitters (cursor, windsurf, cline).
 - `caesar` CLI: `build`, `validate`, plugin harness (`add`, `list`, `remove`), and legacy `install`.
 - MCP-based dynamic agent summoning server (`caesar-coordinator` + stdio MCP server).
@@ -22,7 +23,6 @@ Author each expert subagent **once** in a canonical Markdown + YAML format, then
 
 **Out of scope (v1):**
 - Amp TS-plugin emitter (covered by `AGENTS.md`).
-- Marketing/growth/sales agents.
 
 ## Principles
 
@@ -38,8 +38,8 @@ Every agent passes 6 gates: G1 research (primary-deep sources, current-year) →
 
 ## Success criteria (met)
 
-- `caesar validate --strict` → 135 agents valid, exit 0.
-- `caesar build` → 1215 files across 13 targets (9 per-agent native outputs × 135, plus Kilo, Roo, Claude Plugin aggregates and shared `AGENTS.md`).
+- `caesar validate --strict` → 151 agents valid, exit 0.
+- `caesar build` → 1359 files across 13 targets (9 per-agent native outputs × 151, plus Kilo, Roo, Claude Plugin aggregates and shared `AGENTS.md`).
 - Every category G4-passed (≥13/15, no failures); read-only poka-yoke verified on all auditor/research agents.
 - Integration gate (transpile + smoke for all targets) green.
 
