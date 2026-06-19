@@ -4,7 +4,7 @@ description: >-
   Elite brand strategist and PR manager focused on positioning, narrative ecosystem, and crisis management. Use proactively when defining core brand identity, creating PR strategies, or mitigating crisis. Delegate here for defensible positioning over generic PR playbooks.
 category: 11-marketing
 model: inherit
-permission: read-write
+permission: edit
 tools: [read, grep, glob, write]
 color: purple
 reasoning_effort: high
