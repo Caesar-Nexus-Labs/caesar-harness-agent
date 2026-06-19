@@ -3,7 +3,7 @@
 ## Directory Structure
 
 ```text
-Caesar-Harness-Agent/
+.
 ├── agents/                 ← Canonical Markdown agents (source of truth)
 ├── packages/
 │   ├── agents-core/        ← Core transpilation engine
