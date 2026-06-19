@@ -88,7 +88,7 @@ If you prefer not to use the CLI, you can install the npm package or clone the r
 | **Kilo Code** | `kilo/.kilocodemodes` | `.kilocodemodes` |
 | **Roo Code** | `roo/.roomodes` | `.roomodes` |
 | **Cursor** | `cursor/.cursor/rules/*.mdc` | `.cursor/rules/` |
-| **Claude Marketplace** | `claude-plugin/.claude-plugin/marketplace.json`, `plugin.json` | `.claude-plugin/` |
+| **Claude Marketplace** | `claude-plugin/.claude-plugin/marketplace.json`, `plugin.json` and `claude-agents/` | `.claude-plugin/` and `claude-agents/` |
 | **Fallbacks** | `agents-md/AGENTS.md` | `AGENTS.md` |
 
 ## Interactive Auto-Detection
@@ -116,7 +116,7 @@ When you run `caesar add <source>` without specifying the `--tool` flag, the CLI
 | Kilo Code | `.kilocodemodes` | native aggregate output |
 | Roo Code | `.roomodes` | native aggregate output |
 | Cursor | `.cursor/rules/*.mdc` | native per-agent MDC |
-| Claude Marketplace | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json` | native aggregate output |
+| Claude Marketplace | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json`, `claude-agents/*.md` | native aggregate output |
 | Cursor, Windsurf, Cline, Antigravity, Amp | shared `AGENTS.md` routing index | fallback |
 
 Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-support-matrix.md).
