@@ -1,28 +1,40 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`claudePluginEmitter (marketplace.json) > snapshot 1`] = `
+exports[`claudePluginEmitter > snapshot for marketplace.json 1`] = `
 "{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "schemaVersion": "1.0",
-  "name": "Caesar Harness Agent",
+  "name": "caesar-harness-agent",
   "description": "The definitive collection of harness subagents for specialized development tasks.",
-  "agents": [
+  "owner": {
+    "name": "Caesar Nexus Labs",
+    "email": "contact@caesarnexuslabs.com"
+  },
+  "plugins": [
     {
-      "id": "code-reviewer",
-      "name": "Code Reviewer",
-      "description": "Expert code review specialist for quality, security, and maintainability.",
-      "category": "01-core-development",
-      "type": "subagent",
-      "agentPath": "claude-agents/code-reviewer.md"
-    },
-    {
-      "id": "doc-reader",
-      "name": "Doc Reader",
-      "description": "Reads and summarizes documentation without making changes.",
-      "category": "01-core-development",
-      "type": "subagent",
-      "agentPath": "claude-agents/doc-reader.md"
+      "name": "caesar-harness-agent",
+      "description": "The definitive collection of harness subagents for specialized development tasks.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Caesar Nexus Labs",
+        "email": "contact@caesarnexuslabs.com"
+      },
+      "source": "./",
+      "category": "development"
     }
   ]
+}
+"
+`;
+
+exports[`claudePluginEmitter > snapshot for plugin.json 1`] = `
+"{
+  "schemaVersion": "1.0",
+  "name": "caesar-harness-agent",
+  "version": "0.1.0",
+  "description": "The definitive collection of harness subagents for specialized development tasks.",
+  "manifestPath": ".claude-plugin/marketplace.json",
+  "agentsDir": "claude-agents"
 }
 "
 `;

@@ -79,31 +79,31 @@ describe('Multi-Format E2E: claudePluginEmitter (marketplace.json)', () => {
   ];
 
   it('produces parseable JSON for all agents', () => {
-    const file = claudePluginEmitter(agents, ctx);
-    expect(() => JSON.parse(file.content)).not.toThrow();
+    const files = claudePluginEmitter(agents, ctx);
+    const marketplaceFile = files.find((f) => f.relativePath === '.claude-plugin/marketplace.json')!;
+    expect(() => JSON.parse(marketplaceFile.content)).not.toThrow();
   });
 
-  it('every agent entry is type=subagent with correct agentPath', () => {
-    const { agents: entries } = JSON.parse(claudePluginEmitter(agents, ctx).content) as {
-      agents: { type: string; agentPath: string; id: string }[];
+  it('every plugin entry has correct details', () => {
+    const files = claudePluginEmitter(agents, ctx);
+    const marketplaceFile = files.find((f) => f.relativePath === '.claude-plugin/marketplace.json')!;
+    const { plugins: entries } = JSON.parse(marketplaceFile.content) as {
+      plugins: { name: string; source: string; category: string }[];
     };
-    for (const entry of entries) {
-      expect(entry.type).toBe('subagent');
-      expect(entry.agentPath).toBe(`claude-agents/${entry.id}.md`);
-    }
+    expect(entries).toHaveLength(1);
+    expect(entries[0]!.name).toBe('caesar-harness-agent');
+    expect(entries[0]!.source).toBe('./');
+    expect(entries[0]!.category).toBe('development');
   });
 
-  it('handles agents with special characters in description (JSON safe)', () => {
-    const specialAgent = makeAgent({
-      name: 'special-agent',
-      description: 'Handles "quoted" text, colons: like this, and <html> tags safely.',
-    });
-    const file = claudePluginEmitter([specialAgent], ctx);
-    expect(() => JSON.parse(file.content)).not.toThrow();
-    const { agents: entries } = JSON.parse(file.content) as {
-      agents: { description: string }[];
+  it('handles marketplace with special characters (JSON safe)', () => {
+    const files = claudePluginEmitter(agents, ctx);
+    const marketplaceFile = files.find((f) => f.relativePath === '.claude-plugin/marketplace.json')!;
+    expect(() => JSON.parse(marketplaceFile.content)).not.toThrow();
+    const manifest = JSON.parse(marketplaceFile.content) as {
+      description: string;
     };
-    expect(entries[0]!.description).toContain('"quoted"');
+    expect(manifest.description).toContain('specialized development tasks');
   });
 });
 

@@ -34,7 +34,10 @@ export type Emitter = (agent: CanonicalAgent, ctx: EmitContext) => EmittedFile;
  * Used by aggregate fallback targets (e.g. `agents-md`) that produce a single
  * routing index covering all agents, NOT one file per agent.
  */
-export type AggregateEmitter = (agents: readonly CanonicalAgent[], ctx: EmitContext) => EmittedFile;
+export type AggregateEmitter = (
+  agents: readonly CanonicalAgent[],
+  ctx: EmitContext,
+) => EmittedFile | EmittedFile[];
 
 const registry = new Map<ToolTarget, Emitter>();
 
