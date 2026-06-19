@@ -1,7 +1,7 @@
 import { parse as parseToml } from '@iarna/toml';
 import { describe, expect, it } from 'vitest';
-import { codexEmitter } from './codex-emitter.js';
 import type { EmitContext } from '../../core/emitter-interface.js';
+import { codexEmitter } from './codex-emitter.js';
 import {
   agentWithReasoningEffort,
   buildAgent,

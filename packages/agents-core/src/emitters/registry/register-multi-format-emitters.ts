@@ -1,7 +1,10 @@
-import { claudePluginConfigEmitter, claudePluginEmitter } from '../adapters/claude/claude-plugin.js';
+import {
+  claudePluginConfigEmitter,
+  claudePluginEmitter,
+} from '../adapters/claude/claude-plugin.js';
 import { cursorMdcEmitter } from '../adapters/cursor/cursor-mdc.js';
-import { registerAggregateEmitter, registerEmitter } from '../core/emitter-interface.js';
 import { rooYamlEmitter } from '../adapters/roo/roo-yaml.js';
+import { registerAggregateEmitter, registerEmitter } from '../core/emitter-interface.js';
 
 // Wires the multi-format plugin targets into the registries:
 //   - roo           → AGGREGATE `.roomodes`                   (customModes YAML)

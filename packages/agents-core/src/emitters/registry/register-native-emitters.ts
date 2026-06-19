@@ -6,12 +6,12 @@ import { kiroOutputValidator } from '../../validation/kiro-output-validator.js';
 import { opencodeOutputValidator } from '../../validation/opencode-output-validator.js';
 import { registerOutputValidator } from '../../validation/output-validator-interface.js';
 import { claudeEmitter } from '../adapters/claude/claude-emitter.js';
-import { codexEmitter } from '../adapters/pilot/codex-emitter.js';
 import { copilotEmitter } from '../adapters/copilot/copilot-emitter.js';
-import { registerEmitter } from '../core/emitter-interface.js';
+import { codexEmitter } from '../adapters/pilot/codex-emitter.js';
 import { factoryEmitter } from '../adapters/pilot/factory-emitter.js';
 import { kiroEmitter } from '../adapters/pilot/kiro-emitter.js';
 import { opencodeEmitter } from '../adapters/pilot/opencode-emitter.js';
+import { registerEmitter } from '../core/emitter-interface.js';
 
 // Wires ALL 6 native emitters (claude, opencode, kiro, codex, factory, copilot) and their
 // output validators into the Phase 03 registries. Calling this once enables

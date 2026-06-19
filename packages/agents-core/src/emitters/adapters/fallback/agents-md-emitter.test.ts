@@ -7,9 +7,9 @@ import {
   agentsMdOutputValidator,
   makeAgentsMdOutputValidator,
 } from '../../../validation/agents-md-output-validator.js';
-import { agentsMdEmitter } from './agents-md-emitter.js';
 import type { EmitContext } from '../../core/emitter-interface.js';
 import { buildAgent } from '../pilot/pilot-emitter-test-fixtures.js';
+import { agentsMdEmitter } from './agents-md-emitter.js';
 
 // Snapshot + invariant tests for the aggregate AGENTS.md emitter. The snapshot uses the REAL
 // 7 cat-01 authored agents so it locks the actual routing index a user would receive.

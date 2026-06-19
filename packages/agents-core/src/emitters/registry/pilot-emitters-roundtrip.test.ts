@@ -9,7 +9,6 @@ import {
   hasOutputValidator,
 } from '../../validation/output-validator-interface.js';
 import { claudeEmitter } from '../adapters/claude/claude-emitter.js';
-import { clearEmitters, getEmitter, hasEmitter } from '../core/emitter-interface.js';
 import { opencodeEmitter } from '../adapters/pilot/opencode-emitter.js';
 import {
   agentWithWhenToUseAndExamples,
@@ -17,6 +16,7 @@ import {
   fullPermissionAgent,
   readOnlyAgent,
 } from '../adapters/pilot/pilot-emitter-test-fixtures.js';
+import { clearEmitters, getEmitter, hasEmitter } from '../core/emitter-interface.js';
 import { registerPilotEmitters } from './register-pilot-emitters.js';
 
 const ctx = { distRoot: '/tmp/dist' };

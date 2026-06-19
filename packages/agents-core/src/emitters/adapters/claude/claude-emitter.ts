@@ -3,12 +3,12 @@ import { mapModel } from '../../../mapping/model-alias-map.js';
 import { mapPermission } from '../../../mapping/permission-map.js';
 import { getToolTargetMeta } from '../../../mapping/tool-targets.js';
 import { mapTools } from '../../../mapping/tools-map.js';
-import { foldClaudeDescription } from './claude-description-folder.js';
 import type { EmitContext, EmittedFile } from '../../core/emitter-interface.js';
 import {
   type FrontmatterValue,
   serializeMarkdownAgent,
 } from '../../serializers/markdown-frontmatter-serializer.js';
+import { foldClaudeDescription } from './claude-description-folder.js';
 
 // claude emitter: CanonicalAgent → `.claude/agents/{name}.md`.
 // Frontmatter (deterministic order): name, description, tools, model, permissionMode, color.

@@ -1,6 +1,5 @@
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
-import { copilotEmitter } from './copilot-emitter.js';
 import type { EmitContext } from '../../core/emitter-interface.js';
 import {
   agentWithReasoningEffort,
@@ -8,6 +7,7 @@ import {
   fullPermissionAgent,
   readOnlyAgent,
 } from '../pilot/pilot-emitter-test-fixtures.js';
+import { copilotEmitter } from './copilot-emitter.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };
 

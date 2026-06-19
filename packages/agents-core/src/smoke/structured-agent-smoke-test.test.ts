@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { codexEmitter } from '../emitters/adapters/pilot/codex-emitter.js';
-import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { kiloEmitter } from '../emitters/adapters/pilot/kilo-emitter.js';
 import { kiroEmitter } from '../emitters/adapters/pilot/kiro-emitter.js';
 import {
@@ -8,6 +7,7 @@ import {
   fullPermissionAgent,
   readOnlyAgent,
 } from '../emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
+import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { structuredSmokeTest } from './structured-agent-smoke-test.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };
