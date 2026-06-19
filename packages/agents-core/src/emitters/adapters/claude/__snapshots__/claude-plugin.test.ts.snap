@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`claudePluginEmitter (marketplace.json) > snapshot 1`] = `
+"{
+  "schemaVersion": "1.0",
+  "name": "Caesar Harness Agent",
+  "description": "The definitive collection of harness subagents for specialized development tasks.",
+  "agents": [
+    {
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "description": "Expert code review specialist for quality, security, and maintainability.",
+      "category": "01-core-development",
+      "type": "subagent",
+      "agentPath": ".claude/agents/code-reviewer.md"
+    },
+    {
+      "id": "doc-reader",
+      "name": "Doc Reader",
+      "description": "Reads and summarizes documentation without making changes.",
+      "category": "01-core-development",
+      "type": "subagent",
+      "agentPath": ".claude/agents/doc-reader.md"
+    }
+  ]
+}
+"
+`;

@@ -1,5 +1,5 @@
 import type { CanonicalAgent } from '../../loader/agent-file-loader.js';
-import { oneLine } from '../agents-md-text.js';
+import { oneLine } from '../adapters/fallback/agents-md-text.js';
 import { frontmatterBlock, type RuleFile, ruleBody } from './rule-file-shared.js';
 
 // OPT-IN Cursor rule emitter: CanonicalAgent → `.cursor/rules/{name}.mdc`.

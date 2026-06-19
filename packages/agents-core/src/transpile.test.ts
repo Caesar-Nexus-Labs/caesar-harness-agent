@@ -6,7 +6,7 @@ import {
   hasEmitter,
   registerEmitter,
   registeredEmitters,
-} from './emitters/emitter-interface.js';
+} from './emitters/core/emitter-interface.js';
 import type { CanonicalAgent } from './loader/agent-file-loader.js';
 import type { ToolTarget } from './mapping/tool-targets.js';
 import { TranspileValidationError, transpile } from './transpile.js';

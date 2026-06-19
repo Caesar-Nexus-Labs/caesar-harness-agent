@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { codexEmitter } from '../emitters/codex-emitter.js';
-import { copilotEmitter } from '../emitters/copilot-emitter.js';
-import type { EmitContext } from '../emitters/emitter-interface.js';
-import { factoryEmitter } from '../emitters/factory-emitter.js';
-import { geminiEmitter } from '../emitters/gemini-emitter.js';
-import { kiroEmitter } from '../emitters/kiro-emitter.js';
-import { openhandsEmitter } from '../emitters/openhands-emitter.js';
+import { copilotEmitter } from '../emitters/adapters/copilot/copilot-emitter.js';
+import { geminiEmitter } from '../emitters/adapters/gemini/gemini-emitter.js';
+import { codexEmitter } from '../emitters/adapters/pilot/codex-emitter.js';
+import { factoryEmitter } from '../emitters/adapters/pilot/factory-emitter.js';
+import { kiroEmitter } from '../emitters/adapters/pilot/kiro-emitter.js';
+import { openhandsEmitter } from '../emitters/adapters/pilot/openhands-emitter.js';
 import {
   agentWithReasoningEffort,
   buildAgent,
   fullPermissionAgent,
   readOnlyAgent,
-} from '../emitters/pilot-emitter-test-fixtures.js';
+} from '../emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
+import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { codexOutputValidator } from './codex-output-validator.js';
 import { copilotOutputValidator } from './copilot-output-validator.js';
 import { factoryOutputValidator } from './factory-output-validator.js';

@@ -3,7 +3,7 @@ import {
   type EmittedFile,
   getAggregateEmitter,
   getEmitter,
-} from './emitters/emitter-interface.js';
+} from './emitters/core/emitter-interface.js';
 import type { CanonicalAgent } from './loader/agent-file-loader.js';
 import type { ToolTarget } from './mapping/tool-targets.js';
 import { getOutputValidator } from './validation/output-validator-interface.js';
