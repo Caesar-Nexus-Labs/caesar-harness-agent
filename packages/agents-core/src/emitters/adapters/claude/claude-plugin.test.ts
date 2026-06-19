@@ -57,7 +57,7 @@ describe('claudePluginEmitter (marketplace.json)', () => {
     expect(entry.description).toBe(agent.frontmatter.description.trim());
     expect(entry.category).toBe(agent.frontmatter.category);
     expect(entry.type).toBe('subagent');
-    expect(entry.agentPath).toBe(`.claude/agents/${agent.slug}.md`);
+    expect(entry.agentPath).toBe(`claude-agents/${agent.slug}.md`);
   });
 
   it('sorts agents by category asc then slug asc (deterministic order)', () => {
@@ -98,6 +98,6 @@ describe('claudePluginConfigEmitter (plugin.json)', () => {
     };
     expect(config.schemaVersion).toBe('1.0');
     expect(config.manifestPath).toBe('.claude-plugin/marketplace.json');
-    expect(config.agentsDir).toBe('.claude/agents');
+    expect(config.agentsDir).toBe('claude-agents');
   });
 });

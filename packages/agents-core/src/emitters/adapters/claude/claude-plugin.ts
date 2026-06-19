@@ -74,7 +74,7 @@ export const claudePluginEmitter: AggregateEmitter = (
     description: agent.frontmatter.description.trim(),
     category: agent.frontmatter.category,
     type: 'subagent',
-    agentPath: `.claude/agents/${agent.slug}.md`,
+    agentPath: `claude-agents/${agent.slug}.md`,
   }));
 
   const manifest: MarketplaceManifest = {
@@ -93,7 +93,7 @@ export const claudePluginEmitter: AggregateEmitter = (
   const pluginConfig: PluginConfig = {
     schemaVersion: '1.0',
     manifestPath: '.claude-plugin/marketplace.json',
-    agentsDir: '.claude/agents',
+    agentsDir: 'claude-agents',
   };
 
   // Primary output: marketplace.json. The plugin.json is written by a companion emitter
@@ -116,7 +116,7 @@ export const claudePluginConfigEmitter: AggregateEmitter = (
   const pluginConfig: PluginConfig = {
     schemaVersion: '1.0',
     manifestPath: '.claude-plugin/marketplace.json',
-    agentsDir: '.claude/agents',
+    agentsDir: 'claude-agents',
   };
 
   return {
