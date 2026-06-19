@@ -26,4 +26,5 @@ export function registerMultiFormatEmitters(): void {
   // Primary: marketplace.json (the main emitter)
   // Companion: plugin.json (registered under a separate relativePath)
   registerAggregateEmitter('claude-plugin', claudePluginEmitter);
+  registerAggregateEmitter('claude-plugin', claudePluginConfigEmitter);
 }
