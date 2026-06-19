@@ -1,3 +1,5 @@
+import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   type CanonicalAgent,
   discoverAgents,
@@ -13,8 +15,6 @@ import {
   transpileAggregate,
   writeOutputs,
 } from '@caesar/agents-core';
-import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
 import { filterByCategory, resolveTools, splitToolsByTier } from '../agent-selection.js';
 import type { BuildResult, ValidationFailure } from '../command-results.js';
 import { extractIssues } from '../extract-issues.js';
