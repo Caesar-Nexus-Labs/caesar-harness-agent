@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { kiloEmitter } from '../emitters/adapters/pilot/kilo-emitter.js';
 import { buildAgent } from '../emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
+import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { kiloOutputValidator } from './kilo-output-validator.js';
 
 // G5 output validator for the aggregate `.kilocodemodes`. Asserts the customModes structure +

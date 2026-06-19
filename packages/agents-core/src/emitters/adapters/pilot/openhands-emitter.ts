@@ -1,11 +1,11 @@
 import type { CanonicalAgent } from '../../../loader/agent-file-loader.js';
 import { getToolTargetMeta } from '../../../mapping/tool-targets.js';
-import { useWhenLine } from '../fallback/agents-md-text.js';
 import type { EmitContext, EmittedFile } from '../../core/emitter-interface.js';
 import {
   type FrontmatterValue,
   serializeMarkdownAgent,
 } from '../../serializers/markdown-frontmatter-serializer.js';
+import { useWhenLine } from '../fallback/agents-md-text.js';
 
 // openhands emitter: CanonicalAgent → `.agents/skills/{slug}/SKILL.md` (folder-per-skill).
 // YAML-frontmatter markdown (deterministic key order). Body = the 6-section prompt. Pure.

@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { claudePluginEmitter } from '../emitters/adapters/claude/claude-plugin.js';
 import { cursorMdcEmitter } from '../emitters/adapters/cursor/cursor-mdc.js';
-import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import { rooYamlEmitter } from '../emitters/adapters/roo/roo-yaml.js';
+import type { EmitContext } from '../emitters/core/emitter-interface.js';
 import type { CanonicalAgent } from '../loader/agent-file-loader.js';
 
 // E2E tests for multi-format emitter outputs.

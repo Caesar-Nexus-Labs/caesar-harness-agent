@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { claudePluginConfigEmitter, claudePluginEmitter } from './claude-plugin.js';
 import type { EmitContext } from '../../core/emitter-interface.js';
-import { buildAgent, fullPermissionAgent, readOnlyAgent } from '../pilot/pilot-emitter-test-fixtures.js';
+import {
+  buildAgent,
+  fullPermissionAgent,
+  readOnlyAgent,
+} from '../pilot/pilot-emitter-test-fixtures.js';
+import { claudePluginConfigEmitter, claudePluginEmitter } from './claude-plugin.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };
 

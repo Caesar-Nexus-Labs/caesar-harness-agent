@@ -2,10 +2,10 @@ import { geminiOutputValidator } from '../../validation/gemini-output-validator.
 import { kiloOutputValidator } from '../../validation/kilo-output-validator.js';
 import { openhandsOutputValidator } from '../../validation/openhands-output-validator.js';
 import { registerOutputValidator } from '../../validation/output-validator-interface.js';
-import { registerAggregateEmitter, registerEmitter } from '../core/emitter-interface.js';
 import { geminiEmitter } from '../adapters/gemini/gemini-emitter.js';
 import { kiloEmitter } from '../adapters/pilot/kilo-emitter.js';
 import { openhandsEmitter } from '../adapters/pilot/openhands-emitter.js';
+import { registerAggregateEmitter, registerEmitter } from '../core/emitter-interface.js';
 
 // Wires the EXTENDED native targets (beyond the original 6) into the registries:
 //   - openhands → per-agent `.agents/skills/{slug}/SKILL.md`  (inherit-only)

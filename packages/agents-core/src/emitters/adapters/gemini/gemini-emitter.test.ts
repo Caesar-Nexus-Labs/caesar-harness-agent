@@ -1,8 +1,12 @@
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
 import type { EmitContext } from '../../core/emitter-interface.js';
+import {
+  buildAgent,
+  fullPermissionAgent,
+  readOnlyAgent,
+} from '../pilot/pilot-emitter-test-fixtures.js';
 import { geminiEmitter } from './gemini-emitter.js';
-import { buildAgent, fullPermissionAgent, readOnlyAgent } from '../pilot/pilot-emitter-test-fixtures.js';
 
 // Gemini CLI emitter: per-agent `.gemini/agents/{slug}.md`, inherit-only (name+description+kind).
 // NO tools/model keys (user-locked inherit — dodges unverified Gemini tool-ids).

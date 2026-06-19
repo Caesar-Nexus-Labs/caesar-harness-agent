@@ -1,9 +1,9 @@
 import type { CanonicalAgent } from '../../../loader/agent-file-loader.js';
 import { mapPermission } from '../../../mapping/permission-map.js';
 import { getToolTargetMeta } from '../../../mapping/tool-targets.js';
-import { useWhenLine } from '../fallback/agents-md-text.js';
 import type { AggregateEmitter, EmitContext, EmittedFile } from '../../core/emitter-interface.js';
 import { type KiloMode, serializeKiloModes } from '../../serializers/kilo-modes-serializer.js';
+import { useWhenLine } from '../fallback/agents-md-text.js';
 
 // kilo AGGREGATE emitter: ALL agents → one root `.kilocodemodes` (YAML `customModes:` array).
 // Kilo is the first native-tier AGGREGATE target. It carries REAL per-agent permission via

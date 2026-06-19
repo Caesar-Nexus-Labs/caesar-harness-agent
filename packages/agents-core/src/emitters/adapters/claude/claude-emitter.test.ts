@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { claudeEmitter } from './claude-emitter.js';
 import type { EmitContext } from '../../core/emitter-interface.js';
 import {
   agentWithWhenToUseAndExamples,
@@ -7,6 +6,7 @@ import {
   fullPermissionAgent,
   readOnlyAgent,
 } from '../pilot/pilot-emitter-test-fixtures.js';
+import { claudeEmitter } from './claude-emitter.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };
 

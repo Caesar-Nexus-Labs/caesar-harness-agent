@@ -1,7 +1,7 @@
 import type { CanonicalAgent } from '../../../loader/agent-file-loader.js';
 import { getToolTargetMeta } from '../../../mapping/tool-targets.js';
-import { boundaryLine, toolsSummary, useWhenLine } from '../fallback/agents-md-text.js';
 import type { AggregateEmitter, EmitContext, EmittedFile } from '../../core/emitter-interface.js';
+import { boundaryLine, toolsSummary, useWhenLine } from '../fallback/agents-md-text.js';
 
 // agents-md AGGREGATE emitter: ALL agents → one root `AGENTS.md` routing index.
 // AGENTS.md is the universal fallback for tools without a native subagent format

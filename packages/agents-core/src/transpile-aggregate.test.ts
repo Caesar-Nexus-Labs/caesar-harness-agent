@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { agentsMdEmitter } from './emitters/adapters/fallback/agents-md-emitter.js';
+import { buildAgent } from './emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
 import {
   clearAggregateEmitters,
   hasAggregateEmitter,
   registerAggregateEmitter,
 } from './emitters/core/emitter-interface.js';
-import { buildAgent } from './emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
 import { registerFallbackEmitters } from './emitters/registry/register-fallback-emitters.js';
 import { TranspileValidationError, transpileAggregate } from './transpile.js';
 import {
