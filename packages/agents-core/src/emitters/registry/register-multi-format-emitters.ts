@@ -1,7 +1,4 @@
-import {
-  claudePluginConfigEmitter,
-  claudePluginEmitter,
-} from '../adapters/claude/claude-plugin.js';
+import { claudePluginEmitter } from '../adapters/claude/claude-plugin.js';
 import { cursorMdcEmitter } from '../adapters/cursor/cursor-mdc.js';
 import { rooYamlEmitter } from '../adapters/roo/roo-yaml.js';
 import { registerAggregateEmitter, registerEmitter } from '../core/emitter-interface.js';

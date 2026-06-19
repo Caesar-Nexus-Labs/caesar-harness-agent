@@ -1,4 +1,3 @@
-import { stringify as stringifyYaml } from 'yaml';
 import type { CanonicalAgent } from '../../../loader/agent-file-loader.js';
 import type { AggregateEmitter, EmitContext, EmittedFile } from '../../core/emitter-interface.js';
 
@@ -50,30 +49,8 @@ interface PluginConfig {
   agentsDir: string;
 }
 
-/** Derive a display name from a kebab-case slug. */
-function displayName(slug: string): string {
-  return slug
-    .split('-')
-    .map((w) => (w.length > 0 ? w[0]?.toUpperCase() + w.slice(1) : w))
-    .join(' ');
-}
-
-/** Sort agents by category asc, then slug asc — deterministic output. */
-function sortByCategoryThenSlug(agents: readonly CanonicalAgent[]): CanonicalAgent[] {
-  return [...agents].sort((a, b) => {
-    const cat = a.frontmatter.category.localeCompare(b.frontmatter.category);
-    return cat !== 0 ? cat : a.slug.localeCompare(b.slug);
-  });
-}
-
-/**
- * Claude Plugin AGGREGATE emitter.
- * Produces two files:
- *   - `.claude-plugin/marketplace.json` — full agent registry for the marketplace
- *   - `.claude-plugin/plugin.json`      — activation config referencing the manifest
- */
 export const claudePluginEmitter: AggregateEmitter = (
-  agents: readonly CanonicalAgent[],
+  _agents: readonly CanonicalAgent[],
   _ctx: EmitContext,
 ): EmittedFile[] => {
   const manifest: MarketplaceManifest = {
@@ -116,12 +93,12 @@ export const claudePluginEmitter: AggregateEmitter = (
     {
       tool: 'claude-plugin',
       relativePath: '.claude-plugin/marketplace.json',
-      content: JSON.stringify(manifest, null, 2) + '\n',
+      content: `${JSON.stringify(manifest, null, 2)}\n`,
     },
     {
       tool: 'claude-plugin',
       relativePath: '.claude-plugin/plugin.json',
-      content: JSON.stringify(pluginConfig, null, 2) + '\n',
+      content: `${JSON.stringify(pluginConfig, null, 2)}\n`,
     },
   ];
 };
@@ -148,6 +125,6 @@ export const claudePluginConfigEmitter: AggregateEmitter = (
   return {
     tool: 'claude-plugin',
     relativePath: '.claude-plugin/plugin.json',
-    content: JSON.stringify(pluginConfig, null, 2) + '\n',
+    content: `${JSON.stringify(pluginConfig, null, 2)}\n`,
   };
 };
