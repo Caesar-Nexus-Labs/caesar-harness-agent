@@ -89,7 +89,7 @@ describe('Multi-Format E2E: claudePluginEmitter (marketplace.json)', () => {
     };
     for (const entry of entries) {
       expect(entry.type).toBe('subagent');
-      expect(entry.agentPath).toBe(`.claude/agents/${entry.id}.md`);
+      expect(entry.agentPath).toBe(`claude-agents/${entry.id}.md`);
     }
   });
 

@@ -13,6 +13,8 @@ import {
   transpileAggregate,
   writeOutputs,
 } from '@caesar/agents-core';
+import { cpSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
 import { filterByCategory, resolveTools, splitToolsByTier } from '../agent-selection.js';
 import type { BuildResult, ValidationFailure } from '../command-results.js';
 import { extractIssues } from '../extract-issues.js';
@@ -113,6 +115,29 @@ export function runBuild(options: BuildOptions = {}): BuildResult {
 
   const { written } = writeOutputs(emitted, outRoot);
   const writtenByTool = groupWritten(emitted, written);
+
+  // Sync to root for GitHub Marketplace (Claude Add Marketplace support)
+  // Only copy when outRoot is the default dist directory (skip during test builds)
+  if (outRoot === join(root, 'dist')) {
+    if (tools.includes('claude')) {
+      const srcAgents = join(outRoot, 'claude', '.claude', 'agents');
+      const destAgents = join(root, 'claude-agents');
+      if (existsSync(srcAgents)) {
+        rmSync(destAgents, { recursive: true, force: true });
+        mkdirSync(destAgents, { recursive: true });
+        cpSync(srcAgents, destAgents, { recursive: true });
+      }
+    }
+    if (tools.includes('claude-plugin')) {
+      const srcPlugin = join(outRoot, 'claude-plugin', '.claude-plugin');
+      const destPlugin = join(root, '.claude-plugin');
+      if (existsSync(srcPlugin)) {
+        rmSync(destPlugin, { recursive: true, force: true });
+        mkdirSync(destPlugin, { recursive: true });
+        cpSync(srcPlugin, destPlugin, { recursive: true });
+      }
+    }
+  }
 
   return {
     outRoot,

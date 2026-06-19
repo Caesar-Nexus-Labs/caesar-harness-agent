@@ -12,7 +12,7 @@ exports[`claudePluginEmitter (marketplace.json) > snapshot 1`] = `
       "description": "Expert code review specialist for quality, security, and maintainability.",
       "category": "01-core-development",
       "type": "subagent",
-      "agentPath": ".claude/agents/code-reviewer.md"
+      "agentPath": "claude-agents/code-reviewer.md"
     },
     {
       "id": "doc-reader",
@@ -20,7 +20,7 @@ exports[`claudePluginEmitter (marketplace.json) > snapshot 1`] = `
       "description": "Reads and summarizes documentation without making changes.",
       "category": "01-core-development",
       "type": "subagent",
-      "agentPath": ".claude/agents/doc-reader.md"
+      "agentPath": "claude-agents/doc-reader.md"
     }
   ]
 }
