@@ -217,8 +217,8 @@ const agents = discoverAgents(repoRoot).map((d) => parseAgentFile(d.path));
 const baselineTiers = baseline();
 
 describe('agent depth budget (Phase B/C ratchet)', () => {
-  it('discovers all 151 agents', () => {
-    expect(agents.length).toBe(151);
+  it('discovers all 158 agents', () => {
+    expect(agents.length).toBe(158);
   });
 
   for (const agent of agents) {

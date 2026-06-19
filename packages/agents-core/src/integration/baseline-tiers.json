@@ -679,6 +679,11 @@
     "model": "balanced",
     "category": "11-marketing"
   },
+  "brand-strategist": {
+    "permission": "edit",
+    "model": "inherit",
+    "category": "11-marketing"
+  },
   "campaign-architect": {
     "permission": "read-only",
     "model": "balanced",
@@ -709,9 +714,19 @@
     "model": "balanced",
     "category": "11-marketing"
   },
+  "graphic-designer": {
+    "permission": "edit",
+    "model": "inherit",
+    "category": "11-marketing"
+  },
   "market-positioning-strategist": {
     "permission": "read-only",
     "model": "balanced",
+    "category": "11-marketing"
+  },
+  "martech-admin": {
+    "permission": "read-only",
+    "model": "inherit",
     "category": "11-marketing"
   },
   "paid-media-planner": {
@@ -719,9 +734,24 @@
     "model": "balanced",
     "category": "11-marketing"
   },
+  "partnership-manager": {
+    "permission": "read-only",
+    "model": "inherit",
+    "category": "11-marketing"
+  },
+  "performance-marketer": {
+    "permission": "read-only",
+    "model": "inherit",
+    "category": "11-marketing"
+  },
   "pr-outreach-planner": {
     "permission": "read-only",
     "model": "balanced",
+    "category": "11-marketing"
+  },
+  "product-marketer": {
+    "permission": "read-only",
+    "model": "inherit",
     "category": "11-marketing"
   },
   "seo-content-strategist": {
@@ -747,6 +777,11 @@
   "technical-b2b-writer": {
     "permission": "read-only",
     "model": "top",
+    "category": "11-marketing"
+  },
+  "video-marketer": {
+    "permission": "read-only",
+    "model": "inherit",
     "category": "11-marketing"
   },
   "visual-prompt-engineer": {

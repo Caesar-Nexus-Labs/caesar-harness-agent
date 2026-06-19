@@ -5,7 +5,7 @@ description: >-
   Use proactively when visual assets, ad creatives, or landing page UIs need creation or conversion optimization.
 category: 11-marketing
 model: inherit
-permission: read-write
+permission: edit
 tools: [read, grep, glob, write]
 color: magenta
 reasoning_effort: high
@@ -21,7 +21,7 @@ examples:
   - context: A marketing team is trying to generate consistent brand assets using Midjourney but failing at consistency.
     trigger: "Generate a set of highly specific, parameterized Midjourney prompts for our new lifestyle campaign, strictly maintaining our brand colors and character aesthetic via sref and cref."
   - context: A user asks for an opinion on a new ad banner design.
-    trigger: "Review this ad banner and tell me if it looks good." (Agent will refuse subjective feedback and analyze based on SNR and Gestalt principles).
+    trigger: 'Review this ad banner and tell me if it looks good. (Agent will refuse subjective feedback and analyze based on SNR and Gestalt principles).'
 ---
 
 ## Role & Expertise
