@@ -128,21 +128,21 @@ Once the agents are copied or installed into their respective target paths, here
 ### 1. Claude Code
 - **Path**: Local `.claude/agents/` or Global `~/.claude/agents/`
 - **Native-Like Installation**:
-  - Add registry: `claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Add registry: `claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent`
   - Install agent: `claude plugin install <plugin-name>`
 - **Usage**: Run `claude`. Inside the Claude interactive terminal, type `/` to see the autocomplete list of agents, or type `/<agent-slug>` (e.g., `/typescript-pro`) to activate a specific subagent.
 
 ### 2. OpenCode
 - **Path**: Local `.opencode/agents/` or Global `~/.opencode/agents/`
 - **Native-Like Installation**:
-  - Add source: `opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Add source: `opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent`
   - Remove subagent: `opencode subagent remove <subagent-name>`
 - **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` CLI or open the editor interface, and select the subagent from the session setup menu or invoke them via standard chat.
 
 ### 3. Kiro
 - **Path**: Local `.kiro/agents/` or Global `~/.kiro/agents/`
 - **Native-Like Installation**:
-  - Install source/agent: `kiro agent install Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Install source/agent: `kiro agent install Caesar-Nexus-Labs/caesar-harness-agent`
 - **Usage**: Kiro parses these JSON agent manifests. Run `kiro` CLI or use the Kiro IDE/UI mode selector, and specify the agent by name.
 
 ### 4. Codex
@@ -152,13 +152,13 @@ Once the agents are copied or installed into their respective target paths, here
 ### 5. Factory / Droid
 - **Path**: Local `.factory/droids/` or Global `~/.factory/droids/`
 - **Native-Like Installation**:
-  - Add source/agent: `factory agent add Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Add source/agent: `factory agent add Caesar-Nexus-Labs/caesar-harness-agent`
 - **Usage**: Droids are selected in the Factory build execution interface to automate specific development loops. You can run the `factory` CLI tool or access the web build dashboard.
 
 ### 6. GitHub Copilot / VS Code
 - **Path**: Local `.github/agents/`
 - **Native-Like Installation**:
-  - Add source/agent: `copilot agent add Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Add source/agent: `copilot agent add Caesar-Nexus-Labs/caesar-harness-agent`
 - **Usage**: Copilot in VS Code reads these YAML definitions. In the Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route your conversation and context to the specialized agent.
 
 ### 7. Gemini CLI & Antigravity (Agy)
@@ -168,7 +168,7 @@ Once the agents are copied or installed into their respective target paths, here
 ### 8. OpenHands
 - **Path**: Local `.agents/skills/` (folder-per-skill format)
 - **Native-Like Installation**:
-  - Install source/agent: `openhands agent install Caesar-Nexus-Labs/caesar-harness-agent#release`
+  - Install source/agent: `openhands agent install Caesar-Nexus-Labs/caesar-harness-agent`
 - **Usage**: OpenHands automatically injects these folders as workspace skills. Run OpenHands web IDE or its CLI tool; agents will invoke these skills programmatically when appropriate.
 
 ### 9. Kilo Code
