@@ -15,7 +15,7 @@ Caesar Harness Agent transpiles canonical agents into native formats for various
 | **Kilo Code** | `.kilocodemodes` | Native Aggregate | Single YAML UI dropdown parsing |
 | **Roo Code** | `.roomodes` | Native Aggregate | Single YAML UI dropdown parsing |
 | **Cursor** | `.cursor/rules/*.mdc` | Native MDC | Automatic glob-based rules application |
-| **Claude Plugin Marketplace**| `.claude-plugin/marketplace.json` | Native Aggregate | Plugin registry index |
+| **Claude Plugin Marketplace**| `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json` | Native Aggregate | Plugin registry index & configuration |
 | **Windsurf / Cline / Amp** | `AGENTS.md` | Fallback | Shared generic repository routing index |
 
 *Note: Native Tier implies that the tool can natively isolate the subagent's prompt and toolset, instead of mixing it indiscriminately into a single generic repository file.*
