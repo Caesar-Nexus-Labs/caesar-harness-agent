@@ -29,8 +29,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Build Artifacts (Generate dist folder)
+      - name: Build JS Packages
         run: pnpm build
+
+      - name: Build Agent Artifacts (Generate dist folder)
+        run: node packages/cli/dist/index.js build
 
       - name: Copy README to dist
         run: cp README.md dist/
