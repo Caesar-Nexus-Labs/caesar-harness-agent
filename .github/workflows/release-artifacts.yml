@@ -35,14 +35,27 @@ jobs:
       - name: Build Agent Artifacts (Generate dist folder)
         run: node packages/cli/dist/index.js build
 
-      - name: Copy README to dist
-        run: cp README.md dist/
+      - name: Prepare Release Branch Contents
+        run: |
+          mkdir -p deploy
+          cp README.md deploy/
+          # Copy only the marketplace and native configuration folders to the root of the release branch
+          cp -r dist/claude-plugin/.claude-plugin deploy/
+          cp -r dist/opencode/.opencode deploy/
+          cp -r dist/kiro/.kiro deploy/
+          cp -r dist/factory/.factory deploy/
+          cp -r dist/copilot/.github deploy/
+          cp -r dist/openhands/.agents deploy/
+          cp -r dist/gemini/.gemini deploy/
+          cp -r dist/cursor/.cursor deploy/
+          cp -r dist/kilo/.kilocodemodes deploy/
+          cp -r dist/roo/.roomodes deploy/
 
       - name: Deploy to Release Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./deploy
           publish_branch: release
           force_orphan: true
           commit_message: "chore: auto-deploy native plugins to release branch"
