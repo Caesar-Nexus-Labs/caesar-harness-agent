@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
-import type { EmittedFile } from './emitters/emitter-interface.js';
+import type { EmittedFile } from './emitters/core/emitter-interface.js';
 import { isToolTarget } from './mapping/tool-targets.js';
 
 // Filesystem sink for emitted files. Kept SEPARATE from the pure engine so emit/transpile

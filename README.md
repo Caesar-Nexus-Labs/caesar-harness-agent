@@ -123,73 +123,112 @@ Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-suppo
 
 ## Target Tools Configuration & Usage
 
-Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool. For a native-like installation flow, configure CLI shell wrappers by running `caesar alias` (see the [Native-Like CLI Commands Guide](docs/native-like-cli-integration.md)).
+Once the agents are copied or installed into their respective target paths, here is how you invoke and use them in each supported tool.
 
 ### 1. Claude Code
 - **Path**: Local `.claude/agents/` or Global `~/.claude/agents/`
-- **Native-Like Installation**:
-  - Add registry: `claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent`
-  - Install agent: `claude plugin install <plugin-name>`
-- **Usage**: Run `claude`. Inside the Claude interactive terminal, type `/` to see the autocomplete list of agents, or type `/<agent-slug>` (e.g., `/typescript-pro`) to activate a specific subagent.
+- **Installation**:
+  ```bash
+  claude plugin marketplace add Caesar-Nexus-Labs/caesar-harness-agent
+  claude plugin install <plugin-name>
+  ```
+- **Usage**: Run `claude`. Inside the terminal, type `/` for autocomplete or `/<agent-slug>` (e.g., `/typescript-pro`).
 
 ### 2. OpenCode
 - **Path**: Local `.opencode/agents/` or Global `~/.opencode/agents/`
-- **Native-Like Installation**:
-  - Add source: `opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent`
-  - Remove subagent: `opencode subagent remove <subagent-name>`
-- **Usage**: OpenCode automatically detects agents in these directories. Run `opencode` CLI or open the editor interface, and select the subagent from the session setup menu or invoke them via standard chat.
+- **Installation**:
+  ```bash
+  opencode subagent add Caesar-Nexus-Labs/caesar-harness-agent
+  ```
+- **Usage**: Run `opencode` or open the editor interface. Select subagents from the session setup menu.
 
 ### 3. Kiro
 - **Path**: Local `.kiro/agents/` or Global `~/.kiro/agents/`
-- **Native-Like Installation**:
-  - Install source/agent: `kiro agent install Caesar-Nexus-Labs/caesar-harness-agent`
-- **Usage**: Kiro parses these JSON agent manifests. Run `kiro` CLI or use the Kiro IDE/UI mode selector, and specify the agent by name.
+- **Installation**:
+  ```bash
+  kiro agent install Caesar-Nexus-Labs/caesar-harness-agent
+  ```
+- **Usage**: Run `kiro` CLI or use the Kiro IDE/UI mode selector and specify the agent by name.
 
-### 4. Codex
-- **Path**: Local `.codex/agents/` or Global `~/.codex/agents/`
-- **Usage**: Codex loads TOML developer instructions. Run `codex` CLI or launch the Codex web IDE; it automatically scans `.codex/agents/` to make the custom agent modes available.
-
-### 5. Factory / Droid
+### 4. Factory / Droid
 - **Path**: Local `.factory/droids/` or Global `~/.factory/droids/`
-- **Native-Like Installation**:
-  - Add source/agent: `factory agent add Caesar-Nexus-Labs/caesar-harness-agent`
-- **Usage**: Droids are selected in the Factory build execution interface to automate specific development loops. You can run the `factory` CLI tool or access the web build dashboard.
+- **Installation**:
+  ```bash
+  factory agent add Caesar-Nexus-Labs/caesar-harness-agent
+  ```
+- **Usage**: Run `factory` CLI or access the web build dashboard. Select droids in the build execution interface.
 
-### 6. GitHub Copilot / VS Code
+### 5. GitHub Copilot / VS Code
 - **Path**: Local `.github/agents/`
-- **Native-Like Installation**:
-  - Add source/agent: `copilot agent add Caesar-Nexus-Labs/caesar-harness-agent`
-- **Usage**: Copilot in VS Code reads these YAML definitions. In the Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route your conversation and context to the specialized agent.
+- **Installation**:
+  ```bash
+  copilot agent add Caesar-Nexus-Labs/caesar-harness-agent
+  ```
+- **Usage**: In VS Code Copilot Chat view, type `@agent-slug` (e.g., `@typescript-pro`) to route conversation.
 
-### 7. Gemini CLI & Antigravity (Agy)
+### 6. OpenHands
+- **Path**: Local `.agents/skills/`
+- **Installation**:
+  ```bash
+  openhands agent install Caesar-Nexus-Labs/caesar-harness-agent
+  ```
+- **Usage**: Run OpenHands web IDE or its CLI tool. Agents automatically inject these folders as workspace skills.
+
+### 7. Codex
+- **Path**: Local `.codex/agents/` or Global `~/.codex/agents/`
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool codex
+  ```
+- **Usage**: Run `codex` CLI or launch the Codex web IDE. It automatically scans `.codex/agents/`.
+
+### 8. Gemini CLI & Antigravity (Agy)
 - **Path**: Local `.gemini/agents/` or Global `~/.gemini/agents/`
-- **Usage**: Antigravity is built on top of the Gemini CLI substrate and natively parses files in `.gemini/agents/`. Run the `gemini` or `antigravity` CLI tool and target the mode using the mode picker or session arguments. The IDE extensions (such as Gemini Code Assist) also read from the workspace environment dynamically.
-
-### 8. OpenHands
-- **Path**: Local `.agents/skills/` (folder-per-skill format)
-- **Native-Like Installation**:
-  - Install source/agent: `openhands agent install Caesar-Nexus-Labs/caesar-harness-agent`
-- **Usage**: OpenHands automatically injects these folders as workspace skills. Run OpenHands web IDE or its CLI tool; agents will invoke these skills programmatically when appropriate.
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool gemini
+  ```
+- **Usage**: Run `gemini` or `antigravity`. Target the mode using the mode picker or session arguments.
 
 ### 9. Kilo Code
 - **Path**: Local `.kilocodemodes` (single YAML file)
-- **Usage**: Kilo reads this file to configure its custom modes. The modes list will be displayed in the Kilo UI dropdown.
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool kilo
+  ```
+- **Usage**: Read from the UI dropdown in Kilo.
 
 ### 10. Roo Code
 - **Path**: Local `.roomodes` (single YAML file)
-- **Usage**: Roo Code reads this file to configure its custom modes. You can select the custom mode from the mode dropdown in the sidebar in VS Code.
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool roo
+  ```
+- **Usage**: Select the custom mode from the mode dropdown in the VS Code sidebar.
 
 ### 11. Cursor (Native MDC Rules)
 - **Path**: Local `.cursor/rules/`
-- **Usage**: Cursor loads per-agent `.mdc` files. The rules are applied automatically based on the glob patterns defined in the MDC frontmatter, or you can mention them in chat using `@rule-name`. Open the workspace using the `cursor .` CLI command or the editor UI.
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool cursor
+  ```
+- **Usage**: Run `cursor .`. Mention rules in chat using `@rule-name` or rely on automatic glob matching.
 
 ### 12. Claude Plugin Marketplace
 - **Path**: Local `.claude-plugin/`
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool claude-marketplace
+  ```
 - **Usage**: Configures the local registry for custom plugin distributions. Run your local marketplace server to serve these to Claude.
 
 ### 13. Fallbacks (Windsurf, Cline, Amp)
 - **Path**: Local `AGENTS.md`
-- **Usage**: These tools do not support isolated agent folders natively, so they read the `AGENTS.md` file as shared repository-level instructions. Open the workspace using the `windsurf .` CLI command or the IDE interface. The instructions guide the fallback tools on role discovery and system boundaries. Cline also checks `.clinerules/` for custom instruction files.
+- **Installation**:
+  ```bash
+  npx @caesar/cli add github:Caesar-Nexus-Labs/caesar-harness-agent --tool agents-md
+  ```
+- **Usage**: Fallback tools read `AGENTS.md` as shared instructions. Cline also checks `.clinerules/`.
 
 
 ## Expert coding agents and prompt library
@@ -217,13 +256,17 @@ Each category can ship as its own npm package of prebuilt artifacts (`@caesar/la
 ```text
 agents/{NN-category}/{agent}.md   canonical source (Markdown + YAML)
         │
-        ▼  @caesar/agents-core  (schema → transpiler → emitters)
+        ▼  @caesar/agents-core  (schema → transpiler)
         │
-        ▼  per-tool output validators
+        ▼  core/ → registry/ → adapters/ & serializers/
+        │
+        ▼  per-tool output validators → write-outputs
         │
         ▼
 dist/{tool}/…   native files for each tool   +   dist/agents-md/AGENTS.md
 ```
+
+The transpilation engine utilizes the **Adapter Pattern** to isolate AI platform-specific formatting requirements (Claude, OpenCode, Gemini, Roo, Kilo, Cursor, etc.) into standalone adapter modules, while **Serializers** handle raw data stringification (Markdown Frontmatter, YAML, JSON).
 
 Architecture detail: [`docs/system-architecture.md`](docs/system-architecture.md).
 

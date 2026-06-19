@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { claudeEmitter } from '../emitters/claude-emitter.js';
-import type { EmitContext } from '../emitters/emitter-interface.js';
-import { opencodeEmitter } from '../emitters/opencode-emitter.js';
+import { claudeEmitter } from '../emitters/adapters/claude/claude-emitter.js';
+import type { EmitContext } from '../emitters/core/emitter-interface.js';
+import { opencodeEmitter } from '../emitters/adapters/pilot/opencode-emitter.js';
 import {
   buildAgent,
   fullPermissionAgent,
   readOnlyAgent,
-} from '../emitters/pilot-emitter-test-fixtures.js';
+} from '../emitters/adapters/pilot/pilot-emitter-test-fixtures.js';
 import { smokeTest } from './markdown-agent-smoke-test.js';
 
 const ctx: EmitContext = { distRoot: '/tmp/dist' };

@@ -219,7 +219,7 @@ function buildReadme(category: string, pkgSlug: string, agentSlugs: string[]): s
     `npx @caesar/cli add @caesar/${pkgSlug} --tool claude --global`,
     '```',
     '',
-    'Supported tools: `claude`, `opencode`, `kiro`, `codex`, `factory`, `copilot`, `gemini`, `openhands`, `kilo` (native), plus a shared `AGENTS.md` routing index for fallback tools (Cursor, Windsurf, Cline, Antigravity, Amp).',
+    'Supported tools: `claude`, `opencode`, `kiro`, `codex`, `factory`, `copilot`, `gemini`, `openhands`, `kilo`, `cursor` (native), plus a shared `AGENTS.md` routing index for fallback tools (Windsurf, Cline, Antigravity, Amp).',
     '',
     '## Layout',
     '',

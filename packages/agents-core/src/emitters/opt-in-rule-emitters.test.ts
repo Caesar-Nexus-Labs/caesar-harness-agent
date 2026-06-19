@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { clineRuleEmitter } from './opt-in-rules/cline-rule-emitter.js';
 import { cursorRuleEmitter } from './opt-in-rules/cursor-rule-emitter.js';
 import { WINDSURF_MAX_CHARS, windsurfRuleEmitter } from './opt-in-rules/windsurf-rule-emitter.js';
-import { buildAgent, SIX_SECTION_BODY } from './pilot-emitter-test-fixtures.js';
+import { buildAgent, SIX_SECTION_BODY } from './adapters/pilot/pilot-emitter-test-fixtures.js';
 
 // Opt-in per-tool rule emitters (Cursor `.mdc`, Windsurf, Cline). These are NOT wired into
 // the typed transpile registry — they are explicitly invoked by a caller (Phase 08 CLI flag).

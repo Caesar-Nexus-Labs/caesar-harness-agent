@@ -1,17 +1,17 @@
 // @caesar/agents-core — public API surface.
 
 // Aggregate fallback emitter (agents-md routing index).
-export { agentsMdEmitter } from './emitters/agents-md-emitter.js';
+export { agentsMdEmitter } from './emitters/adapters/fallback/agents-md-emitter.js';
 // Native emitters (claude, opencode, kiro, codex, factory, copilot).
-export { claudeEmitter } from './emitters/claude-emitter.js';
+export { claudeEmitter } from './emitters/adapters/claude/claude-emitter.js';
 // Multi-format plugin emitters (claude-plugin marketplace, roo YAML, cursor MDC).
 export {
   claudePluginConfigEmitter,
   claudePluginEmitter,
-} from './emitters/claude-plugin.js';
-export { codexEmitter } from './emitters/codex-emitter.js';
-export { copilotEmitter } from './emitters/copilot-emitter.js';
-export { cursorMdcEmitter } from './emitters/cursor-mdc.js';
+} from './emitters/adapters/claude/claude-plugin.js';
+export { codexEmitter } from './emitters/adapters/pilot/codex-emitter.js';
+export { copilotEmitter } from './emitters/adapters/copilot/copilot-emitter.js';
+export { cursorMdcEmitter } from './emitters/adapters/cursor/cursor-mdc.js';
 // Emitter contract + registry.
 export {
   type AggregateEmitter,
@@ -30,21 +30,21 @@ export {
   registeredEmitters,
   unregisterAggregateEmitter,
   unregisterEmitter,
-} from './emitters/emitter-interface.js';
-export { factoryEmitter } from './emitters/factory-emitter.js';
-export { geminiEmitter } from './emitters/gemini-emitter.js';
-export { kiloEmitter } from './emitters/kilo-emitter.js';
+} from './emitters/core/emitter-interface.js';
+export { factoryEmitter } from './emitters/adapters/pilot/factory-emitter.js';
+export { geminiEmitter } from './emitters/adapters/gemini/gemini-emitter.js';
+export { kiloEmitter } from './emitters/adapters/pilot/kilo-emitter.js';
 export {
   type KiloMode,
   serializeKiloModes,
-} from './emitters/kilo-modes-serializer.js';
-export { kiroEmitter } from './emitters/kiro-emitter.js';
+} from './emitters/serializers/kilo-modes-serializer.js';
+export { kiroEmitter } from './emitters/adapters/pilot/kiro-emitter.js';
 export {
   type FrontmatterValue,
   serializeMarkdownAgent,
-} from './emitters/markdown-frontmatter-serializer.js';
-export { opencodeEmitter } from './emitters/opencode-emitter.js';
-export { openhandsEmitter } from './emitters/openhands-emitter.js';
+} from './emitters/serializers/markdown-frontmatter-serializer.js';
+export { opencodeEmitter } from './emitters/adapters/pilot/opencode-emitter.js';
+export { openhandsEmitter } from './emitters/adapters/pilot/openhands-emitter.js';
 // Opt-in per-tool rule emitters (rules-only fallback tools; OFF by default).
 export {
   type ClineRuleOptions,
@@ -59,12 +59,12 @@ export {
   WINDSURF_MAX_CHARS,
   windsurfRuleEmitter,
 } from './emitters/opt-in-rules/windsurf-rule-emitter.js';
-export { registerExtendedNativeEmitters } from './emitters/register-extended-native-emitters.js';
-export { registerFallbackEmitters } from './emitters/register-fallback-emitters.js';
-export { registerMultiFormatEmitters } from './emitters/register-multi-format-emitters.js';
-export { registerNativeEmitters } from './emitters/register-native-emitters.js';
-export { registerPilotEmitters } from './emitters/register-pilot-emitters.js';
-export { rooYamlEmitter } from './emitters/roo-yaml.js';
+export { registerExtendedNativeEmitters } from './emitters/registry/register-extended-native-emitters.js';
+export { registerFallbackEmitters } from './emitters/registry/register-fallback-emitters.js';
+export { registerMultiFormatEmitters } from './emitters/registry/register-multi-format-emitters.js';
+export { registerNativeEmitters } from './emitters/registry/register-native-emitters.js';
+export { registerPilotEmitters } from './emitters/registry/register-pilot-emitters.js';
+export { rooYamlEmitter } from './emitters/adapters/roo/roo-yaml.js';
 // Errors.
 export { AgentValidationError } from './errors.js';
 export {
