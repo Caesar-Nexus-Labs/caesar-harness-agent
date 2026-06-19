@@ -1,5 +1,8 @@
 {
   "schemaVersion": "1.0",
+  "name": "caesar-harness-agent",
+  "version": "0.1.0",
+  "description": "The definitive collection of harness subagents for specialized development tasks.",
   "manifestPath": ".claude-plugin/marketplace.json",
   "agentsDir": "claude-agents"
 }

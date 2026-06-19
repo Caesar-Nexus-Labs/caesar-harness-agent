@@ -115,22 +115,25 @@ export function transpileAggregate(
       continue;
     }
 
-    const file = emitter(agents, ctx);
+    const fileOrFiles = emitter(agents, ctx);
+    const emittedFiles = Array.isArray(fileOrFiles) ? fileOrFiles : [fileOrFiles];
 
-    const validator = getOutputValidator(tool);
-    if (validator !== undefined) {
-      const result = validator(file.content);
-      if (!result.ok) {
-        if (throwOnInvalid) {
-          // Aggregate output is not tied to one agent — use the tool name as the subject.
-          throw new TranspileValidationError(tool, `<aggregate:${tool}>`, result.errors);
+    for (const file of emittedFiles) {
+      const validator = getOutputValidator(tool);
+      if (validator !== undefined) {
+        const result = validator(file.content);
+        if (!result.ok) {
+          if (throwOnInvalid) {
+            // Aggregate output is not tied to one agent — use the tool name as the subject.
+            throw new TranspileValidationError(tool, `<aggregate:${tool}>`, result.errors);
+          }
+          validationErrors.push({ tool, errors: result.errors });
+          continue; // do not emit a file that failed validation
         }
-        validationErrors.push({ tool, errors: result.errors });
-        continue; // do not emit a file that failed validation
       }
-    }
 
-    files.push(file);
+      files.push(file);
+    }
   }
 
   return { files, skipped, validationErrors };
