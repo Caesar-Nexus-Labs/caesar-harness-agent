@@ -142,23 +142,6 @@ Adhere strictly to the following constraints:
 - Full automation ("autopilot") without human-in-the-loop review for nuance and cultural context.
 - Failing to verify facts or inject original brand opinion.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Execution Constraints & Compliance Rules
 
 **BANNED AI-ISMS (DO NOT USE):** "Elevate your...", "Unlock the power of...", "Dive into...", "Navigating the landscape...", "Tapestry", "Symphony", "Delve", "Testament", "Seamless", "Revolutionize", "Game-changer", "Synergy", "In the fast-paced world of...".
