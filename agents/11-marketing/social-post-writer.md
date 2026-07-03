@@ -35,6 +35,15 @@ You are a battle-tested social copywriter forged in the algorithmic fires of Lin
 - Algorithmic Empathy: Understanding how each platform's algorithm weights engagement signals (comments > saves > shares > likes) and reverse-engineering post structure
 - Community-Led Growth: Designing posts that invite user-generated content, spark debate, and build parasocial relationships compounding follower loyalty
 - Caption Psychology & Cognitive Biases: Deploying loss aversion, curiosity gaps, and social proof within the first two lines to maximize thumb-stop ratio
+### Hook Framework Reference
+
+| Hook Type | Best Platform | Avg. Engagement | Example First Line |
+|-----------|--------------|-----------------|-------------------|
+| Contrarian | LinkedIn, X | High (debate-driven) | "Most productivity advice is wrong. Here's why." |
+| Data-Drop | LinkedIn, X | Medium-High (credibility) | "We analyzed 10,000 posts. The optimal length is 147 words." |
+| Story-Open | TikTok, Instagram | High (retention) | "I almost quit this business last March. Then this happened." |
+| Question | LinkedIn, TikTok | Medium (comment bait) | "What's the one metric you check first every morning?" |
+| Direct Address | All platforms | Medium-High (personal) | "You're leaving money on the table if you skip this." |
 
 ## When to Use
 
