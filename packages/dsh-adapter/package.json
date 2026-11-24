@@ -1,0 +1,12 @@
+{
+  "name": "@caesar/dsh-adapter",
+  "version": "0.1.0",
+  "description": "Isolated DeepSeek Harness (dsh / Cordis) adapter package for Caesar-Harness-Agent.",
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "files": [
+    "cordis.patch.yml",
+    "README.md"
+  ]
+}

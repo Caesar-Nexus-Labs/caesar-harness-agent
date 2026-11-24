@@ -16,6 +16,8 @@ permission: full
 tools: [read, grep, glob, edit, write, bash]
 color: green
 reasoning_effort: medium
+kind: subagent
+isolation: worktree
 when_to_use: >-
   Trigger when the task is to IMPLEMENT server-side behavior against a known
   contract: build/modify REST handlers, services, persistence and migrations,

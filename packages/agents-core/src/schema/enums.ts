@@ -24,3 +24,18 @@ export const MUTATING_TOOLS = ['edit', 'write', 'bash'] as const;
 export const REASONING_EFFORTS = ['low', 'medium', 'high'] as const;
 export const ReasoningEffortEnum = z.enum(REASONING_EFFORTS);
 export type ReasoningEffort = (typeof REASONING_EFFORTS)[number];
+
+/** Canonical packaging role: isolated subagent, progressive-disclosure skill, or hybrid. */
+export const AGENT_KINDS = ['subagent', 'skill', 'hybrid'] as const;
+export const AgentKindEnum = z.enum(AGENT_KINDS);
+export type AgentKind = (typeof AGENT_KINDS)[number];
+
+/** Execution isolation hint for harnesses supporting background or worktree runs. */
+export const ISOLATION_MODES = ['none', 'background', 'worktree'] as const;
+export const IsolationModeEnum = z.enum(ISOLATION_MODES);
+export type IsolationMode = (typeof ISOLATION_MODES)[number];
+
+/** Lifecycle hook events supported by modern harnesses. */
+export const HOOK_EVENTS = ['SessionStart', 'PreToolUse', 'PostToolUse', 'PreCompact'] as const;
+export const HookEventEnum = z.enum(HOOK_EVENTS);
+export type HookEvent = (typeof HOOK_EVENTS)[number];

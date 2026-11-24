@@ -1,5 +1,8 @@
 import { z } from 'zod';
 import {
+  AgentKindEnum,
+  HookEventEnum,
+  IsolationModeEnum,
   ModelTierEnum,
   MUTATING_TOOLS,
   PermissionEnum,
@@ -14,6 +17,21 @@ const ExampleSchema = z.object({
   context: z.string().min(1),
   trigger: z.string().min(1),
 });
+
+const InvocationSchema = z
+  .object({
+    disable_model_invocation: z.boolean().optional(),
+    user_invocable: z.boolean().optional(),
+  })
+  .strict();
+
+const HookEntrySchema = z
+  .object({
+    event: HookEventEnum,
+    matcher: z.string().min(1).optional(),
+    command: z.string().min(1),
+  })
+  .strict();
 
 export const CanonicalAgentFrontmatterSchema = z
   .object({
@@ -37,6 +55,12 @@ export const CanonicalAgentFrontmatterSchema = z
     reasoning_effort: ReasoningEffortEnum.optional(),
     when_to_use: z.string().optional(),
     examples: z.array(ExampleSchema).optional(),
+    // Schema v2 optional harness capabilities (100% backward-compatible).
+    kind: AgentKindEnum.optional(),
+    isolation: IsolationModeEnum.optional(),
+    invocation: InvocationSchema.optional(),
+    mcp_servers: z.array(z.string().min(1)).optional(),
+    hooks: z.array(HookEntrySchema).optional(),
   })
   .strict()
   .superRefine((data, ctx) => {

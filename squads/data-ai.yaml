@@ -1,0 +1,18 @@
+name: data-ai
+description: AI/ML architecture, engineering, and evaluation squad.
+agents:
+  - ai-engineer
+  - ml-engineer
+  - llm-architect
+  - eval-engineer
+workflow:
+  - stage: design-and-build
+    agents:
+      - llm-architect
+      - ai-engineer
+      - ml-engineer
+    parallel: true
+  - stage: evaluate
+    agents:
+      - eval-engineer
+    parallel: false

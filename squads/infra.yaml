@@ -1,0 +1,18 @@
+name: infra
+description: Cloud infrastructure, Kubernetes, Terraform, and SRE reliability squad.
+agents:
+  - devops-engineer
+  - kubernetes-specialist
+  - terraform-engineer
+  - sre-engineer
+workflow:
+  - stage: provision
+    agents:
+      - devops-engineer
+      - terraform-engineer
+    parallel: true
+  - stage: operate
+    agents:
+      - kubernetes-specialist
+      - sre-engineer
+    parallel: true

@@ -1,0 +1,13 @@
+name: security-audit
+description: Read-only security audit squad combining code review, security auditing, and penetration testing.
+agents:
+  - code-reviewer
+  - security-auditor
+  - penetration-tester
+workflow:
+  - stage: audit
+    agents:
+      - code-reviewer
+      - security-auditor
+      - penetration-tester
+    parallel: true

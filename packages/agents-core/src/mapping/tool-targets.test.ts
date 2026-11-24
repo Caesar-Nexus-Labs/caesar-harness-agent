@@ -25,8 +25,8 @@ describe('TOOL_TARGETS registry', () => {
     expect(isToolTarget('roomodes')).toBe(false);
   });
 
-  it('lists all 13 targets', () => {
-    expect(TOOL_TARGETS).toHaveLength(13);
+  it('lists all 22 targets', () => {
+    expect(TOOL_TARGETS).toHaveLength(22);
   });
 });
 
