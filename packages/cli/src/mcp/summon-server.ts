@@ -124,7 +124,7 @@ async function summonAgent(
   // Validate with Zod (rejects ../etc/passwd, ../../, any path separator).
   const parsed = AgentIdSchema.safeParse(agentId);
   if (!parsed.success) {
-    throw { code: -32602, message: `Invalid agent_id: ${parsed.error.errors[0]?.message}` };
+    throw { code: -32602, message: `Invalid agent_id: ${parsed.error.issues[0]?.message}` };
   }
 
   const index = await loadAgentIndex(agentsRoot);
@@ -235,7 +235,7 @@ async function handleRequest(
     if (toolName === 'search_agents') {
       const queryResult = SearchQuerySchema.safeParse(toolArgs.query);
       if (!queryResult.success) {
-        return makeError(id, -32602, `Invalid query: ${queryResult.error.errors[0]?.message}`);
+        return makeError(id, -32602, `Invalid query: ${queryResult.error.issues[0]?.message}`);
       }
       try {
         const result = await searchAgents(queryResult.data, agentsRoot);

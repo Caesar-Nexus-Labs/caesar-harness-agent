@@ -33,13 +33,13 @@
   "dependencies": {
     "@caesar/agents-core": "workspace:*",
     "cac": "7.0.0",
-    "zod": "3.25.76"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@types/node": "20.19.21",
     "tsup": "8.5.0",
     "typescript": "5.9.3",
-    "vitest": "4.1.0",
+    "vitest": "^4.1.12",
     "yaml": "2.8.3"
   }
 }
