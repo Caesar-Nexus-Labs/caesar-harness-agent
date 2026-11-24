@@ -69,7 +69,7 @@ export const CanonicalAgentFrontmatterSchema = z
       const offenders = data.tools.filter((t) => (MUTATING_TOOLS as readonly string[]).includes(t));
       if (offenders.length > 0) {
         ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           path: ['tools'],
           message: `read-only agents cannot use mutating tools: ${offenders.join(', ')}`,
         });
