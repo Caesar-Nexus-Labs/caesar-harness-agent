@@ -7,10 +7,10 @@ import { UsageError } from './cli-errors.js';
 export const PluginLockEntrySchema = z.object({
   name: z.string(),
   version: z.string(),
-  source: z.enum(['npm', 'github', 'local']),
+  source: z.enum(['npm', 'github', 'local', 'squad']),
   resolved: z.string(),
   integrity: z.string(),
-  installedTools: z.array(z.enum(TOOL_TARGETS as any)),
+  installedTools: z.array(z.enum(TOOL_TARGETS)),
   installedPaths: z.array(z.string()),
   scope: z.enum(['project', 'global']),
   installedAt: z.string(), // ISO 8601
@@ -35,15 +35,17 @@ export function readLock(dir: string): CaesarLock {
   let content: string;
   try {
     content = readFileSync(lockPath, 'utf8');
-  } catch (err: any) {
-    throw new UsageError(`Failed to read caesar.lock at ${lockPath}: ${err.message}`);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new UsageError(`Failed to read caesar.lock at ${lockPath}: ${msg}`);
   }
 
   let parsed: unknown;
   try {
     parsed = JSON.parse(content);
-  } catch (err: any) {
-    throw new UsageError(`Failed to parse caesar.lock as JSON at ${lockPath}: ${err.message}`);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new UsageError(`Failed to parse caesar.lock as JSON at ${lockPath}: ${msg}`);
   }
 
   const result = CaesarLockSchema.safeParse(parsed);
@@ -62,8 +64,9 @@ export function writeLock(dir: string, lock: CaesarLock): void {
   try {
     writeFileSync(tmpPath, `${JSON.stringify(lock, null, 2)}\n`, 'utf8');
     renameSync(tmpPath, lockPath);
-  } catch (err: any) {
-    throw new UsageError(`Failed to write caesar.lock to ${lockPath}: ${err.message}`);
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new UsageError(`Failed to write caesar.lock to ${lockPath}: ${msg}`);
   }
 }
 

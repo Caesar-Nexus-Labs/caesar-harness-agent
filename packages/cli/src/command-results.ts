@@ -87,7 +87,7 @@ export interface ListResult {
   entries: Array<{
     name: string;
     version: string;
-    source: 'npm' | 'github' | 'local';
+    source: 'npm' | 'github' | 'local' | 'squad';
     scope: 'project' | 'global';
     installedTools: ToolTarget[];
     installedAt: string;

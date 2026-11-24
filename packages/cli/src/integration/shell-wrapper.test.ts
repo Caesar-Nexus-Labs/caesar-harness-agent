@@ -18,9 +18,10 @@ describe('Unix Shell Integration Wrapper Integration', () => {
     } catch {}
   });
 
-  // Windows system might have bash (e.g. Git Bash)
-  // Let's test if bash is executable in the current environment
+  // Only run Unix shell wrapper integration when native Unix bash is available (skip on win32
+  // where bash may resolve to WSL /bin/bash which cannot execute C:\... paths directly).
   const hasBash = (() => {
+    if (process.platform === 'win32') return false;
     try {
       execSync('bash --version', { stdio: 'ignore' });
       return true;

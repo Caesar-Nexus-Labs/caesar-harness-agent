@@ -25,6 +25,7 @@ import {
   hasAggregateEmitter,
   registerExtendedNativeEmitters,
   registerFallbackEmitters,
+  registerMultiFormatEmitters,
   registerNativeEmitters,
   TOOL_TARGETS,
   type ToolTarget,
@@ -92,6 +93,7 @@ function assemble(): CategoryPackage[] {
   // Register emitters so hasAggregateEmitter() routing is accurate (idempotent).
   registerNativeEmitters();
   registerExtendedNativeEmitters();
+  registerMultiFormatEmitters();
   registerFallbackEmitters();
 
   // Fresh output tree (regenerated every run).

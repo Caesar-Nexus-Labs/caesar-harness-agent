@@ -2,13 +2,15 @@ import { execSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve as pathResolve } from 'node:path';
+import { parseSquadManifest, TOOL_TARGETS } from '@caesar/agents-core';
 import { PluginNotFoundError, RegistryFetchError, UsageError } from './cli-errors.js';
 import { type PluginManifest, PluginManifestSchema } from './plugin-manifest-schema.js';
 
 export type PluginSource =
   | { type: 'npm'; name: string; version?: string }
   | { type: 'github'; owner: string; repo: string; ref?: string }
-  | { type: 'local'; path: string };
+  | { type: 'local'; path: string }
+  | { type: 'squad'; name: string };
 
 export interface ResolvedPlugin {
   manifest: PluginManifest;
@@ -21,6 +23,14 @@ export interface ResolvedPlugin {
 }
 
 export function parseSource(raw: string): PluginSource {
+  if (raw.startsWith('squad:')) {
+    const name = raw.slice('squad:'.length).trim();
+    if (!/^[a-z][a-z0-9-]*$/.test(name)) {
+      throw new UsageError(`Invalid squad source format: ${raw}. Expected squad:<kebab-case-name>`);
+    }
+    return { type: 'squad', name };
+  }
+
   if (
     raw.startsWith('./') ||
     raw.startsWith('../') ||
@@ -80,6 +90,31 @@ export async function resolveSource(
   source: PluginSource,
   opts: { cwd: string },
 ): Promise<ResolvedPlugin> {
+  if (source.type === 'squad') {
+    const squadFile = pathResolve(opts.cwd, 'squads', `${source.name}.yaml`);
+    if (!existsSync(squadFile)) {
+      throw new PluginNotFoundError(`Squad preset not found: ${squadFile}`);
+    }
+    const squad = parseSquadManifest(readFileSync(squadFile, 'utf8'));
+    const distDir = pathResolve(opts.cwd, 'dist');
+    return {
+      manifest: {
+        type: 'agent-plugin',
+        schemaVersion: 1,
+        categories: [`squad:${squad.name}`],
+        agentCount: squad.agents.length,
+        supportedTools: [...TOOL_TARGETS],
+        agentSlugs: squad.agents,
+      },
+      distDir,
+      name: `squad:${squad.name}`,
+      version: '0.1.0',
+      source,
+      integrity: `squad:${squad.name}`,
+      cleanup: () => {},
+    };
+  }
+
   if (source.type === 'local') {
     const absPath = pathResolve(opts.cwd, source.path);
     if (!existsSync(absPath)) {
