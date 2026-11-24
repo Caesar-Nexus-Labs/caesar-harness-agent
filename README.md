@@ -261,26 +261,62 @@ Each category can ship as its own npm package of prebuilt artifacts (`@caesar/la
 
 ## How it works
 
-Caesar Harness Agent compiles a single canonical source (`agents/*.md` + `squads/*.yaml`) through a strict **Schema v2 → Adapter Registry → Per-Tool Validators → CLI Trust** pipeline into **22 native harness targets**.
+One canonical source (`agents/*.md` + `squads/*.yaml`) flows through an exploded 5-layer transpilation stack into **22 native harness targets**, closed by a reinforcing **6-Gate Quality & Trust Flywheel** back to the shared hub:
 
-### 1. System Architecture (Components + Connections)
-![System Architecture](docs/diagrams/architecture-components.svg)
+```mermaid
+flowchart LR
+  %% L0: Shared Canonical Hub (Exploded Axis Start)
+  subgraph L0["L0 · Canonical Hub"]
+    direction TB
+    A1["158 Canonical Agents<br/>agents/*.md"]:::hub
+    A2["5 Squad Presets<br/>squads/*.yaml"]:::hub
+  end
 
-### 2. High-Level End-to-End Stack (Cluster View)
-![High-Level End-to-End Stack](docs/diagrams/high-level-stack.svg)
+  %% L1-L2: Core Transpiler Cluster
+  subgraph L12["L1–L2 · @caesar/agents-core"]
+    direction TB
+    B1["Zod Schema v2<br/>isolation · hooks · mcp"]:::core
+    B2["Adapter Registry<br/>22 Emitters + Serializers"]:::core
+    B1 -->|"CanonicalAgent AST"| B2
+  end
 
-<details>
-<summary><strong>3. Exploded Pipeline Layers &amp; 4. 6-Gate Quality Flywheel (Click to expand)</strong></summary>
+  %% L3: Verification & Supply-Chain Trust
+  subgraph L3["L3 · Strict Gates & CLI"]
+    direction TB
+    C1["Per-Tool Validators<br/>G5 Strict Check"]:::gate
+    C2["@caesar/cli<br/>add · build · verify · doctor"]:::gate
+    C1 -->|"dist/{tool}/"| C2
+  end
 
-#### Exploded Pipeline (5 Separated Layers Along One Axis)
-![Exploded Transpilation Pipeline](docs/diagrams/exploded-layers.svg)
+  %% L4: 22-Harness Ecosystem Cluster
+  subgraph L4["L4 · 22 Native Harnesses"]
+    direction TB
+    D1["Claude Code + Plugin v2<br/>.claude/ · hooks · .mcp.json"]:::target
+    D2["Cursor Native + Qoder<br/>.cursor/agents · .qoder/agents"]:::target
+    D3["Universal Skills + Qwen + Gemini<br/>.agents/skills · extensions"]:::target
+    D4["Codex + Goose + A2A + AGENTS.md<br/>config.toml · agent-card.json"]:::target
+  end
 
-#### 6-Gate Quality &amp; Zero-Drift Flywheel
-![6-Gate Quality Flywheel](docs/diagrams/quality-flywheel.svg)
+  %% Forward Exploded Pipeline
+  A1 -->|"parse"| B1
+  A2 -->|"resolve slugs"| C2
+  B2 -->|"MD · YAML · TOML · JSON"| C1
+  C2 --> D1
+  C2 --> D2
+  C2 --> D3
+  C2 --> D4
 
-</details>
+  %% Reinforcing Flywheel Loop (G6 Eval + Trust → Shared Hub)
+  C2 -.->|"G6 Trajectory Eval + caesar verify<br/>(Zero-Drift Flywheel)"| A1
 
-The transpilation engine utilizes the **Adapter Pattern** to isolate AI platform-specific formatting requirements (Claude Plugin v2, Cursor Native, Universal Agent Skills, Qoder, Qwen Code, Codex, Gemini, Goose, A2A, Roo, Kilo, etc.) into standalone adapter modules, while **Serializers** handle deterministic stringification (Markdown Frontmatter, YAML, TOML, JSON).
+  %% Accessible High-Contrast Palette (Light & Dark GitHub compatible)
+  classDef hub fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+  classDef core fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc
+  classDef gate fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc
+  classDef target fill:#27272a,stroke:#fbbf24,stroke-width:1.5px,color:#fafafa
+```
+
+The transpilation engine uses the **Adapter Pattern** to isolate platform-specific formats (Claude Plugin v2, Cursor Native, Universal Agent Skills, Qoder, Qwen Code, Codex, Gemini, Goose, A2A, Roo, Kilo, etc.) into standalone modules, while **Serializers** guarantee deterministic output.
 
 Architecture detail: [`docs/system-architecture.md`](docs/system-architecture.md).
 
