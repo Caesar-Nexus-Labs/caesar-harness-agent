@@ -14,6 +14,17 @@ when_to_use: >-
 examples:
   - context: A situation the orchestrator might see
     trigger: "a representative user utterance"
+# Optional Schema v2 harness capabilities:
+# kind: subagent # subagent | skill | hybrid
+# isolation: none # none | background | worktree
+# invocation:
+#   disable_model_invocation: false
+#   user_invocable: true
+# mcp_servers: [context7]
+# hooks:
+#   - event: PreToolUse # SessionStart | PreToolUse | PostToolUse | PreCompact
+#     matcher: run_shell_command
+#     command: "echo verify"
 ---
 
 ## Role & Expertise

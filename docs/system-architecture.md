@@ -26,8 +26,9 @@ The engine is responsible for parsing, validating, and transpiling the canonical
 - **Output Validation**: Validates the transpiled structures against the expected schemas for each tool.
 - **Write Outputs (`write-outputs.ts`)**: The isolated I/O sink. Safely flushes the transpiled artifacts to the `dist/` directory, preventing path traversal vulnerabilities.
 
-### 3. CLI & Distribution (`@caesar/cli` & `scripts/`)
-- **CLI Tools**: Commands like `build`, `validate`, and `install` provide the user interface for transpiling agents and installing them into local workspaces.
+### 3. CLI, Squads & Distribution (`@caesar/cli`, `squads/` & `scripts/`)
+- **CLI Tools**: Commands like `build`, `validate`, `install`, `add` (including `squad:<name>`), `verify` (supply-chain security scan), and `doctor` (drift diagnostics).
+- **Squad Presets (`squads/*.yaml`)**: Declarative team manifests (`fullstack`, `security-audit`, `infra`, `data-ai`, `marketing`) validated via `SquadManifestSchema`.
 - **Distribution Registry (`assemble-category-packages.ts`)**: Automatically bundles the `dist/` output into 11 distinct NPM packages (categories) during release. It dynamically generates `package.json` manifests and `README.md` documentation for each category, enabling modular installation via `npm` or the `caesar add` command.
 
 ## Data Flow Pipeline

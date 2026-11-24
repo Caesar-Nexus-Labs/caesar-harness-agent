@@ -115,12 +115,33 @@ function body(md: string): string {
   return (m?.[1] ?? md).trim();
 }
 
+interface TrajectoryReadiness {
+  hasKind: boolean;
+  hasIsolation: boolean;
+  hasHooks: boolean;
+  hasMcpServers: boolean;
+  score: number; // 0..4
+}
+
 interface Metrics {
   bodyLines: number;
+  estimatedTokens: number; // ~chars / 4 heuristic for prompt-budget tracking
   artifacts: number; // fenced code blocks + markdown tables
   decisionSignals: number; // arrows, "defer to", "vs", thresholds, "not"
   uniqueBullets: number;
   fillerRatio: number; // share of sentences that look like generic filler
+  trajectoryScore: number; // 0..4 Schema v2 readiness score
+}
+
+function inspectTrajectoryReadiness(rawMd: string): TrajectoryReadiness {
+  const fmMatch = /^---\r?\n([\s\S]*?)\r?\n---/.exec(rawMd);
+  const fm = fmMatch?.[1] ?? '';
+  const hasKind = /^kind:/m.test(fm);
+  const hasIsolation = /^isolation:/m.test(fm);
+  const hasHooks = /^hooks:/m.test(fm);
+  const hasMcpServers = /^mcp_servers:/m.test(fm);
+  const score = [hasKind, hasIsolation, hasHooks, hasMcpServers].filter(Boolean).length;
+  return { hasKind, hasIsolation, hasHooks, hasMcpServers, score };
 }
 
 function countArtifacts(b: string): number {
@@ -157,13 +178,15 @@ function fillerRatio(b: string): number {
   return Number((vague / sentences.length).toFixed(3));
 }
 
-function metrics(b: string): Metrics {
+function metrics(b: string, trajectoryScore = 0): Metrics {
   return {
     bodyLines: b.split('\n').length,
+    estimatedTokens: Math.ceil(b.length / 4),
     artifacts: countArtifacts(b),
     decisionSignals: countDecisionSignals(b),
     uniqueBullets: uniqueBullets(b),
     fillerRatio: fillerRatio(b),
+    trajectoryScore,
   };
 }
 
@@ -196,8 +219,12 @@ function main(): void {
   const pilotsOut = report.pilots as Record<string, unknown>;
 
   const rows: string[] = [];
-  rows.push('| agent | variant | bodyLines | artifacts | decisionSignals | uniqueBullets | fillerRatio |');
-  rows.push('|-------|---------|-----------|-----------|-----------------|---------------|-------------|');
+  rows.push(
+    '| agent | variant | bodyLines | estTokens | artifacts | decisionSignals | uniqueBullets | fillerRatio | trajScore |',
+  );
+  rows.push(
+    '|-------|---------|-----------|-----------|-----------|-----------------|---------------|-------------|-----------|',
+  );
 
   for (const pilot of PILOTS) {
     const currentPath = join(repoRoot, 'agents', pilot.category, `${pilot.slug}.md`);
@@ -206,16 +233,18 @@ function main(): void {
       console.error(`SKIP ${pilot.slug}: missing current or baseline file`);
       continue;
     }
-    const bBody = body(read(currentPath)); // re-authored
+    const currentRaw = read(currentPath);
+    const traj = inspectTrajectoryReadiness(currentRaw);
+    const bBody = body(currentRaw); // re-authored
     const aBody = body(read(baselinePath)); // baseline
     const target = bBody.split('\n').length;
     const cBody = makeFiller(aBody, target); // length-control
     const negBody = makeNegativeControl(aBody, target); // negative control
 
-    const mA = metrics(aBody);
-    const mB = metrics(bBody);
-    const mC = metrics(cBody);
-    const mNeg = metrics(negBody);
+    const mA = metrics(aBody, 0);
+    const mB = metrics(bBody, traj.score);
+    const mC = metrics(cBody, 0);
+    const mNeg = metrics(negBody, 0);
 
     for (const [variant, m] of [
       ['A-baseline', mA],
@@ -224,7 +253,7 @@ function main(): void {
       ['NEG-control', mNeg],
     ] as const) {
       rows.push(
-        `| ${pilot.slug} | ${variant} | ${m.bodyLines} | ${m.artifacts} | ${m.decisionSignals} | ${m.uniqueBullets} | ${m.fillerRatio} |`,
+        `| ${pilot.slug} | ${variant} | ${m.bodyLines} | ${m.estimatedTokens} | ${m.artifacts} | ${m.decisionSignals} | ${m.uniqueBullets} | ${m.fillerRatio} | ${m.trajectoryScore}/4 |`,
       );
     }
 

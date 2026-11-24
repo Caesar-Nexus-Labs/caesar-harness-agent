@@ -1,6 +1,7 @@
 // @caesar/agents-core — public API surface.
 
 // Native emitters (claude, opencode, kiro, codex, factory, copilot).
+export { a2aCardEmitter } from './emitters/adapters/a2a/a2a-card-emitter.js';
 export { claudeEmitter } from './emitters/adapters/claude/claude-emitter.js';
 // Multi-format plugin emitters (claude-plugin marketplace, roo YAML, cursor MDC).
 export {
@@ -8,17 +9,25 @@ export {
   claudePluginEmitter,
 } from './emitters/adapters/claude/claude-plugin.js';
 export { copilotEmitter } from './emitters/adapters/copilot/copilot-emitter.js';
+export { cursorAgentEmitter } from './emitters/adapters/cursor/cursor-agent-emitter.js';
 export { cursorMdcEmitter } from './emitters/adapters/cursor/cursor-mdc.js';
 // Aggregate fallback emitter (agents-md routing index).
 export { agentsMdEmitter } from './emitters/adapters/fallback/agents-md-emitter.js';
 export { geminiEmitter } from './emitters/adapters/gemini/gemini-emitter.js';
+export { geminiExtensionEmitter } from './emitters/adapters/gemini/gemini-extension.js';
+export { gooseEmitter } from './emitters/adapters/goose/goose-emitter.js';
+export { codexConfigEmitter } from './emitters/adapters/pilot/codex-config-emitter.js';
 export { codexEmitter } from './emitters/adapters/pilot/codex-emitter.js';
 export { factoryEmitter } from './emitters/adapters/pilot/factory-emitter.js';
 export { kiloEmitter } from './emitters/adapters/pilot/kilo-emitter.js';
 export { kiroEmitter } from './emitters/adapters/pilot/kiro-emitter.js';
 export { opencodeEmitter } from './emitters/adapters/pilot/opencode-emitter.js';
 export { openhandsEmitter } from './emitters/adapters/pilot/openhands-emitter.js';
+export { qoderEmitter } from './emitters/adapters/qoder/qoder-emitter.js';
+export { qwenEmitter } from './emitters/adapters/qwen/qwen-emitter.js';
+export { qwenExtensionEmitter } from './emitters/adapters/qwen/qwen-extension.js';
 export { rooYamlEmitter } from './emitters/adapters/roo/roo-yaml.js';
+export { agentSkillsEmitter } from './emitters/adapters/skills/agent-skills-emitter.js';
 // Emitter contract + registry.
 export {
   type AggregateEmitter,
@@ -114,6 +123,11 @@ export {
 } from './schema/canonical-agent-schema.js';
 // Schema + enums (single source of truth).
 export * from './schema/enums.js';
+export {
+  parseSquadManifest,
+  type SquadManifest,
+  SquadManifestSchema,
+} from './schema/squad-schema.js';
 // Smoke-test harnesses for emitted agent files.
 export {
   type SmokeOptions,
@@ -134,6 +148,7 @@ export {
   transpile,
   transpileAggregate,
 } from './transpile.js';
+export { agentSkillsOutputValidator } from './validation/agent-skills-output-validator.js';
 // Output validator contract + registry.
 export {
   agentsMdOutputValidator,
@@ -142,6 +157,7 @@ export {
 export { claudeOutputValidator } from './validation/claude-output-validator.js';
 export { codexOutputValidator } from './validation/codex-output-validator.js';
 export { copilotOutputValidator } from './validation/copilot-output-validator.js';
+export { cursorOutputValidator } from './validation/cursor-output-validator.js';
 export { factoryOutputValidator } from './validation/factory-output-validator.js';
 export { geminiOutputValidator } from './validation/gemini-output-validator.js';
 export { kiloOutputValidator } from './validation/kilo-output-validator.js';
@@ -159,6 +175,8 @@ export {
   validationFailed,
   validationOk,
 } from './validation/output-validator-interface.js';
+export { qoderOutputValidator } from './validation/qoder-output-validator.js';
+export { qwenOutputValidator } from './validation/qwen-output-validator.js';
 export { CAESAR_AGENTS_CORE_VERSION } from './version.js';
 // Filesystem sink.
 export {

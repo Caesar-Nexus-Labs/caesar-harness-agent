@@ -58,7 +58,14 @@ export function resolveGlobalToolDir(tool: ToolTarget): string | undefined {
     case 'gemini':
       return join(h, '.gemini', 'agents');
     case 'openhands':
+    case 'agent-skills':
       return join(h, '.agents', 'skills');
+    case 'cursor':
+      return join(h, '.cursor', 'agents');
+    case 'qoder':
+      return join(h, '.qoder', 'agents');
+    case 'qwen':
+      return join(h, '.qwen', 'skills');
     case 'kilo':
       return join(h, '.kilocode');
     case 'copilot':

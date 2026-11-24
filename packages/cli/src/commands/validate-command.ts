@@ -4,6 +4,7 @@ import {
   parseAgentFile,
   registerExtendedNativeEmitters,
   registerFallbackEmitters,
+  registerMultiFormatEmitters,
   registerNativeEmitters,
   TOOL_TARGETS,
   transpile,
@@ -67,6 +68,7 @@ function validateOutputs(agents: readonly CanonicalAgent[]): OutputFailure[] {
   // (hasAggregateEmitter), so kilo lands in the aggregate path and gemini/openhands in native.
   registerNativeEmitters();
   registerExtendedNativeEmitters();
+  registerMultiFormatEmitters();
   registerFallbackEmitters();
 
   const { native, fallback } = splitToolsByTier([...TOOL_TARGETS]);

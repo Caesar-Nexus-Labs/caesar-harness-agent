@@ -112,12 +112,20 @@ When you run `caesar add <source>` without specifying the `--tool` flag, the CLI
 | Factory / Droid | `.factory/droids/*.md` | native |
 | GitHub Copilot / VS Code | `.github/agents/*.agent.md` | native |
 | Gemini CLI | `.gemini/agents/*.md` | native, inherit-only emit |
-| OpenHands | `.agents/skills/*/SKILL.md` | native skill output |
+| OpenHands | `.agents/skills/*/SKILL.md` | native skill output (legacy alias) |
+| Universal Agent Skills (`agent-skills`) | `.agents/skills/*/SKILL.md` | native (`agentskills.io`) |
 | Kilo Code | `.kilocodemodes` | native aggregate output |
 | Roo Code | `.roomodes` | native aggregate output |
-| Cursor | `.cursor/rules/*.mdc` | native per-agent MDC |
-| Claude Marketplace | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json`, `claude-agents/*.md` | native aggregate output |
-| Cursor, Windsurf, Cline, Antigravity, Amp | shared `AGENTS.md` routing index | fallback |
+| Cursor | `.cursor/agents/*.md` | native subagents |
+| Cursor MDC (`cursor-mdc`) | `.cursor/rules/*.mdc` | legacy opt-in MDC |
+| Qoder (IDE / CLI) | `.qoder/agents/*.md` | native subagents |
+| Qwen Code | `.qwen/skills/*/SKILL.md` + `qwen-extension.json` | native skill + extension bundle |
+| Gemini Extension | `gemini-extension.json` | native aggregate extension |
+| Codex Config (`codex-config`) | `.codex/config.toml` | native aggregate config |
+| Goose | `.goose/agents/*.md` | native subagents |
+| A2A Agent Card (`a2a-card`) | `.well-known/agent-card.json` | A2A v1.0 discovery card |
+| Claude Marketplace | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json`, `hooks/hooks.json`, `.mcp.json` | native Plugin v2 bundle |
+| Universal Repo Index | shared `AGENTS.md` routing index | AAIF standard |
 
 Full matrix and per-tool limits: [`docs/tool-support-matrix.md`](docs/tool-support-matrix.md).
 
@@ -253,20 +261,62 @@ Each category can ship as its own npm package of prebuilt artifacts (`@caesar/la
 
 ## How it works
 
-```text
-agents/{NN-category}/{agent}.md   canonical source (Markdown + YAML)
-        │
-        ▼  @caesar/agents-core  (schema → transpiler)
-        │
-        ▼  core/ → registry/ → adapters/ & serializers/
-        │
-        ▼  per-tool output validators → write-outputs
-        │
-        ▼
-dist/{tool}/…   native files for each tool   +   dist/agents-md/AGENTS.md
+One canonical source (`agents/*.md` + `squads/*.yaml`) flows through an exploded 5-layer transpilation stack into **22 native harness targets**, closed by a reinforcing **6-Gate Quality & Trust Flywheel** back to the shared hub:
+
+```mermaid
+flowchart LR
+  %% L0: Shared Canonical Hub (Exploded Axis Start)
+  subgraph L0["L0 · Canonical Hub"]
+    direction TB
+    A1["158 Canonical Agents<br/>agents/*.md"]:::hub
+    A2["5 Squad Presets<br/>squads/*.yaml"]:::hub
+  end
+
+  %% L1-L2: Core Transpiler Cluster
+  subgraph L12["L1–L2 · @caesar/agents-core"]
+    direction TB
+    B1["Zod Schema v2<br/>isolation · hooks · mcp"]:::core
+    B2["Adapter Registry<br/>22 Emitters + Serializers"]:::core
+    B1 -->|"CanonicalAgent AST"| B2
+  end
+
+  %% L3: Verification & Supply-Chain Trust
+  subgraph L3["L3 · Strict Gates & CLI"]
+    direction TB
+    C1["Per-Tool Validators<br/>G5 Strict Check"]:::gate
+    C2["@caesar/cli<br/>add · build · verify · doctor"]:::gate
+    C1 -->|"dist/{tool}/"| C2
+  end
+
+  %% L4: 22-Harness Ecosystem Cluster
+  subgraph L4["L4 · 22 Native Harnesses"]
+    direction TB
+    D1["Claude Code + Plugin v2<br/>.claude/ · hooks · .mcp.json"]:::target
+    D2["Cursor Native + Qoder<br/>.cursor/agents · .qoder/agents"]:::target
+    D3["Universal Skills + Qwen + Gemini<br/>.agents/skills · extensions"]:::target
+    D4["Codex + Goose + A2A + AGENTS.md<br/>config.toml · agent-card.json"]:::target
+  end
+
+  %% Forward Exploded Pipeline
+  A1 -->|"parse"| B1
+  A2 -->|"resolve slugs"| C2
+  B2 -->|"MD · YAML · TOML · JSON"| C1
+  C2 --> D1
+  C2 --> D2
+  C2 --> D3
+  C2 --> D4
+
+  %% Reinforcing Flywheel Loop (G6 Eval + Trust → Shared Hub)
+  C2 -.->|"G6 Trajectory Eval + caesar verify<br/>(Zero-Drift Flywheel)"| A1
+
+  %% Accessible High-Contrast Palette (Light & Dark GitHub compatible)
+  classDef hub fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+  classDef core fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc
+  classDef gate fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc
+  classDef target fill:#27272a,stroke:#fbbf24,stroke-width:1.5px,color:#fafafa
 ```
 
-The transpilation engine utilizes the **Adapter Pattern** to isolate AI platform-specific formatting requirements (Claude, OpenCode, Gemini, Roo, Kilo, Cursor, etc.) into standalone adapter modules, while **Serializers** handle raw data stringification (Markdown Frontmatter, YAML, JSON).
+The transpilation engine uses the **Adapter Pattern** to isolate platform-specific formats (Claude Plugin v2, Cursor Native, Universal Agent Skills, Qoder, Qwen Code, Codex, Gemini, Goose, A2A, Roo, Kilo, etc.) into standalone modules, while **Serializers** guarantee deterministic output.
 
 Architecture detail: [`docs/system-architecture.md`](docs/system-architecture.md).
 

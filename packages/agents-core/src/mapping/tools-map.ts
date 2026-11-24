@@ -18,7 +18,13 @@ import type { ToolTarget } from './tool-targets.js';
 //   - agents-md → aggregated fallback index, no per-agent tools field.
 
 /** Targets that DO accept a per-agent tools allowlist. */
-const ALLOWLIST_TOOLS: ReadonlySet<ToolTarget> = new Set(['claude', 'opencode', 'kiro', 'copilot']);
+const ALLOWLIST_TOOLS: ReadonlySet<ToolTarget> = new Set([
+  'claude',
+  'opencode',
+  'kiro',
+  'copilot',
+  'qoder',
+]);
 
 /** Default read-only tool surface when an agent gives no explicit list (standards §2). */
 const READ_ONLY_DEFAULT: readonly Tool[] = ['read', 'grep', 'glob'];
@@ -79,6 +85,7 @@ const ID_TABLES: Partial<Record<ToolTarget, Record<Tool, string>>> = {
   opencode: OPENCODE_IDS,
   kiro: KIRO_IDS,
   copilot: COPILOT_IDS,
+  qoder: CLAUDE_IDS,
 };
 
 /** Sort canonical tools by their enum order so output is deterministic for snapshots. */

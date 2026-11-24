@@ -59,9 +59,19 @@ describe('plugin-source', () => {
       });
     });
 
+    it('parses squad:<name> presets', () => {
+      expect(parseSource('squad:fullstack')).toEqual({ type: 'squad', name: 'fullstack' });
+      expect(parseSource('squad:security-audit')).toEqual({
+        type: 'squad',
+        name: 'security-audit',
+      });
+    });
+
     it('throws UsageError on invalid format', () => {
       expect(() => parseSource('')).toThrow(UsageError);
       expect(() => parseSource('gh:owner')).toThrow(UsageError);
+      expect(() => parseSource('squad:')).toThrow(UsageError);
+      expect(() => parseSource('squad:Bad_Name')).toThrow(UsageError);
     });
   });
 

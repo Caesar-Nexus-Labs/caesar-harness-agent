@@ -17,6 +17,8 @@ permission: full
 tools: [read, grep, glob, edit, write, bash]
 color: cyan
 reasoning_effort: high
+kind: hybrid
+isolation: none
 when_to_use: >-
   Trigger when the task is to MAKE SEVERAL AGENTS WORK AS ONE: stand up a
   lead-subagent topology, split a goal into bounded delegations, choose how

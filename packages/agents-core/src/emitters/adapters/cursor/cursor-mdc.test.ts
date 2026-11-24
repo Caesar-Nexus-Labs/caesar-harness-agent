@@ -13,7 +13,7 @@ describe('cursorMdcEmitter', () => {
   it('emits to .cursor/rules/{slug}.mdc', () => {
     const agent = buildAgent();
     const file = cursorMdcEmitter(agent, ctx);
-    expect(file.tool).toBe('cursor');
+    expect(file.tool).toBe('cursor-mdc');
     expect(file.relativePath).toBe(`.cursor/rules/${agent.slug}.mdc`);
   });
 

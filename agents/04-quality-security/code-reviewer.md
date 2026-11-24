@@ -15,6 +15,8 @@ permission: read-only
 tools: [read, grep, glob]
 color: yellow
 reasoning_effort: high
+kind: subagent
+isolation: background
 when_to_use: >-
   Trigger right after code is written or changed and before it merges: review
   the diff for logic/correctness bugs, security holes (OWASP — especially broken

@@ -16,6 +16,9 @@ permission: read-only
 tools: [read, grep, glob]
 color: red
 reasoning_effort: high
+kind: subagent
+isolation: background
+mcp_servers: [context7]
 when_to_use: >-
   Trigger when code or a change set must be assessed for security weaknesses before
   it ships: reviewing auth/authz paths, untrusted-input sinks, secret handling,

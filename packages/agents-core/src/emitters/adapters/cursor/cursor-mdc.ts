@@ -78,7 +78,7 @@ export function cursorMdcEmitter(agent: CanonicalAgent, _ctx: EmitContext): Emit
   const content = `${frontmatterBlock(frontmatterData)}\n\n${body}\n`;
 
   return {
-    tool: 'cursor',
+    tool: 'cursor-mdc',
     relativePath: `.cursor/rules/${agent.slug}.mdc`,
     content,
   };

@@ -1,0 +1,18 @@
+name: marketing
+description: Campaign strategy, SEO content, ad copy, and social distribution squad.
+agents:
+  - campaign-architect
+  - seo-content-strategist
+  - ad-copy-creator
+  - social-media-planner
+workflow:
+  - stage: strategy
+    agents:
+      - campaign-architect
+    parallel: false
+  - stage: execution
+    agents:
+      - seo-content-strategist
+      - ad-copy-creator
+      - social-media-planner
+    parallel: true

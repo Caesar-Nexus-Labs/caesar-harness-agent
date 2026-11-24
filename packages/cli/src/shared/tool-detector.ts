@@ -26,8 +26,12 @@ export function detectActiveTools(cwd: string): ToolTarget[] {
   }
   if (existsSync(resolve(cwd, '.agents/skills')) || existsSync(resolve(cwd, '.agents'))) {
     active.add('openhands');
+    active.add('agent-skills');
   }
   if (existsSync(resolve(cwd, '.gemini'))) active.add('gemini');
+  if (existsSync(resolve(cwd, '.cursor'))) active.add('cursor');
+  if (existsSync(resolve(cwd, '.qoder'))) active.add('qoder');
+  if (existsSync(resolve(cwd, '.qwen'))) active.add('qwen');
   if (existsSync(resolve(cwd, '.kilocodemodes')) || existsSync(resolve(cwd, '.kilocode'))) {
     active.add('kilo');
   }
@@ -61,7 +65,10 @@ export function detectActiveTools(cwd: string): ToolTarget[] {
     else if (tool === 'factory') parentDir = join(h, '.factory');
     else if (tool === 'gemini') parentDir = join(h, '.gemini');
     else if (tool === 'kilo') parentDir = join(h, '.kilocode');
-    else if (tool === 'openhands') parentDir = join(h, '.agents');
+    else if (tool === 'openhands' || tool === 'agent-skills') parentDir = join(h, '.agents');
+    else if (tool === 'cursor') parentDir = join(h, '.cursor');
+    else if (tool === 'qoder') parentDir = join(h, '.qoder');
+    else if (tool === 'qwen') parentDir = join(h, '.qwen');
 
     if (parentDir && existsSync(parentDir)) {
       active.add(tool);

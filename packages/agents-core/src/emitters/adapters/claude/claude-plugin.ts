@@ -50,7 +50,7 @@ interface PluginConfig {
 }
 
 export const claudePluginEmitter: AggregateEmitter = (
-  _agents: readonly CanonicalAgent[],
+  agents: readonly CanonicalAgent[],
   _ctx: EmitContext,
 ): EmittedFile[] => {
   const manifest: MarketplaceManifest = {
@@ -89,7 +89,7 @@ export const claudePluginEmitter: AggregateEmitter = (
     agentsDir: 'claude-agents',
   };
 
-  return [
+  const files: EmittedFile[] = [
     {
       tool: 'claude-plugin',
       relativePath: '.claude-plugin/marketplace.json',
@@ -101,6 +101,50 @@ export const claudePluginEmitter: AggregateEmitter = (
       content: `${JSON.stringify(pluginConfig, null, 2)}\n`,
     },
   ];
+
+  // Aggregate Schema v2 lifecycle hooks → hooks/hooks.json (only when declared).
+  const hooksByEvent: Record<
+    string,
+    Array<{ matcher?: string; hooks: Array<{ type: 'command'; command: string }> }>
+  > = {};
+  const mcpServerNames = new Set<string>();
+
+  for (const agent of agents) {
+    for (const h of agent.frontmatter.hooks ?? []) {
+      const list = hooksByEvent[h.event] ?? [];
+      const entry: { matcher?: string; hooks: Array<{ type: 'command'; command: string }> } = {
+        hooks: [{ type: 'command', command: h.command }],
+      };
+      if (h.matcher) entry.matcher = h.matcher;
+      list.push(entry);
+      hooksByEvent[h.event] = list;
+    }
+    for (const server of agent.frontmatter.mcp_servers ?? []) {
+      mcpServerNames.add(server);
+    }
+  }
+
+  if (Object.keys(hooksByEvent).length > 0) {
+    files.push({
+      tool: 'claude-plugin',
+      relativePath: 'hooks/hooks.json',
+      content: `${JSON.stringify({ hooks: hooksByEvent }, null, 2)}\n`,
+    });
+  }
+
+  if (mcpServerNames.size > 0) {
+    const mcpServers: Record<string, { command: string; args: string[] }> = {};
+    for (const name of [...mcpServerNames].sort()) {
+      mcpServers[name] = { command: 'npx', args: ['-y', name] };
+    }
+    files.push({
+      tool: 'claude-plugin',
+      relativePath: '.mcp.json',
+      content: `${JSON.stringify({ mcpServers }, null, 2)}\n`,
+    });
+  }
+
+  return files;
 };
 
 /**

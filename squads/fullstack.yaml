@@ -1,0 +1,18 @@
+name: fullstack
+description: End-to-end fullstack delivery squad with implementation, code review, and security gates.
+agents:
+  - backend-developer
+  - frontend-developer
+  - code-reviewer
+  - security-auditor
+workflow:
+  - stage: implement
+    agents:
+      - backend-developer
+      - frontend-developer
+    parallel: true
+  - stage: verify
+    agents:
+      - code-reviewer
+      - security-auditor
+    parallel: true
